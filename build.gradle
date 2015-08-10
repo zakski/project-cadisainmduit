@@ -2,13 +2,32 @@ group 'com.szadowsz'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'scala'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+task unzip1901Census(type: Copy) {
+    def zipFile = file('data/archives/1901.zip')
+    def outputDir = file("data/census")
+    from zipTree(zipFile)
+    into outputDir
+}
+
 dependencies {
+    compile group: 'org.scala-lang', name: 'scala-compiler', version: '2.11.7'
+    compile 'net.sf.supercsv:super-csv:2.3.1'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
+
+    compile group: 'org.scalaj', name: 'scalaj-http_2.11', version: '1.1.5'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
 }
