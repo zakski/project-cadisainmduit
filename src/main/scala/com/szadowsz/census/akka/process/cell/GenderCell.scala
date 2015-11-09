@@ -16,7 +16,9 @@ class GenderCell extends CellProcessorAdaptor {
     sex match {
       case "M" => Gender.MALE
       case "F" => Gender.FEMALE
-      case _ => Gender.UNKNOWN
+      case null => Gender.MISSING
+      case "" => Gender.MISSING
+      case _ => Gender.OTHER
     }
   }
 }

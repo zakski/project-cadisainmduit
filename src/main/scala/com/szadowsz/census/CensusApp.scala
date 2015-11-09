@@ -1,6 +1,6 @@
-package com.szadowsz.census.akka
+package com.szadowsz.census
 
-import akka.actor.{ActorSystem, Props}
+import _root_.akka.actor.{ActorSystem, Props}
 import com.szadowsz.census.akka.io.FileActor
 import com.szadowsz.census.akka.process.{BeginProcessing, CensusWorker}
 import com.szadowsz.census.io.ExtensionFilter

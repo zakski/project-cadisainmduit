@@ -82,5 +82,4 @@ crashlytics.properties
 crashlytics-build.properties
 
 
-/data/census
-/data/results
+/data/

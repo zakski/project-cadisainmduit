@@ -55,13 +55,8 @@ dependencies {
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
-    compile group: 'org.scalaj', name: 'scalaj-http_2.11', version: '1.1.5'
-
-
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
-
-    /* Defaulting this to test only to allow for the choice of other logging systems */
-    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
 
     testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
     testCompile group: 'junit', name: 'junit', version: junitVersion
@@ -78,8 +73,15 @@ task sourcesJar(type: Jar) {
 }
 
 task unzip1901Census(type: Copy) {
-    def zipFile = file('data/archives/1901.zip')
+    def zipFile = file('archives/1901.zip')
     def outputDir = file("data/census")
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task unzipSurnames(type: Copy) {
+    def zipFile = file('archives/surnames.zip')
+    def outputDir = file("data/surnames")
     from zipTree(zipFile)
     into outputDir
 }

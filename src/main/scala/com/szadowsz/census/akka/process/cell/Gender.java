@@ -7,7 +7,7 @@ package com.szadowsz.census.akka.process.cell;
  */
 public enum Gender {
 
-    MALE, FEMALE, UNKNOWN;
+    MALE, FEMALE, MISSING, OTHER;
 
     @Override
     public String toString() {
@@ -16,8 +16,10 @@ public enum Gender {
                 return "MALE";
             case FEMALE:
                 return "FEMALE";
+            case MISSING:
+                return "MISSING";
             default:
-                return "UNKNOWN";
+                return "OTHER";
         }
     }
 }

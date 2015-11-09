@@ -20,7 +20,7 @@ class Census1901DataBean() {
 
   private var _age: Int = 0
 
-  private var _gender: Gender = Gender.UNKNOWN
+  private var _gender: Gender = Gender.MISSING
 
   private var _birthplace: String = null
 
