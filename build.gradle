@@ -51,6 +51,8 @@ dependencies {
 
     compile 'net.sf.supercsv:super-csv:2.3.1'
 
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.4-M3'
+
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
     compile group: 'org.scalaj', name: 'scalaj-http_2.11', version: '1.1.5'
