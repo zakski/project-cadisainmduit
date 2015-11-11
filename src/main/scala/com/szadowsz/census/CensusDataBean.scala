@@ -1,14 +1,17 @@
-package com.szadowsz.census.akka.process
+package com.szadowsz.census
 
-import com.szadowsz.census.akka.process.cell.Gender
+import com.szadowsz.census.mapping.{SurnameOrigins, Gender}
+
 
 /**
  * Bean to hold data extracted by Super CSV
  *
  * @author Zakski : 29/07/2015.
  */
-class Census1901DataBean() {
+class CensusDataBean() {
   private var _surname: String = null
+
+  private var _surnameOrigins: String = null
 
   private var _forename: String = null
 
@@ -18,7 +21,7 @@ class Census1901DataBean() {
 
   private var _county: String = null
 
-  private var _age: Int = 0
+  private var _age: String = null
 
   private var _gender: Gender = Gender.MISSING
 
@@ -41,6 +44,7 @@ class Census1901DataBean() {
 
   def setSurname(value: String): Unit = {
     _surname = value
+    _surnameOrigins = SurnameOrigins.getOrigins(_surname).map(_.mkString("|")).getOrElse("MISSING")
   }
 
   def setForename (value: String): Unit = {
@@ -60,7 +64,7 @@ class Census1901DataBean() {
     _county = value
   }
 
-  def setAge(value: Int): Unit = {
+  def setAge(value: String): Unit = {
     _age = value
   }
 
@@ -98,5 +102,5 @@ class Census1901DataBean() {
     _illnesses = value
   }
 
-  override def toString = _surname
+  override def toString = _surname + "," + _surnameOrigins + "," + _age
 }

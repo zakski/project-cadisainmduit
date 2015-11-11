@@ -1,4 +1,4 @@
-package com.szadowsz.census.compare
+package com.szadowsz.census
 
 class LevenshteinDistance {
   /**

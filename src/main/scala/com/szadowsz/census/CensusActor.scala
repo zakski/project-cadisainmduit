@@ -1,18 +1,17 @@
-package com.szadowsz.census.akka.process
+package com.szadowsz.census
 
+import java.io.StringReader
 import akka.actor.{Actor, ActorRef}
-import com.szadowsz.census.akka.io.LineRequest
-import com.szadowsz.census.akka.process.cell.GenderCell
+import com.szadowsz.census.io.LineRequest
+import com.szadowsz.census.supercsv.{AgeCell, GenderCell}
 import org.supercsv.cellprocessor.ift.CellProcessor
 import org.supercsv.cellprocessor.{Optional, ParseInt, Trim}
 import org.supercsv.io.CsvBeanReader
 import org.supercsv.prefs.CsvPreference
 
-import java.io.StringReader
-
 case object BeginProcessing
 
-object CensusWorker {
+object CensusActor {
 
   private val headers1901: Array[String] = Array(
     "surname",
@@ -37,7 +36,7 @@ object CensusWorker {
     new Optional(new Trim()),
     new Optional(new Trim()),
     new Optional(new Trim()),
-    new Optional(new ParseInt()),
+    new AgeCell(),
     new GenderCell(),
     new Optional(new Trim()),
     new Optional(new Trim()),
@@ -53,7 +52,7 @@ object CensusWorker {
 /**
  * @author Zakski : 16/09/2015.
  */
-class CensusWorker(reader: ActorRef) extends Actor {
+class CensusActor(val reader: ActorRef, val writer: ActorRef) extends Actor {
 
 
   var count: Int = 0
@@ -61,13 +60,13 @@ class CensusWorker(reader: ActorRef) extends Actor {
   def process(line: String) = {
     val csvReader = new CsvBeanReader(new StringReader(line), CsvPreference.STANDARD_PREFERENCE)
 
-    var bean: Census1901DataBean = csvReader.read(classOf[Census1901DataBean],
-      CensusWorker.headers1901,
-      CensusWorker.cells1901: _*)
+    var bean: CensusDataBean = csvReader.read(classOf[CensusDataBean],
+      CensusActor.headers1901,
+      CensusActor.cells1901: _*)
 
-    println(bean.toString)
 
     count += 1
+    writer ! bean
   }
 
   def receive = {

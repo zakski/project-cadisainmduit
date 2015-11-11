@@ -1,10 +1,11 @@
-package com.szadowsz.census.akka.io
-
-import akka.actor.TypedActor.PostStop
-import akka.actor.{PoisonPill, Actor}
-import com.szadowsz.census.io.FileFinder
+package com.szadowsz.census.io
 
 import java.io.{File, FilenameFilter}
+
+import akka.actor.TypedActor.PostStop
+import akka.actor.{Actor, PoisonPill}
+import com.szadowsz.util.FileFinder
+
 import scala.io.Source
 
 case object LineRequest
@@ -12,7 +13,7 @@ case object LineRequest
 /**
  * @author Zakski : 16/09/2015.
  */
-class FileActor(directory: String, encoding: String, filter: FilenameFilter) extends Actor with PostStop{
+class FileInputActor(directory: String, encoding: String, filter: FilenameFilter) extends Actor with PostStop{
 
   val dir = directory
 

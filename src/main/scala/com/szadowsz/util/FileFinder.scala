@@ -1,4 +1,4 @@
-package com.szadowsz.census.io
+package com.szadowsz.util
 
 import java.io.{File, FilenameFilter}
 

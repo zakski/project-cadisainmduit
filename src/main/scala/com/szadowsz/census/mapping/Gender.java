@@ -1,4 +1,4 @@
-package com.szadowsz.census.akka.process.cell;
+package com.szadowsz.census.mapping;
 
 /**
  * Mapping of gender values in 1901 census.

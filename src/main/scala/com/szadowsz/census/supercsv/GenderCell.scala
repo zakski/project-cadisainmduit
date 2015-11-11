@@ -1,5 +1,6 @@
-package com.szadowsz.census.akka.process.cell
+package com.szadowsz.census.supercsv
 
+import com.szadowsz.census.mapping.Gender
 import org.supercsv.cellprocessor.CellProcessorAdaptor
 import org.supercsv.util.CsvContext
 
