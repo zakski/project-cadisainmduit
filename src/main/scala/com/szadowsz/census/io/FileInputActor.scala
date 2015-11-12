@@ -2,20 +2,23 @@ package com.szadowsz.census.io
 
 import java.io.{File, FilenameFilter}
 
+import akka.actor
 import akka.actor.TypedActor.PostStop
-import akka.actor.{Actor, PoisonPill}
+import akka.actor.{ActorRef, Actor, PoisonPill}
 import com.szadowsz.util.FileFinder
+import org.slf4j.LoggerFactory
 
 import scala.io.Source
-
-case object LineRequest
 
 /**
  * @author Zakski : 16/09/2015.
  */
 class FileInputActor(directory: String, encoding: String, filter: FilenameFilter) extends Actor with PostStop{
+  private val _logger = LoggerFactory.getLogger(classOf[FileInputActor])
 
   val dir = directory
+
+  var writer : ActorRef = null
 
   var count:Int = 0
 
@@ -52,13 +55,21 @@ class FileInputActor(directory: String, encoding: String, filter: FilenameFilter
   }
 
   def receive = {
-    case LineRequest => sender ! getLine
-    case PoisonPill => context.stop(self)
+    case actor : ActorRef =>
+      writer = actor
+      _logger.info("Acknowledged writer {}",writer)
+    case "LineRequest" =>
+      sender ! getLine
+      _logger.debug("Parsed Line {} for {}",count,sender)
+    case PoisonPill =>
+      _logger.info("Closing File Input in {}",self)
+      context.stop(self)
   }
 
   override def postStop() = {
     println(count)
-    context.system.terminate()
+    _logger.info("Messaging writer {} to stand down",writer)
+    writer ! PoisonPill
   }
 }
 

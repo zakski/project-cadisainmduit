@@ -2,14 +2,12 @@ package com.szadowsz.census
 
 import java.io.StringReader
 import akka.actor.{Actor, ActorRef}
-import com.szadowsz.census.io.LineRequest
 import com.szadowsz.census.supercsv.{AgeCell, GenderCell}
+import org.slf4j.LoggerFactory
 import org.supercsv.cellprocessor.ift.CellProcessor
-import org.supercsv.cellprocessor.{Optional, ParseInt, Trim}
+import org.supercsv.cellprocessor.{Optional, Trim}
 import org.supercsv.io.CsvBeanReader
 import org.supercsv.prefs.CsvPreference
-
-case object BeginProcessing
 
 object CensusActor {
 
@@ -52,32 +50,37 @@ object CensusActor {
 /**
  * @author Zakski : 16/09/2015.
  */
-class CensusActor(val reader: ActorRef, val writer: ActorRef) extends Actor {
+class CensusActor() extends Actor {
+  private val _logger = LoggerFactory.getLogger(classOf[CensusActor])
 
+
+  var reader : ActorRef = null
+  var writer : ActorRef = null
 
   var count: Int = 0
 
   def process(line: String) = {
     val csvReader = new CsvBeanReader(new StringReader(line), CsvPreference.STANDARD_PREFERENCE)
 
-    var bean: CensusDataBean = csvReader.read(classOf[CensusDataBean],
-      CensusActor.headers1901,
-      CensusActor.cells1901: _*)
-
+    val bean: CensusDataBean = csvReader.read(classOf[CensusDataBean],CensusActor.headers1901,CensusActor.cells1901: _*)
 
     count += 1
     writer ! bean
   }
 
   def receive = {
-    case BeginProcessing => reader ! LineRequest
+    case (read : ActorRef, write : ActorRef) =>
+      reader = read
+      writer = write
+      _logger.info("Initialised Census Actor with reader {} and writer {}",List(reader, writer):_*)
+      reader ! "LineRequest"
 
     case Some(line: String) =>
       process(line)
-      reader ! LineRequest
+      reader ! "LineRequest"
 
     case None =>
-      println(count)
+      _logger.info("Census Actor finished with count of {}",count)
       context.stop(self)
   }
 }

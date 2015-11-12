@@ -22,7 +22,7 @@ object SurnameOrigins {
       do {
         fields = csvReader.read()
         if (fields != null) {
-          val key = fields.get(0)
+          val key = fields.get(0).toUpperCase
           val set = fields.get(1).split("\\|").toSet
           origins = origins.get(key) match {
             case Some(old) => origins + (key -> old.union(set))

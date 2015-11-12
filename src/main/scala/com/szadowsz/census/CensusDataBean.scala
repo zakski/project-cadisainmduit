@@ -102,5 +102,35 @@ class CensusDataBean() {
     _illnesses = value
   }
 
+  def getSurname: String = _surname
+
+  def getForename: String = _forename
+
+  def getTownlandOrStreet: String = _townlandOrStreet
+
+  def getDed: String =_ded
+
+  def getCounty: String = _county
+
+  def getAge: String = _age
+
+  def getGender: Gender = _gender
+
+  def getBirthplace: String = _birthplace
+
+  def getOccupation: String = _occupation
+
+  def getReligion: String = _religion
+
+  def getLiteracy: String = _literacy
+
+  def getKnowsIrish: String = _knowsIrish
+
+  def getRelationToHeadOfHouse: String = _relationToHeadOfHouse
+
+  def getMarried: String = _married
+
+  def getIllnesses: String = _illnesses
+
   override def toString = _surname + "," + _surnameOrigins + "," + _age
 }
