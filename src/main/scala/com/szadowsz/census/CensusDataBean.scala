@@ -104,6 +104,8 @@ class CensusDataBean() {
 
   def getSurname: String = _surname
 
+  def getSurnameOrigins: String = _surnameOrigins
+
   def getForename: String = _forename
 
   def getTownlandOrStreet: String = _townlandOrStreet

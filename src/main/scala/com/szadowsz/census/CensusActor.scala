@@ -2,7 +2,7 @@ package com.szadowsz.census
 
 import java.io.StringReader
 import akka.actor.{Actor, ActorRef}
-import com.szadowsz.census.supercsv.{AgeCell, GenderCell}
+import com.szadowsz.census.supercsv.{MissingCell, AgeCell, GenderCell}
 import org.slf4j.LoggerFactory
 import org.supercsv.cellprocessor.ift.CellProcessor
 import org.supercsv.cellprocessor.{Optional, Trim}
@@ -29,21 +29,21 @@ object CensusActor {
     "illnesses")
 
   val cells1901: List[CellProcessor] = List(
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
     new AgeCell(),
     new GenderCell(),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()),
-    new Optional(new Trim()))
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell,
+    new MissingCell)
 
 }
 

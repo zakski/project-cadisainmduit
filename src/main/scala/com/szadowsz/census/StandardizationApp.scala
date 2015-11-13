@@ -21,10 +21,10 @@ object StandardizationApp extends App {
   val system = ActorSystem("census")
 
 
-  _logger.info("Perparing Actor System")
+  _logger.info("Preparing Actor System")
   val reader = system.actorOf(Props(classOf[FileInputActor],"./data/census/", "UTF-8", filter).withMailbox("akka.actor.priority-mailbox"))
   val writer = system.actorOf(Props(classOf[FileOutputActor]))
-  val workers = Vector.fill(8)(system.actorOf(Props(classOf[CensusActor])))
+  val workers = Vector.fill(4)(system.actorOf(Props(classOf[CensusActor])))
   reader ! writer
   workers.foreach {_ ! (reader,writer)}
   _logger.info("Started Actor System")
