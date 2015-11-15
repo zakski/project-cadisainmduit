@@ -1,4 +1,4 @@
-package com.szadowsz.census.supercsv
+package com.szadowsz.census.supercsv.read
 
 import com.szadowsz.census.mapping.Gender
 import org.supercsv.cellprocessor.CellProcessorAdaptor
@@ -12,13 +12,12 @@ import org.supercsv.util.CsvContext
 class GenderCell extends CellProcessorAdaptor {
 
   override def execute(value: AnyRef, context: CsvContext): AnyRef = {
-    val sex = value.asInstanceOf[String]
+    val opt = Option(value)
 
-    sex match {
-      case "M" => Gender.MALE
-      case "F" => Gender.FEMALE
-      case null => Gender.MISSING
-      case "" => Gender.MISSING
+    opt match {
+      case Some("M") => Gender.MALE
+      case Some("F") => Gender.FEMALE
+      case None => Gender.MISSING
       case _ => Gender.OTHER
     }
   }

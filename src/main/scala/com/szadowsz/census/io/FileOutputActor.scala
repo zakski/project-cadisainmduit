@@ -5,21 +5,23 @@ import java.io.FileWriter
 import akka.actor.{PoisonPill, Actor}
 import akka.actor.TypedActor.PostStop
 import com.szadowsz.census.CensusDataBean
-import com.szadowsz.census.supercsv.{MissingCell, GenderCell, AgeCell}
-import org.supercsv.cellprocessor.{Trim, Optional}
+import com.szadowsz.census.supercsv.write.{OutputCell, StringCell, AgeBandingCell, SurnameOriginCell}
 import org.supercsv.cellprocessor.ift.CellProcessor
 import org.supercsv.io.CsvBeanWriter
 import org.supercsv.prefs.CsvPreference
 
 object FileOutputActor {
   private val headers1901: Array[String] = Array(
-    "surnameOrigins" /*,
     "forename",
+    "surname",
+    "surnameOrigins",
+    "gender",
+    "ageBanding",
+    "county"
+    /*
     "townlandOrStreet",
     "ded",
-    "county",
     "age",
-    "gender",
     "birthplace",
     "occupation",
     "religion",
@@ -27,10 +29,17 @@ object FileOutputActor {
     "knowsIrish",
     "relationToHeadOfHouse",
     "married",
-    "illnesses"*/)
+    "illnesses"*/
+  )
 
   val cells1901: Array[CellProcessor] = Array(
-    new MissingCell /*,
+    new StringCell,
+    new StringCell,
+    new SurnameOriginCell,
+    new OutputCell,
+    new AgeBandingCell,
+    new OutputCell
+    /*
     new Optional(new Trim()),
     new Optional(new Trim()),
     new Optional(new Trim()),
@@ -44,7 +53,8 @@ object FileOutputActor {
     new Optional(new Trim()),
     new Optional(new Trim()),
     new Optional(new Trim()),
-    new Optional(new Trim())*/)
+    new Optional(new Trim())*/
+  )
 }
 
 
@@ -65,7 +75,7 @@ class FileOutputActor extends Actor with PostStop {
       this.synchronized {
         csvWriter.write(bean, FileOutputActor.headers1901, FileOutputActor.cells1901)
         index += 1
-        if (index % 1000 == 0)println(100000*count + index)
+        if (index % 1000 == 0) println(100000 * count + index)
         if (index == 100000) {
           index = 0
           count += 1
@@ -77,7 +87,7 @@ class FileOutputActor extends Actor with PostStop {
   }
 
   override def postStop() = {
-    println(100000*count + index)
+    println(100000 * count + index)
     context.system.terminate()
   }
 }

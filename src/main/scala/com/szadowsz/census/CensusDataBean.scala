@@ -1,6 +1,6 @@
 package com.szadowsz.census
 
-import com.szadowsz.census.mapping.{SurnameOrigins, Gender}
+import com.szadowsz.census.mapping.{County, AgeBanding, SurnameOrigins, Gender}
 
 
 /**
@@ -9,130 +9,135 @@ import com.szadowsz.census.mapping.{SurnameOrigins, Gender}
  * @author Zakski : 29/07/2015.
  */
 class CensusDataBean() {
-  private var _surname: String = null
+  private var _surname: Option[String] = None
 
-  private var _surnameOrigins: String = null
+  private var _surnameOrigins: Option[Set[String]] = None
 
-  private var _forename: String = null
+  private var _forename: Option[String] = None
 
-  private var _townlandOrStreet: String = null
+  private var _townlandOrStreet: Option[String] = None
 
-  private var _ded: String = null
+  private var _ded: Option[String] = None
 
-  private var _county: String = null
+  private var _county: County = County.MISSING
 
-  private var _age: String = null
+  private var _age : Option[Int] = None
+
+  private var _ageBanding: Option[(Int,Int)] = None
 
   private var _gender: Gender = Gender.MISSING
 
-  private var _birthplace: String = null
+  private var _birthplace: Option[String] = None
 
-  private var _occupation: String = null
+  private var _occupation: Option[String] = None
 
-  private var _religion: String = null
+  private var _religion: Option[String] = None
 
-  private var _literacy: String = null
+  private var _literacy: Option[String] = None
 
-  private var _knowsIrish: String = null
+  private var _knowsIrish: Option[String] = None
 
-  private var _relationToHeadOfHouse: String = null
+  private var _relationToHeadOfHouse: Option[String] = None
 
-  private var _married: String = null
+  private var _married: Option[String] = None
 
-  private var _illnesses: String = null
+  private var _illnesses: Option[String] = None
 
 
-  def setSurname(value: String): Unit = {
-    _surname = value
-    _surnameOrigins = SurnameOrigins.getOrigins(_surname).map(_.mkString("|")).getOrElse("MISSING")
+  def setSurname(opt : Option[String]):Unit = {
+    _surname = opt
+    _surnameOrigins = SurnameOrigins.getOrigins(_surname.getOrElse(""))
   }
 
-  def setForename (value: String): Unit = {
-    _forename = value
+  def setForename (opt : Option[String]):Unit = {
+    _forename = opt
   }
 
-  def setTownlandOrStreet(value: String): Unit = {
-    _townlandOrStreet = value
+  def setTownlandOrStreet(opt : Option[String]):Unit = {
+    _townlandOrStreet = opt
   }
 
 
-  def setDed(value: String): Unit = {
-    _ded = value
+  def setDed(opt : Option[String]):Unit = {
+    _ded = opt
   }
 
-  def setCounty(value: String): Unit = {
+  def setCounty(value : County):Unit = {
     _county = value
   }
 
-  def setAge(value: String): Unit = {
+  def setAge(value: Option[Int]): Unit = {
     _age = value
+    _ageBanding = _age.map(AgeBanding.ageToBand)
   }
 
   def setGender(value: Gender): Unit = {
     _gender = value
   }
 
-  def setBirthplace(value: String): Unit = {
-    _birthplace = value
+  def setBirthplace(opt : Option[String]):Unit = {
+    _birthplace = opt
   }
 
-  def setOccupation(value: String): Unit = {
-    _occupation = value
+  def setOccupation(opt : Option[String]):Unit = {
+    _occupation = opt
   }
 
-  def setReligion(value: String): Unit = {
-    _religion = value
+  def setReligion(opt : Option[String]):Unit = {
+    _religion = opt
   }
 
-  def setLiteracy(value: String): Unit = {
-    _literacy = value
+  def setLiteracy(opt : Option[String]):Unit = {
+    _literacy = opt
   }
 
-  def setKnowsIrish(value: String): Unit = {
-    _knowsIrish = value
+  def setKnowsIrish(opt : Option[String]):Unit = {
+    _knowsIrish = opt
   }
 
-  def setRelationToHeadOfHouse(value: String): Unit = {
-    _relationToHeadOfHouse = value
+  def setRelationToHeadOfHouse(opt : Option[String]):Unit = {
+    _relationToHeadOfHouse = opt
   }
-  def setMarried(value: String): Unit = {
-    _married = value
+  def setMarried(opt : Option[String]):Unit = {
+    _married = opt
   }
-  def setIllnesses(value: String): Unit = {
-    _illnesses = value
+  def setIllnesses(opt : Option[String]):Unit = {
+    _illnesses = opt
   }
 
-  def getSurname: String = _surname
+  def getSurname: Option[String] = _surname
 
-  def getSurnameOrigins: String = _surnameOrigins
+  def getSurnameOrigins: Option[Set[String]] = _surnameOrigins
 
-  def getForename: String = _forename
+  def getForename: Option[String] = _forename
 
-  def getTownlandOrStreet: String = _townlandOrStreet
+  def getTownlandOrStreet: Option[String] = _townlandOrStreet
 
-  def getDed: String =_ded
+  def getDed: Option[String] =_ded
 
-  def getCounty: String = _county
+  def getCounty: County = _county
 
-  def getAge: String = _age
+  def getAge: Option[Int] = _age
+
+  def getAgeBanding: Option[(Int,Int)] = _ageBanding
 
   def getGender: Gender = _gender
 
-  def getBirthplace: String = _birthplace
+  def getBirthplace: Option[String] = _birthplace
 
-  def getOccupation: String = _occupation
+  def getOccupation: Option[String] = _occupation
 
-  def getReligion: String = _religion
+  def getReligion: Option[String] = _religion
 
-  def getLiteracy: String = _literacy
+  def getLiteracy: Option[String] = _literacy
 
-  def getKnowsIrish: String = _knowsIrish
+  def getKnowsIrish: Option[String] = _knowsIrish
 
-  def getRelationToHeadOfHouse: String = _relationToHeadOfHouse
+  def getRelationToHeadOfHouse: Option[String] = _relationToHeadOfHouse
 
-  def getMarried: String = _married
+  def getMarried: Option[String] = _married
 
-  def getIllnesses: String = _illnesses
+  def getIllnesses: Option[String] = _illnesses
 
   override def toString = _surname + "," + _surnameOrigins + "," + _age
 }
