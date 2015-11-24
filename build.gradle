@@ -26,7 +26,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 ext {
     scalaVersion        = '2.11.7'
     scalaTestVersion    = '2.2.4'
-    slf4jVersion        = '1.7.+'
+    slf4jVersion        = '1.7.12'
     junitVersion        = '4.11'
 }
 
@@ -75,6 +75,13 @@ task sourcesJar(type: Jar) {
 task unzip1901Census(type: Copy) {
     def zipFile = file('archives/1901.zip')
     def outputDir = file("data/census")
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task unzipFirstnames(type: Copy) {
+    def zipFile = file('archives/firstnames.zip')
+    def outputDir = file("data/firstnames")
     from zipTree(zipFile)
     into outputDir
 }
