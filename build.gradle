@@ -14,9 +14,9 @@ apply plugin: 'scala'
  */
 apply plugin: 'idea'
 
-/* Explicitly Target Java for 1.8, so that it doesn't decide we are targeting 1.5. */
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+/* Explicitly Target Java for 1.7, so that it doesn't decide we are targeting 1.5. */
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
 
 
 /*
@@ -51,9 +51,9 @@ dependencies {
 
     compile 'net.sf.supercsv:super-csv:2.3.1'
 
-    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.4-M3'
-
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+    compile group: 'org.apache.spark', name: 'spark-core_2.11', version: '1.4.1'
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
@@ -79,6 +79,13 @@ task unzip1901Census(type: Copy) {
     into outputDir
 }
 
+task unzipDictionary(type: Copy) {
+    def zipFile = file('archives/dict.zip')
+    def outputDir = file("data/dict")
+    from zipTree(zipFile)
+    into outputDir
+}
+
 task unzipFirstnames(type: Copy) {
     def zipFile = file('archives/firstnames.zip')
     def outputDir = file("data/firstnames")
@@ -91,6 +98,12 @@ task unzipSurnames(type: Copy) {
     def outputDir = file("data/surnames")
     from zipTree(zipFile)
     into outputDir
+}
+
+task zipDictionary(type: Zip) {
+    from "data/dict"
+    destinationDir file("archives/")
+    archiveName "dict.zip"
 }
 
 artifacts {
