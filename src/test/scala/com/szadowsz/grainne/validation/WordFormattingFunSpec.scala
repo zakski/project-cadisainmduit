@@ -1,6 +1,6 @@
 package com.szadowsz.grainne.validation
 
-import com.szadowsz.grainne.input.util.WordFormatting
+import com.szadowsz.grainne.tools.lang.WordFormatting
 import org.junit.runner.RunWith
 import org.scalatest.FunSpec
 import org.scalatest.junit.JUnitRunner

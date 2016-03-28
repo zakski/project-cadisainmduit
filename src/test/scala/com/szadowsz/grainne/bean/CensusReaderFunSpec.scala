@@ -1,6 +1,6 @@
 package com.szadowsz.grainne.bean
 
-import com.szadowsz.grainne.data.{Language, Gender, County}
+import com.szadowsz.grainne.data.{Gender, County}
 import com.szadowsz.grainne.input.cell.{Header, CensusReader, SparkCell}
 import org.junit.runner.RunWith
 import org.scalatest.FunSpec

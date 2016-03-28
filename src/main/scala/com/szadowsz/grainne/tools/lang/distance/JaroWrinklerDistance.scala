@@ -43,10 +43,6 @@ object JaroWrinklerDistance {
     * The default prefix length limit set to four.
     */
   private val PREFIX_LENGTH_LIMIT: Int = 4
-  /**
-    * Represents a failed index search.
-    */
-  val INDEX_NOT_FOUND: Int = -1
 
   /**
     * Calculates the number of characters from the beginning of the strings

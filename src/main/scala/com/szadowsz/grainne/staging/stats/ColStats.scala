@@ -1,12 +1,5 @@
 package com.szadowsz.grainne.stats
 
-object ColStats {
-
-
-  def apply[T] (id : String, data : Map[T,Long]) = new ColStats[T](id,data)
-
-}
-
 /**
   * Created by zakski on 24/11/2015.
   */
@@ -20,11 +13,6 @@ class ColStats[T <: Any](val id : String, private val dataSource : Map[T,Long]) 
 
 
   /**
-    * Ordering to sort values by their occurrence.
-    */
-  protected val order: Ordering[(T, Long)] = Ordering.by(_._2)
-
-  /**
     * Method to include new data for the purpose of statistics calculation.
     */
   private def calcPercentages(): Map[T, Double] = {
@@ -32,9 +20,9 @@ class ColStats[T <: Any](val id : String, private val dataSource : Map[T,Long]) 
     dataSource.map(d => d._1 -> (d._2.toDouble / count)).toMap
   }
 
-  def lowToHigh: List[(T, Long)] = dataSource.toList.sorted(order)
+  def lowToHigh: List[(T, Long)] = dataSource.toList.sortBy{ case (key, value) => (value, key.toString) }
 
-  def highToLow: List[(T, Long)] = dataSource.toList.sorted(order.reverse)
+  def highToLow: List[(T, Long)] = dataSource.toList.sortBy{ case (key, value) => (-value, key.toString) }
 
   def median: (T, Long) = {
     lowToHigh(dataSource.size / 2)

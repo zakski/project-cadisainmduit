@@ -1,13 +1,12 @@
-package com.szadowsz.grainne.input.util.spelling
+package com.szadowsz.grainne.staging.input.util.spelling.simple
 
 import java.io.FileReader
-import java.util
-
-import scala.collection.JavaConverters._
 
 import com.szadowsz.grainne.tools.distance.JaroWrinklerDistance
 import org.supercsv.io.CsvListReader
 import org.supercsv.prefs.CsvPreference
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by zakski on 08/01/2016.

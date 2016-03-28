@@ -25,21 +25,21 @@ object JaroDistance  {
     if (first == null || second == null) {
       throw new IllegalArgumentException("Arguments must not be null")
     }
+
     val (short, long) = getShortAndLong(first, second)
     val halfLength: Int = long.length / 2 - 1
 
     val m1: String = getCommonCharacters(short, long, halfLength)
     val m2: String = getCommonCharacters(long, short, halfLength)
-    if (m1.length == 0 || m2.length == 0) {
-      return 0.0
+
+    if (m1.length == 0 || m2.length == 0 || m1.length != m2.length) {
+      0.0
+    } else {
+      val transpositions: Int = getTranspositions(m1, m2)
+      val defaultDenominator: Double = 3.0
+      val dist: Double = (m1.length / (short.length.toDouble) + m2.length / (long.length.toDouble) + (m1.length - transpositions) / (m1.length.toDouble)) / defaultDenominator
+      dist
     }
-    if (m1.length != m2.length) {
-      return 0.0
-    }
-    val transpositions: Int = getTranspositions(m1, m2)
-    val defaultDenominator: Double = 3.0
-    val dist: Double = (m1.length / (short.length.toDouble) + m2.length / (long.length.toDouble) + (m1.length - transpositions) / (m1.length.toDouble)) / defaultDenominator
-    return dist
   }
 
   /**

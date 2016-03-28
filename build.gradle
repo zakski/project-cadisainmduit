@@ -62,10 +62,10 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 
-task javadocJar(type: Jar) {
+/*task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
-}
+}*/
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
@@ -107,5 +107,5 @@ task zipDictionary(type: Zip) {
 }
 
 artifacts {
-    archives javadocJar, sourcesJar
+    archives /*javadocJar,*/ sourcesJar
 }

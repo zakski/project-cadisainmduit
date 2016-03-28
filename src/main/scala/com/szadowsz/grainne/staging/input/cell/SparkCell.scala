@@ -1,8 +1,9 @@
 package com.szadowsz.grainne.input.cell
 
-import com.szadowsz.grainne.data.{County, Gender, Language}
-import com.szadowsz.grainne.input.util.WordFormatting
-import com.szadowsz.grainne.input.util.spelling.{LangSpell, LitSpell, BeliefsSpell}
+import com.szadowsz.grainne.data.{County, Gender}
+import com.szadowsz.grainne.input.util.spelling.BirthSpell
+import com.szadowsz.grainne.staging.input.util.spelling.simple.{LangSpell, LitSpell, BeliefsSpell}
+import com.szadowsz.grainne.tools.lang.WordFormatting
 import org.supercsv.cellprocessor.CellProcessorAdaptor
 import org.supercsv.util.CsvContext
 
@@ -19,6 +20,7 @@ object SparkCell {
       case Header.REL => new ReligionCell
       case Header.OCC => new JobCell
       case Header.LIT => new LitCell
+      case Header.BIRTH => new BirthCell
       case _ => new SparkCell
     }
   }
@@ -100,7 +102,8 @@ private class CountyCell extends SparkCell {
 private class NameCell extends SparkCell {
 
   private def split(field: String): List[String] = {
-    WordFormatting.formatName(field).split("[ -]").toList
+    val words = WordFormatting.formatName(field).split("[ -]").toList
+    words.filter(w => w.length > 1 ||((w == "D" || w == "O") && words.head == w))
   }
 
   override def execute(value: Any, context: CsvContext): AnyRef = {
@@ -120,8 +123,11 @@ private class LangCell extends SparkCell {
 
   override def execute(value: Any, context: CsvContext): AnyRef = {
     Option(value) match {
-      case Some(s: String) => Option(LangSpell.parse(s))
-      case _ => None//List(Language.ENGLISH) // We will assume that they only speak English if no value for knowsIrish is filled in.
+      case Some(s: String) =>
+        val parsed = LangSpell.parse(s)
+        parsed.split(" ").toList
+
+      case _ => List("English") // We will assume that they only speak English if no value for knowsIrish is filled in.
     }
   }
 }
@@ -155,6 +161,22 @@ private class LitCell extends SparkCell {
     }
   }
 }
+
+/**
+  * Cell to process religious affiliation.
+  *
+  * @author Zakski : 13/11/2015.
+  */
+private class BirthCell extends SparkCell {
+
+  override def execute(value: Any, context: CsvContext): AnyRef = {
+    Option(value) match {
+      case Some(s : String) => Option(BirthSpell.parse(WordFormatting.capitalizeFully(s.trim)))
+      case _ => None
+    }
+  }
+}
+
 
 /**
   * Created by zakski on 13/11/2015.

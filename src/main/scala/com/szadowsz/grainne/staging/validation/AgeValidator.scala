@@ -5,10 +5,9 @@ import com.szadowsz.grainne.data.CensusDataBean
 /**
   * @author Zakski : 15/02/2016.
   */
-class AgeValidator extends AbstractValidator {
+class AgeValidator extends AbstractValidator[CensusDataBean] {
 
   override def validate(bean: CensusDataBean): Boolean = {
- //   bean.getAge.exists(age => age >= 0 && age <= 125)
-    true
+    bean.getAge.exists(age => age >= 0 && age <= 125)
   }
 }

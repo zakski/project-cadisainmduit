@@ -1,5 +1,7 @@
 package com.szadowsz.grainne.input.util.spelling
 
+import com.szadowsz.grainne.staging.input.util.spelling.simple.ColumnSpell
+
 /**
   * Created by zakski on 15/11/2015.
   */

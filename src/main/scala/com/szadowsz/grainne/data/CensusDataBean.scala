@@ -1,6 +1,8 @@
 package com.szadowsz.grainne.data
 
 import com.szadowsz.grainne.input.util.AgeBanding
+import com.szadowsz.grainne.input.util.spelling.BirthSpell
+import com.szadowsz.grainne.tools.reflection.ReflectionUtil
 
 
 /**
@@ -27,144 +29,63 @@ import com.szadowsz.grainne.input.util.AgeBanding
   */
 class CensusDataBean extends Serializable {
 
+  private var surnames: List[String] = Nil
+  private var forenames: List[String] = Nil
 
-  private var _canRead: Option[Boolean] = None
+  private var townlandOrStreet: Option[String] = None
+  private var ded: Option[String] = None
+  private var county: Option[County] = None
 
-  private var _canWrite: Option[Boolean] = None
+  private var age: Option[Int] = None
+  private var ageBanding: Option[(Int, Int)] = None
 
+  private var gender: Option[Gender] = None
 
-  /**
-    * The family names of the person.
-    *
-    * @note input index 1
-    *
-    */
-  private var _surnames: List[String] = Nil
+  private var countyOfBirth: Option[County] = None
 
-  /**
-    * The name determined to be the first given name.
-    *
-    * @note input index 2
-    *
-    */
-  private var _forename: Option[String] = None
+  private var countryOfBirth: Option[String] = None
 
+  private var isCommonwealth : Option[Boolean] = None
 
-  /**
-    * The subsequent given names of the person, if any.
-    *
-    * @note input index 2 (originally part of the forename)
-    *
-    */
-  private var _middlenames: List[String] = Nil
+  private var occupation: Option[String] = None
 
-  /**
-    * The townlands index of the person's residence.
-    *
-    * @see http://www.irishancestors.ie/?page_id=5392
-    * @note input index 3
-    *
-    */
-  private var _townlandOrStreet: Option[String] = None
+  private var religion: Option[String] = None
 
-  /**
-    * The district electoral division of the person's residence.
-    *
-    * @see http://www.irishancestors.ie/?page_id=5392
-    * @note input index 4
-    *
-    */
-  private var _ded: Option[String] = None
+  private var canRead: Option[Boolean] = None
+  private var canWrite: Option[Boolean] = None
 
-  /**
-    * The County of the person's residence.
-    *
-    * @note input index 5
-    *
-    */
-  private var _county: Option[County] = None
+  private var languages: List[String] = Nil
 
-  /**
-    * The Age of the person.
-    *
-    * @note input index 6
-    *
-    */
-  private var _age: Option[Int] = None
+  private var relationToHeadOfHouse: Option[String] = None
 
-  /**
-    * The Gender of the person.
-    *
-    * @note input index 7
-    *
-    */
-  private var _gender: Option[Gender] = None
+  private var married: Option[String] = None
 
-  private var _birthplace: Option[String] = None
-
-  private var _occupation: Option[String] = None
-
-  private var _religion: Option[String] = None
-
-  private var _languages: Option[String] = None
-
-  private var _relationToHeadOfHouse: Option[String] = None
-
-  private var _married: Option[String] = None
-
-  private var _illnesses: Option[String] = None
-
-  private var _ageBanding: Option[(Int, Int)] = None
-  private var _surnameOrigins: Option[Set[String]] = None
-  private var _middlenamesOrigins: Option[List[Option[Set[String]]]] = None
-  private var _forenameOrigins: Option[Set[String]] = None
+  private var illnesses: Option[String] = None
 
 
-  def setSurname(opt: Option[List[String]]): Unit = {
-    _surnames = opt.getOrElse(Nil)
-    //   _surnameOrigins = SurnameOrigins.getOrigins(_surname.getOrElse(""))
-  }
+  def setSurname(opt: Option[List[String]]): Unit = surnames = opt.getOrElse(Nil)
+  def setForename(opt: Option[List[String]]): Unit = forenames = opt.getOrElse(Nil)
 
-  def setForename(opt: Option[List[String]]): Unit = {
-    _forename = opt.map(_.head)
-    _middlenames = opt.map(_.tail).getOrElse(Nil)
-    //  _forenameOrigins = FirstnameOrigins.getOrigins(_forename.getOrElse(""))
-    //   _middlenamesOrigins = _middlenames.map(l => l.map(s => FirstnameOrigins.getOrigins(s)))
-  }
-
-  def setTownlandOrStreet(opt: Option[String]): Unit = {
-    _townlandOrStreet = opt
-  }
-
-
-  def setDed(opt: Option[String]): Unit = {
-    _ded = opt
-  }
-
-  def setCounty(value: Option[County]): Unit = {
-    _county = value
-  }
+  def setTownlandOrStreet(opt: Option[String]): Unit = townlandOrStreet = opt
+  def setDed(opt: Option[String]): Unit = ded = opt
+  def setCounty(value: Option[County]): Unit = county = value
 
   def setAge(value: Option[Int]): Unit = {
-    _age = value
-    _ageBanding = _age.map(AgeBanding.ageToBand)
+    age = value
+    ageBanding = age.map(AgeBanding.ageToBand)
   }
 
-  def setGender(value: Option[Gender]): Unit = {
-    _gender = value
+  def setGender(value: Option[Gender]): Unit = gender = value
+
+  def setBirthplace(input: Option[(String, String, String)]): Unit = {
+    countyOfBirth = if (input.exists(_._2 != "MISSING"))input.map(t => County.fromString(t._2)) else None
+    countryOfBirth = if (input.exists(_._3 != "MISSING"))input.map(t => t._3) else None
+    isCommonwealth = countryOfBirth.map(BirthSpell.isCommonwealth)
   }
 
-  def setBirthplace(opt: Option[String]): Unit = {
-    _birthplace = opt
-  }
+  def setOccupation(opt: Option[String]): Unit = occupation = opt
 
-  def setOccupation(opt: Option[String]): Unit = {
-    _occupation = opt
-  }
-
-  def setReligion(opt: Option[String]): Unit = {
-    _religion = opt
-  }
+  def setReligion(opt: Option[String]): Unit = religion = opt
 
   def setLiteracy(opt: Option[String]): Unit = {
     val parsed = opt match {
@@ -175,73 +96,47 @@ class CensusDataBean extends Serializable {
       case Some("MISSING") => None
       case None => None
     }
-
-    _canRead = parsed.map(_._1)
-    _canWrite = parsed.map(_._2)
+    canRead = parsed.map(_._1)
+    canWrite = parsed.map(_._2)
   }
 
-  def setKnowsIrish(opt: Option[String]): Unit = {
-    _languages = opt
-  }
+  def setKnowsIrish(opt: List[String]): Unit = languages = opt
 
-  def setRelationToHeadOfHouse(opt: Option[String]): Unit = {
-    _relationToHeadOfHouse = opt
-  }
+  def setRelationToHeadOfHouse(opt: Option[String]): Unit = relationToHeadOfHouse = opt
 
-  def setMarried(opt: Option[String]): Unit = {
-    _married = opt
-  }
+  def setMarried(opt: Option[String]): Unit = married = opt
 
-  def setIllnesses(opt: Option[String]): Unit = {
-    _illnesses = opt
-  }
+  def setIllnesses(opt: Option[String]): Unit = illnesses = opt
 
-  def getCounty: Option[County] = _county
+  def getForename: List[String] = forenames
 
-  def getAge: Option[Int] = _age
+  def getSurname: List[String] = surnames
 
-  def getGender: Option[Gender] = _gender
+  def getCountyOfResidence: Option[County] = county
 
-  def getCanRead: Option[Boolean] = _canRead
+  def getAge: Option[Int] = age
 
-  def getCanWrite: Option[Boolean] = _canWrite
+  def getAgeGroup: Option[(Int, Int)] = ageBanding
 
-  def getLiteracy:Option[Boolean] = if(_canRead.isEmpty || _canWrite.isEmpty) None else _canRead.map(_ && _canWrite.get)
+  def getGender: Option[Gender] = gender
 
-  //  def getSurnames: List[String] = _surnames
-  //
-  // // def getSurnameOrigins: Option[Set[String]] = _surnameOrigins
-  //
-  //  def getForename: Option[String] = _forename
-  //
-  // // def getForenameOrigins: Option[Set[String]] = _forenameOrigins
-  //
-  //  def getMiddlenames: List[String] = _middlenames
-  //
-  //  def getTownlandOrStreet: Option[String] = _townlandOrStreet
-  //
-  //  def getDed: Option[String] = _ded
-  //
+  def getCountyOfBirth: Option[County] = countyOfBirth
 
-  //
-  //  def getAgeBanding: Option[(Int, Int)] = _ageBanding
-  //
+  def getCountryOfBirth: Option[String] = countryOfBirth
 
-  //
-  //  def getBirthplace: Option[String] = _birthplace
-  //
-  //  def getOccupation: Option[String] = _occupation
-  //
-  //  def getReligion: Option[String] = _religion
+  def getIsCommonwealth: Option[Boolean] = isCommonwealth
 
-  def getLanguages: Option[String] = _languages
+  def getCanRead: Option[Boolean] = canRead
 
-  //
-  //  def getRelationToHeadOfHouse: Option[String] = _relationToHeadOfHouse
-  //
-  //  def getMarried: Option[String] = _married
-  //
-  //  def getIllnesses: Option[String] = _illnesses
+  def getCanWrite: Option[Boolean] = canWrite
 
-  override def toString = _surnames + "," + _surnameOrigins + "," + _age
+  def getIsLiterate: Option[Boolean] = if (canRead.isEmpty || canWrite.isEmpty) None else canRead.map(_ && canWrite.get)
+
+  def getReligion = religion
+
+  def getKnowsEnglish = Some(languages.contains("English"))
+
+  def getKnowsIrish = Some(languages.contains("Irish"))
+
+  override def toString = ReflectionUtil.findJavaStyleGetters(getClass).filter(_.getName != "getClass").map(_.invoke(this).asInstanceOf[Any].toString).mkString(",")
 }

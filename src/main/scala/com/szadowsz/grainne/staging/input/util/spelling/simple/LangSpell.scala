@@ -1,6 +1,6 @@
-package com.szadowsz.grainne.input.util.spelling
+package com.szadowsz.grainne.staging.input.util.spelling.simple
 
-import com.szadowsz.grainne.input.util.WordFormatting
+import com.szadowsz.grainne.tools.lang.WordFormatting
 
 /**
   * Created by zakski on 04/03/2016.
@@ -19,10 +19,9 @@ object LangSpell extends ColumnSpell with Serializable{
 
   override protected val phraseViableMatch: Double = 0.65
 
-//  override protected def getReplacementPhrase(phrase : String) = {
-//    phrase
-//  }
-
+  override protected def getReplacementWord(word : String) = {
+    ""
+  }
 
   /**
     * Method to handle exceptions that would otherwise be mapped to wrong values.

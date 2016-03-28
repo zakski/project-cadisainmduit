@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.szadowsz.grainne.input.util
+package com.szadowsz.grainne.tools.lang
 
 import java.util.regex.Pattern
 

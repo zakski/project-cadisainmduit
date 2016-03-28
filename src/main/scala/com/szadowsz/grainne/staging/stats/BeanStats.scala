@@ -1,6 +1,5 @@
 package com.szadowsz.grainne.stats
 
-import com.szadowsz.grainne.data.CensusDataBean
 import com.szadowsz.grainne.tools.io.FWriter
 import com.szadowsz.grainne.tools.reflection.ReflectionUtil
 
@@ -16,8 +15,10 @@ object BeanStats extends Serializable {
     val counts = returns.map(_.length)
     val all: RDD[List[String]] = returns.map(l => l.map(_.toString))
     val max = counts.max()
-
-    var list = List[ColStats[Any]](ColStats(tag + "_count", counts.countByValue.toMap), ColStats(tag + "_all", all.flatMap(x => x).countByValue.toMap))
+    var list = List[ColStats[Any]](
+      new ColStats(tag + "_count", counts.countByValue.toMap),
+      new ColStats(tag + "_all", all.flatMap(x => x).countByValue.toMap),
+      new ColStats(tag + "_full",all.map(_.mkString(" ")).countByValue().toMap))
 
     for (i <- 0 until max) {
       list = list :+ new ColStats[Any](tag + "_" + i, all.filter(_.length > i).map(_ (i)).countByValue.toMap)
@@ -27,10 +28,10 @@ object BeanStats extends Serializable {
 
   private def mapOpts(tag: String, returns: RDD[Option[Any]]) = {
     val all: RDD[Option[String]] = returns.map(l => l.map(_.toString))
-    List[ColStats[Any]](ColStats(tag, all.map(x => x.getOrElse("MISSING")).countByValue.toMap))
+    List[ColStats[Any]](new ColStats(tag, all.map(x => x.getOrElse("MISSING")).countByValue.toMap))
   }
 
-  def calculateStats(beans: RDD[CensusDataBean]) = {
+  def calculateStats[T <: Serializable](beans: RDD[T]) = {
     val taggedVals = beans.map(b =>
       ReflectionUtil.findJavaStyleGetters(b.getClass).filter(_.getName != "getClass").map(m => (m.getName.substring(3), m.invoke(b).asInstanceOf[Any]))
     )
@@ -52,9 +53,9 @@ object BeanStats extends Serializable {
     results
   }
 
-  def writeHighToLow(list : List[ColStats[Any]]): Unit = {
+  def writeHighToLow(folder : String, list : List[ColStats[Any]]): Unit = {
     list.foreach(s => {
-      val writer = new FWriter("./data/stats/" + s.id + ".csv","UTF-8",false)
+      val writer = new FWriter(folder + s.id + ".csv","UTF-8",false)
       writer.init()
       s.highToLow.foreach(l => writer.writeLine(l._1.toString + "," + l._2))
       writer.close()
