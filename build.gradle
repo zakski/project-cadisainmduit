@@ -8,15 +8,9 @@ version '0.1-ALPHA'
 apply plugin: 'java'
 apply plugin: 'scala'
 
-/*
- * IDE plugins to aid in building of project files, in this case we use intellij, but eclipse can also be used. That
- * being said, IntelliJ can pull build a project from the build.gradle file so its not strictly necessary.
- */
-apply plugin: 'idea'
-
-/* Explicitly Target Java for 1.7, so that it doesn't decide we are targeting 1.5. */
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+/* Explicitly Target Java for 1.8, so that it doesn't decide we are targeting 1.5. */
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 
 /*
@@ -24,10 +18,12 @@ targetCompatibility = JavaVersion.VERSION_1_7
  * can add a '+' in the version info instead of a major/minor version to get the latest relevant version of the jar.
  */
 ext {
-    scalaVersion        = '2.11.7'
-    scalaTestVersion    = '2.2.4'
-    slf4jVersion        = '1.7.12'
-    junitVersion        = '4.11'
+    scalaVersion = '2.11.8'
+    sparkVersion = '2.0.1'
+    scalaTestVersion = '3.0.0'
+    slf4jVersion = '1.7.12'
+    junitVersion = '4.11'
+    superCsvVersion = '2.3.1'
 }
 
 /*
@@ -47,29 +43,19 @@ repositories {
  * slf4j logger, scalatest and junit.
  */
 dependencies {
+    compile project(':module/phobail')
     compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
-
-    compile 'net.sf.supercsv:super-csv:2.3.1'
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
-    compile group: 'org.apache.spark', name: 'spark-core_2.11', version: '1.4.1'
+    compile group: 'org.apache.spark', name: 'spark-core_2.11', version: sparkVersion
+    compile group: 'org.apache.spark', name: 'spark-mllib_2.11', version: sparkVersion
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
 
     testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
     testCompile group: 'junit', name: 'junit', version: junitVersion
-}
-
-/*task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}*/
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
 }
 
 task unzip1901Census(type: Copy) {
@@ -104,8 +90,4 @@ task zipDictionary(type: Zip) {
     from "data/dict"
     destinationDir file("archives/")
     archiveName "dict.zip"
-}
-
-artifacts {
-    archives /*javadocJar,*/ sourcesJar
 }

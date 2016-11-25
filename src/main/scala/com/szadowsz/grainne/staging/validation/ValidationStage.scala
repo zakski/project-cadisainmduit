@@ -2,7 +2,6 @@ package com.szadowsz.grainne.staging.validation
 
 import com.szadowsz.grainne.data.CensusDataBean
 import com.szadowsz.grainne.input.cell.CensusReader
-import com.szadowsz.grainne.tools.io.{ExtensionFilter, FileFinder}
 import com.szadowsz.grainne.validation.{AbstractValidator, AgeValidator}
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD

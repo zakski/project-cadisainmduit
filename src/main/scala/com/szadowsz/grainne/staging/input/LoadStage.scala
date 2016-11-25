@@ -1,8 +1,8 @@
 package com.szadowsz.grainne.input
 
+import com.szadowsz.common.io.explore.{ExtensionFilter, FileFinder}
 import com.szadowsz.grainne.data.CensusDataBean
 import com.szadowsz.grainne.input.cell.CensusReader
-import com.szadowsz.grainne.tools.io.{FileFinder, ExtensionFilter}
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
@@ -21,8 +21,8 @@ class LoadStage(val dir : String,val headers : Array[String],val cells : Array[C
     val start = System.currentTimeMillis()
     _logger.info("Loading Census Beans")
 
-    val filter = ExtensionFilter(".csv", recursive)
-    val data = sc.textFile(FileFinder.search(dir, filter).toList.map(_.getAbsolutePath).mkString(","))
+    val filter = new ExtensionFilter(".csv", recursive)
+    val data = sc.textFile(FileFinder.search(dir, Option(filter)).toList.map(_.getAbsolutePath).mkString(","))
 
     beans = data.map(s => {
       val reader = CensusReader(headers, cells)

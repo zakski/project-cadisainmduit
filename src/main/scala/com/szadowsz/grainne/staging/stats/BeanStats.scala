@@ -1,8 +1,7 @@
 package com.szadowsz.grainne.stats
 
-import com.szadowsz.grainne.tools.io.FWriter
+import com.szadowsz.common.io.write.FWriter
 import com.szadowsz.grainne.tools.reflection.ReflectionUtil
-
 import org.apache.spark.rdd.RDD._
 import org.apache.spark.rdd.RDD
 
@@ -55,8 +54,7 @@ object BeanStats extends Serializable {
 
   def writeHighToLow(folder : String, list : List[ColStats[Any]]): Unit = {
     list.foreach(s => {
-      val writer = new FWriter(folder + s.id + ".csv","UTF-8",false)
-      writer.init()
+      val writer = new FWriter(folder + s.id + ".csv",false)
       s.highToLow.foreach(l => writer.writeLine(l._1.toString + "," + l._2))
       writer.close()
     })
