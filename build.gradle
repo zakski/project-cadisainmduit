@@ -8,10 +8,15 @@ version '0.1-ALPHA'
 apply plugin: 'java'
 apply plugin: 'scala'
 
-/* Explicitly Target Java for 1.8, so that it doesn't decide we are targeting 1.5. */
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+// IntelliJ is the primary development medium, so it makes sense to add explicit support for all the sub-modules
+apply plugin: 'idea'
 
+//idea {
+//    module {
+//        downloavadoc = true
+//        downloadSources = true
+//    }
+//}
 
 /*
  * Specifying the versions as extra variables here so that they can be reused across multiple dependencies. Note you
@@ -19,19 +24,12 @@ targetCompatibility = JavaVersion.VERSION_1_8
  */
 ext {
     scalaVersion = '2.11.8'
-    sparkVersion = '2.0.1'
-    scalaTestVersion = '3.0.0'
+    sparkVersion = '2.0.0'
+    scalaTestVersion = '2.2.4'
     slf4jVersion = '1.7.12'
     junitVersion = '4.11'
-    superCsvVersion = '2.3.1'
+    seleniumVersion = '2.52.0'
 }
-
-/*
- * This enables scala/java joint compilation by adding the java source folders to the scala compile source sets and
- * removing them from the java compile source set.
- */
-sourceSets.main.scala.srcDir "src/main/java"
-sourceSets.main.java.srcDirs = []
 
 /* The Repositories to pull the dependencies from. Can include local jars. */
 repositories {
