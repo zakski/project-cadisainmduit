@@ -24,7 +24,7 @@ apply plugin: 'idea'
  */
 ext {
     scalaVersion = '2.11.8'
-    sparkVersion = '2.0.0'
+    sparkVersion = '2.0.1'
     scalaTestVersion = '2.2.4'
     slf4jVersion = '1.7.12'
     junitVersion = '4.11'
@@ -56,11 +56,14 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 
-task unzip1901Census(type: Copy) {
-    def zipFile = file('archives/1901.zip')
-    def outputDir = file("data/census")
-    from zipTree(zipFile)
-    into outputDir
+task unzip1901Census {
+    fileTree(dir: 'archives/census/ireland/1901/').include('*.zip').each { census ->
+        copy {
+            println "Unzip $census.name"
+            from zipTree("archives/census/ireland/1901/${census.name}")
+            into "data/census/ireland/1901/"
+        }
+    }
 }
 
 task unzipDictionary(type: Copy) {
