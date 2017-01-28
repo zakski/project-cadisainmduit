@@ -1,7 +1,7 @@
 package com.szadowsz.grainne.stats
 
 import com.szadowsz.common.io.write.FWriter
-import com.szadowsz.grainne.tools.reflection.ReflectionUtil
+import com.szadowsz.common.reflection.ReflectionUtil
 import org.apache.spark.rdd.RDD._
 import org.apache.spark.rdd.RDD
 

@@ -11,12 +11,12 @@ apply plugin: 'scala'
 // IntelliJ is the primary development medium, so it makes sense to add explicit support for all the sub-modules
 apply plugin: 'idea'
 
-//idea {
-//    module {
-//        downloavadoc = true
-//        downloadSources = true
-//    }
-//}
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
 /*
  * Specifying the versions as extra variables here so that they can be reused across multiple dependencies. Note you
@@ -24,11 +24,12 @@ apply plugin: 'idea'
  */
 ext {
     scalaVersion = '2.11.8'
-    sparkVersion = '2.0.1'
+    sparkVersion = '2.0.2'
     scalaTestVersion = '2.2.4'
     slf4jVersion = '1.7.12'
     junitVersion = '4.11'
     seleniumVersion = '2.52.0'
+    superCsvVersion = '2.3.1'
 }
 
 /* The Repositories to pull the dependencies from. Can include local jars. */
@@ -42,28 +43,49 @@ repositories {
  */
 dependencies {
     compile project(':module/phobail')
+    compile project(':module/ulster')
+
     compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-
-    compile group: 'org.apache.spark', name: 'spark-core_2.11', version: sparkVersion
-    compile group: 'org.apache.spark', name: 'spark-mllib_2.11', version: sparkVersion
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
 
     testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
     testCompile group: 'junit', name: 'junit', version: junitVersion
+
+    compile group: 'net.sf.extjwnl', name: 'extjwnl', version: '1.9.2'
+    compile group: 'net.sf.extjwnl', name: 'extjwnl-data-wn31', version: '1.2'
+
 }
 
-task unzip1901Census {
-    fileTree(dir: 'archives/census/ireland/1901/').include('*.zip').each { census ->
-        copy {
-            println "Unzip $census.name"
-            from zipTree("archives/census/ireland/1901/${census.name}")
-            into "data/census/ireland/1901/"
-        }
-    }
+task unzip1901_1(type: Copy) {
+    def zipFile = file('archives/census/ireland/1901/1901-1.zip')
+    def outputDir = file("data/census/ireland/1901")
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task unzip1901_2(type: Copy) {
+    def zipFile = file('archives/census/ireland/1901/1901-2.zip')
+    def outputDir = file("data/census/ireland/1901")
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task unzip1901_3(type: Copy) {
+    def zipFile = file('archives/census/ireland/1901/1901-3.zip')
+    def outputDir = file("data/census/ireland/1901")
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task unzip1901_4(type: Copy) {
+    def zipFile = file('archives/census/ireland/1901/1901-4.zip')
+    def outputDir = file("data/census/ireland/1901")
+    from zipTree(zipFile)
+    into outputDir
 }
 
 task unzipDictionary(type: Copy) {

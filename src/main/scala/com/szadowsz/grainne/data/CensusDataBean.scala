@@ -2,7 +2,7 @@ package com.szadowsz.grainne.data
 
 import com.szadowsz.grainne.input.util.AgeBanding
 import com.szadowsz.grainne.input.util.spelling.BirthSpell
-import com.szadowsz.grainne.tools.reflection.ReflectionUtil
+import com.szadowsz.common.reflection.ReflectionUtil
 
 
 /**

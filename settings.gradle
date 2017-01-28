@@ -1,3 +1,4 @@
 rootProject.name = 'project-cadisainmduit'
 include 'module/phobail'
+include 'module/ulster'
 

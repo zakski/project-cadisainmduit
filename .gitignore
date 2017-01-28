@@ -13,7 +13,7 @@ gradlew.bat
 
 # Do not add local builds to git
 build/
-data/
+/data/
 
 # Do not add complied jvm code to git
 *.class
