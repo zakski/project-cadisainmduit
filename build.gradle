@@ -2,8 +2,22 @@
 group 'com.szadowsz'
 version '0.0.1'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
 // IntelliJ is the primary development medium, so it makes sense to add explicit support for it in gradle
 apply plugin: 'idea'
+
+// Add distribution support
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 // Add necessary language support
 apply plugin: 'java'
@@ -38,4 +52,33 @@ dependencies {
 
     testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
     testCompile group: 'junit', name: 'junit', version: junitVersion
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+         }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+  //  configurations = ['archives']
+    publications = ['maven']
+    pkg {
+        repo = 'default'
+        name = 'an-phobail'
+        userOrg = user
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/zakski/project-an-phobail.git'
+        githubRepo ='zakski/project-an-phobail'
+        publicDownloadNumbers = false
+        version {
+            name = '0.0.1-snapshot'
+            desc = 'Common Scala Functions 0.0.1'
+            vcsTag = '0.0.1'
+        }
+    }
 }

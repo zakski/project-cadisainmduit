@@ -10,6 +10,7 @@
 gradle/
 gradlew
 gradlew.bat
+gradle.properties
 
 # Do not add local builds to git
 build/
