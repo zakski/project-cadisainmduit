@@ -2,7 +2,7 @@ package com.szadowsz.cadisainmduit.census.uk.scotland
 
 import java.io.File
 
-import com.szadowsz.cadisainmduit.census.uk.CountryNameStatsSplicer
+import com.szadowsz.cadisainmduit.census.SegGenderCensusHandler
 import com.szadowsz.cadisainmduit.census.uk.norire.NorireNamesStatsSplicer._
 import com.szadowsz.ulster.spark.Lineage
 import com.szadowsz.ulster.spark.transformers.string.spelling.{CapitalisationTransformer, RegexValidationTransformer}
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory
   *
   * Created on 19/10/2016.
   */
-object ScotNamesStatsSplicer extends CountryNameStatsSplicer {
+object ScotNamesStatsSplicer extends SegGenderCensusHandler {
 
   protected override def getInitialCols(country: String, year: String): Array[String] = {
     Array(s"${country}rank_$year", "name", s"${country}_count_$year")

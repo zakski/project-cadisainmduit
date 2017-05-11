@@ -1,6 +1,6 @@
 package com.szadowsz.cadisainmduit.census.uk.engwales
 
-import com.szadowsz.cadisainmduit.census.uk.CountryNameStatsSplicer
+import com.szadowsz.cadisainmduit.census.SegGenderCensusHandler
 import org.apache.spark.sql.DataFrame
 
 /**
@@ -8,7 +8,7 @@ import org.apache.spark.sql.DataFrame
   *
   * Created on 19/10/2016.
   */
-object EngWalNamesStatsSplicer extends CountryNameStatsSplicer {
+object EngWalNamesStatsSplicer extends SegGenderCensusHandler {
 
   protected override def selectStdCols(country: String, year: String, tmp: DataFrame): DataFrame = {
     if (year.toInt < 1996)

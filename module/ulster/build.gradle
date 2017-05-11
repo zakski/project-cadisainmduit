@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':module/phobail')
+    compile group: 'com.szadowsz', name: 'an-phobail', version: '0.0.2'
     compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion

@@ -50,7 +50,7 @@ object UkCensusNamesStatsSplicer {
       writer.close()
     }
 
-    uk
+    df
   }
 
   def main(args: Array[String]): Unit = {

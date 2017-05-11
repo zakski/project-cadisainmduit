@@ -22,27 +22,33 @@ idea {
  * Specifying the versions as extra variables here so that they can be reused across multiple dependencies. Note you
  * can add a '+' in the version info instead of a major/minor version to get the latest relevant version of the jar.
  */
-ext {
-    scalaVersion = '2.11.8'
-    sparkVersion = '2.0.2'
-    scalaTestVersion = '2.2.4'
-    slf4jVersion = '1.7.12'
-    junitVersion = '4.11'
-    seleniumVersion = '2.52.0'
-    superCsvVersion = '2.3.1'
+allprojects {
+    ext {
+        scalaVersion = '2.11.8'
+        scalaTestVersion = '2.2.4'
+        sparkVersion = '2.0.2'
+        slf4jVersion = '1.7.12'
+        junitVersion = '4.11'
+        seleniumVersion = '2.52.0'
+        superCsvVersion = '2.3.1'
+    }
+
+    /* The Repositories to pull the dependencies from. Can include local jars. */
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://dl.bintray.com/zakski/default'
+        }
+    }
 }
 
-/* The Repositories to pull the dependencies from. Can include local jars. */
-repositories {
-    mavenCentral()
-}
 
 /*
  * Dependencies of the current system. Important dependencies for interops between scala and java are: scala compiler,
  * slf4j logger, scalatest and junit.
  */
 dependencies {
-    compile project(':module/phobail')
+    compile group: 'com.szadowsz', name: 'an-phobail', version: '0.0.2'
     compile project(':module/ulster')
 
     compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
@@ -61,28 +67,28 @@ dependencies {
 }
 
 task unzip1901_1(type: Copy) {
-    def zipFile = file('archives/census/ireland/1901/1901-1.zip')
+    def zipFile = file('archives/data/census/ireland/1901/1901-1.zip')
     def outputDir = file("data/census/ireland/1901")
     from zipTree(zipFile)
     into outputDir
 }
 
 task unzip1901_2(type: Copy) {
-    def zipFile = file('archives/census/ireland/1901/1901-2.zip')
+    def zipFile = file('archives/data/census/ireland/1901/1901-2.zip')
     def outputDir = file("data/census/ireland/1901")
     from zipTree(zipFile)
     into outputDir
 }
 
 task unzip1901_3(type: Copy) {
-    def zipFile = file('archives/census/ireland/1901/1901-3.zip')
+    def zipFile = file('archives/data/census/ireland/1901/1901-3.zip')
     def outputDir = file("data/census/ireland/1901")
     from zipTree(zipFile)
     into outputDir
 }
 
 task unzip1901_4(type: Copy) {
-    def zipFile = file('archives/census/ireland/1901/1901-4.zip')
+    def zipFile = file('archives/data/census/ireland/1901/1901-4.zip')
     def outputDir = file("data/census/ireland/1901")
     from zipTree(zipFile)
     into outputDir
