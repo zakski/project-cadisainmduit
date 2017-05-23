@@ -5,11 +5,13 @@ import org.apache.spark.ml.Transformer
 import org.apache.spark.ml.param.{Param, ParamMap, ParamValidators}
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{DataFrame, Dataset, Row}
+import org.slf4j.LoggerFactory
 
 /**
   * Created on 06/12/2016.
   */
 class StringMappingGenerator(override val uid: String) extends Transformer {
+  protected val logger = LoggerFactory.getLogger("com.szadowsz.ulster.spark")
   protected val isDebug: Param[Boolean] = new Param[Boolean](this, "isDebug", "flag for outputting debugging info")
 
   protected val debugPath: Param[String] = new Param[String](this, "debugPath", "filepath for debug info")
@@ -23,6 +25,7 @@ class StringMappingGenerator(override val uid: String) extends Transformer {
   }
 
   override def transform(dataset: Dataset[_]): DataFrame = {
+    logger.info("Executing stage {}",uid)
     val result = dataset.select($(inputCols).head, $(inputCols).tail: _*)
     if ($(isDebug)) write($(debugPath),result.collect())
     result

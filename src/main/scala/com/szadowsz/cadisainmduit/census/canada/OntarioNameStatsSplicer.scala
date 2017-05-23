@@ -3,7 +3,6 @@ package com.szadowsz.cadisainmduit.census.canada
 import java.io.File
 
 import com.szadowsz.cadisainmduit.census.CensusHandler
-import com.szadowsz.cadisainmduit.census.canada.BCNamesStatsSplicer.{buildFractionPipeline, buildStdPipeline, extractFile, writeDF}
 import com.szadowsz.common.io.delete.DeleteUtil
 import com.szadowsz.common.io.explore.{ExtensionFilter, FileFinder}
 import com.szadowsz.common.io.zip.ZipperUtil

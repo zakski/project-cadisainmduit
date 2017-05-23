@@ -5,11 +5,13 @@ import org.apache.spark.ml.param.{Param, ParamMap}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, Dataset}
+import org.slf4j.LoggerFactory
 
 /**
   * Created on 19/08/2016.
   */
 class StringFiller(override val uid: String) extends Transformer {
+  protected val logger = LoggerFactory.getLogger("com.szadowsz.ulster.spark")
   protected val value: Param[String] = new Param[String](this, "value", "output value")
 
   protected val outputCol: Param[String] = new Param[String](this, "outputCol", "output Column")
@@ -30,6 +32,7 @@ class StringFiller(override val uid: String) extends Transformer {
   override def copy(extra: ParamMap): Transformer = defaultCopy(extra)
 
   override def transformSchema(schema: StructType): StructType = {
+    logger.info("Executing stage {}",uid)
     StructType(schema :+ StructField($(outputCol),StringType))
   }
 }
