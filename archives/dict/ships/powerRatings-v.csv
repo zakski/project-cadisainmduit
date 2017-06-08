@@ -1,227 +1,139 @@
-Minesweeper,1146
-Submarine,950
-Sloop,811
-Patrol Vessel,593
-Corvette,525
-Gunboat,428
-Brig-Sloop,298
-Ms Trawler,278
-Schooner,258
-Fifth Rate,229
-Cutter,186
-Sixth Rate,166
-Cruiser,165
-Tug,149
-Fifth Rate Frigate,148
-Brig,129
-Gunvessel,121
-Fireship,112
-Ship,106
-Yacht,101
-Fleet Tug,97
-Netlayer,97
-Rescue Tug,94
-Boom Defence Vessel,92
-Gun-Brig,92
-Repair Ship,91
-Sixth Rate Frigate,87
-Escort Destroyer,84
-Net Tender,80
-Stone Frigate,77
-Armoured Cruiser,73
-Large Harbour Tug,73
-Protected Cruiser,62
-Fourth Rate,60
-Minelayer,56
-Salvage Vessel,56
-Torpedo Boat,52
-Asw Trawler,51
-Dock Landing Ship,47
-Patrol Boat,43
-River Gunboat,43
-Ship Sloop,38
-Attack Submarine,34
-Destroyer Leader,34
-Hoy,33
-Ketch,30
-Torpedo Gunboat,29
-Vessel,29
-Harbour Tug,28
-Post Ship,28
-Patrol Frigate,27
-Ballistic Missile Submarine,26
-Collier,26
-Sixth Rate Post Ship,26
-Littoral Combat Ship,25
-Mooring Vessel,25
-Battlecruiser,23
-Galley,23
-Minehunter,23
-Fleet Oiler,22
-Fourth Rate Frigate,22
-Fleet Ocean Tug,21
-Armoured Frigate,20
-Scout Cruiser,20
-Submarine Chaser,20
-Trawler,20
-Brigantine,19
-District Harbour Tug,18
-Third Rate,18
-Submarine Rescue Ship,16
-Cargo Barge,14
-Freighter,14
-Barrage / Gate Vessel,13
-Guided Missile Destroyer,13
-Mine Countermeasures Ship,13
-Mine Countermeasures Vessel,13
-Rescue And Salvage Ship,13
-Armed Merchant Cruiser,12
-Floating Battery,12
-Stores Ship,12
-Submarine Rescue Vessel,12
-Coastguard Vessel,11
-Guided Missile Cruiser,11
-Infantry Landing Ship,11
-Large Landing Craft,11
-Expeditionary Fast Transport,10
-Ironclad,10
-Torpedo Cruiser,10
-Guided Missile Frigate,9
-Hospital Ship,9
-Hulk,9
-Missile Range Instrumentation Ship,9
-Seaplane Carrier,9
-Anti-aircraft Cruiser,8
-Auxiliary Minesweeper,8
-Barge,8
-Battle Damage Repair Ship,8
-Combat Stores Ship,8
-Hydrofoil,8
-Internal Combustion Engine Repair Ship,8
-Salvage Ship,8
-Yard Tug,8
-Auxiliary Minelayer,7
-Bark,7
-Flyboat,7
-Great Ship,7
-Landing Ship,7
-Pink,7
-Vehicle Landing Ship,7
-Asw Whaler,6
-Auxiliary Cruiser,6
-Fourth Rate Storeship,6
-Lugger,6
-Aircraft Maintenance Ship,5
-Amphibious Cargo Ship,5
-Ballinger,5
-Barque,5
-Barracks Ship,5
-Fast Combat Support Ship,5
-Fifth Rate Ship Of The Line,5
-Gundalow,5
-Motor Torpedo Boat Tender,5
-Q-Ship,5
-River Monitor,5
-Whaler,5
-Yawl,5
-Aircraft / Seaplane Carrier,4
-Aviso,4
-Brig-Aviso,4
-Chourre,4
-Dogger,4
-Fifth Rate Ship,4
-Light Aircraft Carrier,4
-Motor Launch,4
-Packet-Brig,4
-Partially Protected Cruiser,4
-Pinnace,4
-Schuyt,4
-Seaward Defence Boat,4
-Sixth Rate Corvette,4
 Airship,3
-Armed Boarding Vessel,3
-Floating Dry Dock,3
-Large Cruiser,3
-Maintenance Ship,3
-Net Cargo Ship,3
-Royal Ship,3
-Salvage And Rescue Ship,3
-Ship-Sloop,3
-Smack,3
-Store Lighter,3
+Anti-Aircraft Cruiser,1
 Arctic Tanker,2
-Auxiliary Patrol Vessel,2
-Auxiliary Repair Dock,2
-Base Ship,2
 Busse,2
+Cable Layer,1
 Carrack,2
+Chourre,4
+Clipper,1
+Coastguard Vessel,11
 Cog,2
+Combat Stores Ship,8
 Convoy Rescue Ship,2
 Deep-Submergence Vehicle,2
-Discovery Ship,2
-Dithmarschen,2
-Fifth Rate Warship,2
-First Rate,2
-Galliot,2
-Harbour Defence Motor Launch,2
-Landing Platform Dock,2
-Large Destroyer,2
-Minelaying Submarine,2
-Patrol Boat Tender,2
-Royal Yacht,2
-Schooner Tender,2
-Training Ship,2
-Warship,2
-Xebec,2
-Aircraft Transport,1
-Aircraft Transporter,1
-Anti-Aircraft Cruiser,1
-Anti-Aircraft Frigate,1
-Aviation Supply Ship,1
-Cable Layer,1
-Clipper,1
 Depot Ship,1
 District Harbour Tugboat,1
+Dithmarschen,2
 Dockyard Water Tank Vessel,1
+Dogger,4
 Drifter,1
 Drillship,1
 Dynamite Gun Cruiser,1
+Expeditionary Fast Transport,10
+Fast Combat Support Ship,5
+Fifth Rate Ship,4
+Fifth Rate Ship Of The Line,5
 Fifth Rate Troop Ship,1
+Fifth Rate Warship,2
+First Rate,2
 Fleet Messenger,1
+Fleet Ocean Tug,21
+Fleet Oiler,22
+Floating Battery,12
 Floating Dock,1
+Floating Dry Dock,3
 Fluyt,1
+Flyboat,7
+Fourth Rate Frigate,22
 Fourth Rate Ship,1
+Fourth Rate Storeship,6
 Fourth Rate Troopship,1
 Fourth Rate Warship,1
 Galleon,1
+Galley,23
+Galliot,2
+Great Ship,7
+Guided Missile Frigate,9
+Gundalow,5
+Harbour Defence Motor Launch,2
 Helicopter Landing Platform,1
+Hospital Ship,9
+Hulk,9
+Hydrofoil,8
+Internal Combustion Engine Repair Ship,8
+Ironclad,10
+Ketch,30
 King's Ship,1
 Kite Balloon Ship,1
+Landing Platform Dock,2
+Large Cruiser,3
+Large Destroyer,2
 Lighter,1
 Lightship,1
+Littoral Combat Ship,25
+Lugger,6
 Maintenance Aircraft Carrier,1
+Maintenance Ship,3
 Middling Ship,1
+Mine Countermeasures Ship,13
+Mine Countermeasures Vessel,13
+Minehunter,23
+Minelayer,56
 Minelaying Cruiser,1
+Minelaying Submarine,2
+Missile Range Instrumentation Ship,9
+Motor Launch,4
 Naval Mine Carrier,1
+Net Cargo Ship,3
 Nuclear-Powered Submarine,1
 Ocean Survey Vessel,1
+Packet-Brig,4
+Partially Protected Cruiser,4
+Patrol Boat Tender,2
 Patrol Craft,1
+Patrol Frigate,27
+Pink,7
+Pinnace,4
 Pinnance,1
+Post Ship,28
+Q-Ship,5
+Rescue And Salvage Ship,13
 Rescue Ship,1
 Research Ship & Icebreaker,1
 River Barge,1
+River Gunboat,43
+River Monitor,5
+Royal Ship,3
+Royal Yacht,2
+Salvage And Rescue Ship,3
+Salvage Ship,8
+Schooner Tender,2
+Schuyt,4
 Seabed Operations Vessel,1
+Seaward Defence Boat,4
 Second Rate Frigate,1
 Second Rate Hospital Ship,1
+Ship,106
+Ship Sloop,38
+Ship-Sloop,3
 Sireene,1
+Sixth Rate Corvette,4
+Sixth Rate Post Ship,26
 Sixth Rate Ship,1
 Sixth Rate Storeship,1
 Sixth Rate Vessel,1
+Smack,3
 Snow,1
 Special Service Vessel,1
 Starship,1
 Stealth Ship,1
+Stone Frigate,77
+Store Lighter,3
+Stores Ship,12
+Submarine Chaser,20
+Submarine Rescue Ship,16
+Submarine Rescue Vessel,12
 Tank Landing Craft,1
 Third Rate Frigate,1
 Torpedo Boat Depot Ship,1
+Torpedo Cruiser,10
+Torpedo Gunboat,29
+Training Ship,2
 type,1
+Vessel,29
+Warship,2
+Whaler,5
+Xebec,2
+Yacht,101
+Yard Tug,8
+Yawl,5
