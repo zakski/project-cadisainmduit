@@ -66,10 +66,10 @@ object RoyalNavyPreparer {
   }
 
   private def buildClassAndTypePipe(): Lineage = {
-    val rateData = new CsvReader("./archives/dict/rateMap.csv")
+    val rateData = new CsvReader("./archives/dict/ships/rateMap.csv")
     val rateMap = rateData.readAll().map(s => s.head.trim -> s.last.trim).toMap
 
-    val typeData = new CsvReader("./archives/dict/classAndTypeMap.csv")
+    val typeData = new CsvReader("./archives/dict/ships/classAndTypeMap.csv")
     val typeMap = typeData.readAll().map(s => s.head.trim -> s.last.trim).toMap
 
     val pipe = new Lineage("candt")

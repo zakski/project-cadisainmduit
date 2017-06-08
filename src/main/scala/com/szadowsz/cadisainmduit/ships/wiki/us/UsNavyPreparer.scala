@@ -63,15 +63,15 @@ object UsNavyPreparer {
     pipe.addStage(classOf[RegexGroupExtractor], "inputCol" -> "fate", "pattern" -> UsNavySchema.datePat)
     pipe.addStage(classOf[StringFiller], "outputCol" -> "navy", "value" -> "USN")
     pipe.addStage(classOf[StringFiller], "outputCol" -> "country", "value" -> "Usa")
-    pipe.addPassThroughTransformer(classOf[StringStatistics], Map("isDebug" -> true, "debugPath" -> "./data/debug/rn/"))
+    pipe.addPassThroughTransformer(classOf[StringStatistics], Map("isDebug" -> true, "debugPath" -> "./data/debug/us/"))
     pipe
   }
 
   private def buildClassAndTypePipe(): Lineage = {
-    val rateData = new CsvReader("./archives/dict/rateMap.csv")
+    val rateData = new CsvReader("./archives/dict/ships/rateMap.csv")
     val rateMap = rateData.readAll().map(s => s.head.trim -> s.last.trim).toMap
 
-    val typeData = new CsvReader("./archives/dict/classAndTypeMap.csv")
+    val typeData = new CsvReader("./archives/dict/ships/classAndTypeMap.csv")
     val typeMap = typeData.readAll().map(s => s.head.trim -> s.last.trim).toMap
 
     val pipe = new Lineage("candt")
@@ -89,7 +89,7 @@ object UsNavyPreparer {
     pipe.addStage(classOf[RegexGroupExtractor], "inputCol" -> "classAndTypeDesc", "outputCol" -> "typeDesc", "pattern" -> "^(Type \\d\\d).*$")
     pipe.addStage(classOf[RegexGroupExtractor], "inputCol" -> "classAndTypeDesc", "pattern" -> "^(?:Type \\d\\d ){0,1}(.*)$")
     pipe.addStage(classOf[StringMapper], Map("mapping" -> typeMap, "inputCol" -> "classAndTypeDesc"))
-    pipe.addPassThroughTransformer(classOf[StringStatistics], Map("isDebug" -> true, "debugPath" -> "./data/debug/rn/"))
+    pipe.addPassThroughTransformer(classOf[StringStatistics], Map("isDebug" -> true, "debugPath" -> "./data/debug/us/"))
     pipe
   }
 

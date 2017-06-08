@@ -1,0 +1,64 @@
+type,role
+Advice Boat,scout
+Aircraft Carrier,capital
+Ammunition Ship,cargo
+Amphibious Assault Ship,capital
+Amphibious Command Ship,capital
+Amphibious Transport Dock,assault
+Arctic Discovery Ship,scout
+Attack Transport,assault
+Attack Cargo Ship,assault
+Battleship,capital
+Bomb Vessel,bombardment
+Cargo Ship,cargo
+Command Ship,capital
+Cutter Tender,resupply
+Despatch Vessel,scout
+Destroyer,battle
+Destroyer Escort,escort
+Destroyer Depot Ship,resupply
+Destroyer Tender,resupply
+Discovery Vessel,scout
+Distilling Ship,resupply
+Dreadnought Battleship,capital
+Escort Carrier,capital
+First Rate Ship Of The Line,capital
+Fourth Rate Ship Of The Line,battle
+Frigate,escort
+Gasoline Tanker,cargo
+Heavy Cruiser,battle
+High Speed Transport,assault
+Hydrographic Survey Vessel,scout
+Icebreaker,scout
+Ironclad Battleship,capital
+Landing Ship Infantry,assault
+Light Cruiser,battle
+Light Fleet Carrier,capital
+Lighthouse Tender,resupply
+Medium Landing Ship,assault
+Monitor,bombardment
+Mortar Vessel,bombardment
+Oceanographic Research Ship,scout
+Oceanographic Survey Ship,scout
+Ocean Surveillance Ship,scout
+Oiler,cargo
+Packet Ship,scout
+Pre-Dreadnought Battleship,capital
+Radar Picket Ship,scout
+Replenishment Oiler,resupply
+Seaplane Tender,resupply
+Second Rate Ship Of The Line,capital
+Second Rate,capital
+Ship Of The Line,battle
+Storeship,cargo
+Submarine Depot Ship,resupply
+Submarine Tender,resupply
+Survey Ship,scout
+Survey Vessel,scout
+Tanker,cargo
+Tank Landing Ship,assault
+Tender,resupply
+Third Rate Ship Of The Line,battle
+Transport,cargo
+Troopship,cargo
+Vehicle Cargo Ship,cargo

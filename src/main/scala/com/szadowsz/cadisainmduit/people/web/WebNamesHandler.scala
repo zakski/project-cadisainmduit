@@ -90,7 +90,7 @@ object WebNamesHandler extends NameHandler {
     val bnres = bnmodel.transform(bname).select("name", "gender", "bn_origin").distinct().withColumn("isBNames",lit(1.0))
     writeDF(bnres,"./data/web/behindthename.csv","UTF-8",(s : Seq[String]) => true,ord)
 
-    val originData = new CsvReader("./archives/dict/origin.csv")
+    val originData = new CsvReader("./archives/dict/names/origin.csv")
     val originMap = originData.readAll().map(s => s.head.trim -> s.last.trim).toMap
 
     val funct = udf[String, String, String]((x: String, y: String) => Option(x).getOrElse(y))

@@ -76,6 +76,12 @@ object ShipPreparer {
     val usa = model.transform(dfUSN)
     val ships = uboat.union(rn).union(usa).distinct()
 
+    val pipe2 = new Lineage("ship2")
+    pipe2.addPassThroughTransformer(classOf[StringStatistics], Map("isDebug" -> true, "debugPath" -> "./data/debug/ships/"))
+
+    val model2 = pipe2.fit(ships)
+    model2.transform(ships)
+
     val finalOrd: Ordering[Seq[String]] = Ordering.by(seq => seq.head)
     writeDF(ships, "./data/web/ships.csv", "UTF-8", (s: Seq[String]) => true, finalOrd)
   }
