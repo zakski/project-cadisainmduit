@@ -29,6 +29,7 @@ Cable Layer,auxiliary
 District Harbour Tug,auxiliary
 Fireship,auxiliary
 Fleet Tug,auxiliary
+Convoy Rescue Ship,auxiliary
 Harbour Tug,auxiliary
 Hoy,auxiliary
 Large Harbour Tug,auxiliary
@@ -40,13 +41,17 @@ Rescue Tug,auxiliary
 Salvage Vessel,auxiliary
 Trawler,auxiliary
 Tug,auxiliary
+Clipper,auxiliary
+Coastguard Vessel,auxiliary
 Anti-aircraft Cruiser,battle
 Armoured Cruiser,battle
 Armoured Frigate,battle
 Cruiser,battle
 Destroyer,battle
 Destroyer Leader,battle
+Cog,battle
 Fourth Rate,battle
+Carrack,battle
 Fourth Rate Ship Of The Line,battle
 Guided Missile Cruiser,battle
 Guided Missile Destroyer,battle
@@ -123,6 +128,7 @@ Distilling Ship,resupply
 Lighthouse Tender,resupply
 Motor Torpedo Boat Tender,resupply
 Repair Ship,resupply
+Combat Stores Ship,resupply
 Replenishment Oiler,resupply
 Seaplane Carrier,resupply
 Seaplane Tender,resupply
@@ -151,3 +157,4 @@ Survey Vessel,scout
 Attack Submarine,stealth
 Ballistic Missile Submarine,stealth
 Submarine,stealth
+Deep-Submergence Vehicle,stealth
