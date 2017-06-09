@@ -1,160 +1,283 @@
-type,role
-Amphibious Cargo Ship,assault
-Amphibious Transport Dock,assault
-Armed Boarding Vessel,assault
-Attack Cargo Ship,assault
-Attack Transport,assault
-Dock Landing Ship,assault
-High Speed Transport,assault
-Infantry Landing Ship,assault
-Landing Ship,assault
-Landing Ship Infantry,assault
-Large Landing Craft,assault
-Medium Landing Ship,assault
-Tank Landing Ship,assault
-Vehicle Landing Ship,assault
-Armed Merchant Cruiser,auxiliary
-Asw Trawler,auxiliary
-Asw Whaler,auxiliary
-Auxiliary Cruiser,auxiliary
-Auxiliary Minelayer,auxiliary
-Auxiliary Minesweeper,auxiliary
-Auxiliary Patrol Vessel,auxiliary
-Bark,auxiliary
-Barque,auxiliary
-Barrage / Gate Vessel,auxiliary
-Base Ship,auxiliary
-Boom Defence Vessel,auxiliary
-Cable Layer,auxiliary
-District Harbour Tug,auxiliary
-Fireship,auxiliary
-Fleet Tug,auxiliary
-Convoy Rescue Ship,auxiliary
-Harbour Tug,auxiliary
-Hoy,auxiliary
-Large Harbour Tug,auxiliary
-Mooring Vessel,auxiliary
-Ms Trawler,auxiliary
-Net Tender,auxiliary
-Netlayer,auxiliary
-Rescue Tug,auxiliary
-Salvage Vessel,auxiliary
-Trawler,auxiliary
-Tug,auxiliary
-Clipper,auxiliary
-Coastguard Vessel,auxiliary
-Anti-aircraft Cruiser,battle
-Armoured Cruiser,battle
-Armoured Frigate,battle
-Cruiser,battle
-Destroyer,battle
-Destroyer Leader,battle
-Cog,battle
-Fourth Rate,battle
-Carrack,battle
-Fourth Rate Ship Of The Line,battle
-Guided Missile Cruiser,battle
-Guided Missile Destroyer,battle
-Heavy Cruiser,battle
-Light Cruiser,battle
-Protected Cruiser,battle
-Scout Cruiser,battle
-Ship Of The Line,battle
-Third Rate,battle
-Third Rate Ship Of The Line,battle
-Torpedo Boat,battle
-Bomb Vessel,bombardment
-Gunboat,bombardment
-Gunvessel,bombardment
-Monitor,bombardment
-Mortar Vessel,bombardment
-Aircraft / Seaplane Carrier,capital
-Aircraft Carrier,capital
-Aircraft Maintenance Ship,capital
-Amphibious Assault Ship,capital
-Amphibious Command Ship,capital
-Battlecruiser,capital
-Battleship,capital
-Command Ship,capital
-Dreadnought Battleship,capital
-Escort Carrier,capital
-First Rate Ship Of The Line,capital
-Ironclad Battleship,capital
-Light Aircraft Carrier,capital
-Light Fleet Carrier,capital
-Pre-Dreadnought Battleship,capital
-Second Rate,capital
-Second Rate Ship Of The Line,capital
-Aircraft Transport,cargo
-Aircraft Transporter,cargo
-Ammunition Ship,cargo
-Aviation Supply Ship,cargo
-Ballinger,cargo
-Barge,cargo
-Barracks Ship,cargo
-Cargo Barge,cargo
-Cargo Ship,cargo
-Collier,cargo
-Freighter,cargo
-Gasoline Tanker,cargo
-Oiler,cargo
-Storeship,cargo
-Tanker,cargo
-Transport,cargo
-Troopship,cargo
-Vehicle Cargo Ship,cargo
-Anti-Aircraft Frigate,escort
-Brig-Sloop,escort
-Corvette,escort
-Destroyer Escort,escort
-Escort Destroyer,escort
-Frigate,escort
-Gun-Brig,escort
-Sloop,escort
-Fifth Rate,patrol
-Fifth Rate Frigate,patrol
-Minesweeper,patrol
-Patrol Boat,patrol
-Patrol Vessel,patrol
-Schooner,patrol
-Sixth Rate,patrol
-Sixth Rate Frigate,patrol
-Auxiliary Repair Dock,resupply
-Battle Damage Repair Ship,resupply
-Cutter Tender,resupply
-Destroyer Depot Ship,resupply
-Destroyer Tender,resupply
-Distilling Ship,resupply
-Lighthouse Tender,resupply
-Motor Torpedo Boat Tender,resupply
-Repair Ship,resupply
-Combat Stores Ship,resupply
-Replenishment Oiler,resupply
-Seaplane Carrier,resupply
-Seaplane Tender,resupply
-Submarine Depot Ship,resupply
-Submarine Tender,resupply
-Tender,resupply
-Advice Boat,scout
-Arctic Discovery Ship,scout
-Aviso,scout
-Brig,scout
-Brigantine,scout
-Brig-Aviso,scout
-Cutter,scout
-Despatch Vessel,scout
-Discovery Ship,scout
-Discovery Vessel,scout
-Hydrographic Survey Vessel,scout
-Icebreaker,scout
-Ocean Surveillance Ship,scout
-Oceanographic Research Ship,scout
-Oceanographic Survey Ship,scout
-Packet Ship,scout
-Radar Picket Ship,scout
-Survey Ship,scout
-Survey Vessel,scout
-Attack Submarine,stealth
-Ballistic Missile Submarine,stealth
-Submarine,stealth
-Deep-Submergence Vehicle,stealth
+type,role,power
+Amphibious Cargo Ship,assault,7.0
+Amphibious Transport Dock,assault,3.0
+Armed Boarding Vessel,assault,8.0
+Attack Cargo Ship,assault,5.0
+Attack Transport,assault,5.0
+Dock Landing Ship,assault,5.0
+High Speed Transport,assault,5.0
+Infantry Landing Ship,assault,6.0
+Landing Platform Dock,assault,3.0
+Landing Ship,assault,6.0
+Landing Ship Infantry,assault,6.0
+Large Landing Craft,assault,7.0
+Medium Landing Ship,assault,6.0
+Tank Landing Craft,assault,7.0
+Tank Landing Ship,assault,6.0
+Vehicle Landing Ship,assault,6.0
+Armed Merchant Cruiser,auxiliary,10.0
+Asw Trawler,auxiliary,10.0
+Asw Whaler,auxiliary,10.0
+Auxiliary Cruiser,auxiliary,10.0
+Auxiliary Minelayer,auxiliary,10.0
+Auxiliary Minesweeper,auxiliary,10.0
+Auxiliary Patrol Vessel,auxiliary,10.0
+Bark,auxiliary,10.0
+Barque,auxiliary,10.0
+Barrage / Gate Vessel,auxiliary,10.0
+Base Ship,auxiliary,10.0
+Boom Defence Vessel,auxiliary,10.0
+Cable Layer,auxiliary,10.0
+Clipper,auxiliary,10.0
+Coastguard Vessel,auxiliary,10.0
+Convoy Rescue Ship,auxiliary,10.0
+District Harbour Tug,auxiliary,10.0
+District Harbour Tugboat,auxiliary,10.0
+Dockyard Water Tank Vessel,auxiliary,10.0
+Dogger,auxiliary,10.0
+Drillship,auxiliary,10.0
+Fireship,auxiliary,10.0
+Fleet Messenger,auxiliary,10.0
+Fleet Ocean Tug,auxiliary,10.0
+Fleet Tug,auxiliary,10.0
+Fluyt,auxiliary,10.0
+Flyboat,auxiliary,10.0
+Harbour Defence Motor Launch,auxiliary,10.0
+Harbour Tug,auxiliary,10.0
+Hoy,auxiliary,10.0
+Hulk,auxiliary,10.0
+Ketch,auxiliary,10.0
+Large Harbour Tug,auxiliary,10.0
+Lighter,auxiliary,10.0
+Lightship,auxiliary,10.0
+Lugger,auxiliary,10.0
+Missile Range Instrumentation Ship,auxiliary,10.0
+Mooring Vessel,auxiliary,10.0
+Motor Launch,auxiliary,10.0
+Ms Trawler,auxiliary,10.0
+Naval Mine Carrier,auxiliary,10.0
+Net Tender,auxiliary,10.0
+Netlayer,auxiliary,10.0
+Patrol Craft,auxiliary,10.0
+Pinnace,auxiliary,10.0
+Pinnance,auxiliary,10.0
+Q-Ship,auxiliary,10.0
+Rescue And Salvage Ship,auxiliary,10.0
+Rescue Ship,auxiliary,10.0
+Rescue Tug,auxiliary,10.0
+River Barge,auxiliary,10.0
+River Monitor,auxiliary,10.0
+Royal Yacht,auxiliary,10.0
+Salvage And Rescue Ship,auxiliary,10.0
+Salvage Ship,auxiliary,10.0
+Salvage Vessel,auxiliary,10.0
+Seabed Operations Vessel,auxiliary,10.0
+Sireene,auxiliary,10.0
+Smack,auxiliary,10.0
+Snow,auxiliary,10.0
+Special Service Vessel,auxiliary,10.0
+Stone Frigate,auxiliary,10.0
+Store Lighter,auxiliary,10.0
+Submarine Rescue Ship,auxiliary,10.0
+Submarine Rescue Vessel,auxiliary,10.0
+Trawler,auxiliary,10.0
+Tug,auxiliary,10.0
+Whaler,auxiliary,10.0
+Xebec,auxiliary,10.0
+Yacht,auxiliary,10.0
+Yard Tug,auxiliary,10.0
+Yawl,auxiliary,10.0
+Anti-aircraft Cruiser,battle,3.5
+Anti-Aircraft Cruiser,battle,3.5
+Armoured Cruiser,battle,3.5
+Armoured Frigate,battle,3.5
+Busse,battle,5.0
+Carrack,battle,4.0
+Cog,battle,4.0
+Cruiser,battle,3.5
+Destroyer,battle,4.5
+Destroyer Leader,battle,4.0
+Fourth Rate,battle,4.0
+Fourth Rate Frigate,battle,4.0
+Fourth Rate Ship,battle,4.0
+Fourth Rate Ship Of The Line,battle,4.0
+Fourth Rate Warship,battle,4.0
+Galleon,battle,4.0
+Galley,battle,4.0
+Galliot,battle,4.0
+Great Ship,battle,2.0
+Guided Missile Cruiser,battle,4.0
+Guided Missile Destroyer,battle,3.0
+Heavy Cruiser,battle,3.5
+Ironclad,battle,3.0
+Large Destroyer,battle,3.5
+Light Cruiser,battle,4.0
+Littoral Combat Ship,battle,4.5
+Middling Ship,battle,3.0
+Partially Protected Cruiser,battle,4.0
+Protected Cruiser,battle,3.5
+Scout Cruiser,battle,4.5
+Ship Of The Line,battle,3.0
+Third Rate,battle,3.0
+Third Rate Ship Of The Line,battle,3.0
+Torpedo Boat,battle,5.0
+Torpedo Cruiser,battle,3.5
+Torpedo Gunboat,battle,4.5
+Warship,battle,3.0
+Bomb Vessel,bombardment,7.0
+Dynamite Gun Cruiser,bombardment,4.5
+Floating Battery,bombardment,9.0
+Gunboat,bombardment,7.0
+Gunvessel,bombardment,7.0
+Monitor,bombardment,6.0
+Mortar Vessel,bombardment,7.0
+River Gunboat,bombardment,8.0
+Aircraft / Seaplane Carrier,capital,2.0
+Aircraft Carrier,capital,1.0
+Aircraft Maintenance Ship,capital,1.5
+Airship,capital,3.0
+Amphibious Assault Ship,capital,2.0
+Amphibious Command Ship,capital,3.0
+Battlecruiser,capital,3.0
+Battleship,capital,2.0
+Command Ship,capital,3.0
+Dreadnought Battleship,capital,1.0
+Escort Carrier,capital,1.5
+First Rate,capital,1.0
+First Rate Ship Of The Line,capital,1.0
+Helicopter Landing Platform,capital,2.0
+Ironclad Battleship,capital,1.0
+King's Ship,capital,1.0
+Large Cruiser,capital,3.0
+Light Aircraft Carrier,capital,1.5
+Light Fleet Carrier,capital,1.5
+Maintenance Aircraft Carrier,capital,1.5
+Pre-Dreadnought Battleship,capital,1.0
+Royal Ship,capital,1.0
+Second Rate,capital,2.0
+Second Rate Ship Of The Line,capital,2.0
+Aircraft Transport,cargo,9.0
+Aircraft Transporter,cargo,9.0
+Ammunition Ship,cargo,9.0
+Arctic Tanker,cargo,9.0
+Aviation Supply Ship,cargo,9.0
+Ballinger,cargo,9.0
+Barge,cargo,9.0
+Barracks Ship,cargo,9.0
+Cargo Barge,cargo,9.0
+Cargo Ship,cargo,9.0
+Collier,cargo,9.0
+Expeditionary Fast Transport,cargo,9.0
+Fifth Rate Troop Ship,cargo,9.0
+Fourth Rate Storeship,cargo,9.0
+Fourth Rate Troopship,cargo,9.0
+Freighter,cargo,9.0
+Gasoline Tanker,cargo,9.0
+Gundalow,cargo,9.0
+Hydrofoil,cargo,9.0
+Net Cargo Ship,cargo,9.0
+Oiler,cargo,9.0
+Schuyt,cargo,9.0
+Sixth Rate Storeship,cargo,9.0
+Storeship,cargo,9.0
+Tanker,cargo,9.0
+Transport,cargo,9.0
+Troopship,cargo,9.0
+Vehicle Cargo Ship,cargo,9.0
+Anti-Aircraft Frigate,escort,5.0
+Brig-Sloop,escort,6.5
+Corvette,escort,6.0
+Destroyer Escort,escort,5.0
+Escort Destroyer,escort,5.0
+Frigate,escort,5.0
+Guided Missile Frigate,escort,4.5
+Gun-Brig,escort,6.5
+Patrol Frigate,escort,5.0
+Post Ship,escort,7.0
+Second Rate Frigate,escort,5.0
+Ship Sloop,escort,6.5
+Ship-Sloop,escort,6.5
+Sixth Rate,escort,6.0
+Sixth Rate Corvette,escort,6.0
+Sixth Rate Frigate,escort,6.0
+Sixth Rate Post Ship,escort,6.0
+Sixth Rate Ship,escort,6.0
+Sixth Rate Vessel,escort,6.0
+Sloop,escort,6.5
+Third Rate Frigate,escort,6.0
+Fifth Rate,patrol,5.0
+Fifth Rate Frigate,patrol,5.0
+Fifth Rate Ship,patrol,5.0
+Fifth Rate Ship Of The Line,patrol,5.0
+Fifth Rate Warship,patrol,5.0
+Mine Countermeasures Ship,patrol,6.0
+Mine Countermeasures Vessel,patrol,6.0
+Minehunter,patrol,6.0
+Minelayer,patrol,6.0
+Minelaying Cruiser,patrol,4.0
+Minesweeper,patrol,6.0
+Patrol Boat,patrol,7.0
+Patrol Vessel,patrol,7.0
+Pink,patrol,7.0
+Schooner,patrol,7.0
+Seaward Defence Boat,patrol,7.0
+Submarine Chaser,patrol,7.0
+Auxiliary Repair Dock,resupply,8.0
+Battle Damage Repair Ship,resupply,8.0
+Combat Stores Ship,resupply,8.0
+Cutter Tender,resupply,8.0
+Depot Ship,resupply,8.0
+Destroyer Depot Ship,resupply,8.0
+Destroyer Tender,resupply,8.0
+Distilling Ship,resupply,8.0
+Fast Combat Support Ship,resupply,8.0
+Fleet Oiler,resupply,8.0
+Floating Dock,resupply,8.0
+Floating Dry Dock,resupply,8.0
+Hospital Ship,resupply,8.0
+Internal Combustion Engine Repair Ship,resupply,8.0
+Lighthouse Tender,resupply,8.0
+Maintenance Ship,resupply,8.0
+Motor Torpedo Boat Tender,resupply,8.0
+Patrol Boat Tender,resupply,8.0
+Repair Ship,resupply,8.0
+Replenishment Oiler,resupply,8.0
+Schooner Tender,resupply,8.0
+Seaplane Carrier,resupply,8.0
+Seaplane Tender,resupply,8.0
+Second Rate Hospital Ship,resupply,8.0
+Stores Ship,resupply,8.0
+Submarine Depot Ship,resupply,8.0
+Submarine Tender,resupply,8.0
+Tender,resupply,8.0
+Torpedo Boat Depot Ship,resupply,8.0
+Advice Boat,scout,7.0
+Arctic Discovery Ship,scout,7.0
+Aviso,scout,7.0
+Brig,scout,7.0
+Brigantine,scout,7.0
+Brig-Aviso,scout,7.0
+Cutter,scout,7.0
+Despatch Vessel,scout,7.0
+Discovery Ship,scout,7.0
+Discovery Vessel,scout,7.0
+Hydrographic Survey Vessel,scout,7.0
+Icebreaker,scout,7.0
+Kite Balloon Ship,scout,7.0
+Ocean Surveillance Ship,scout,7.0
+Ocean Survey Vessel,scout,7.0
+Oceanographic Research Ship,scout,7.0
+Oceanographic Survey Ship,scout,7.0
+Packet Ship,scout,7.0
+Packet-Brig,scout,7.0
+Radar Picket Ship,scout,7.0
+Research Ship & Icebreaker,scout,7.0
+Survey Ship,scout,7.0
+Survey Vessel,scout,7.0
+Attack Submarine,stealth,3.5
+Ballistic Missile Submarine,stealth,3.0
+Deep-Submergence Vehicle,stealth,7.0
+Minelaying Submarine,stealth,3.5
+Nuclear-Powered Submarine,stealth,3.5
+Stealth Ship,stealth,7.0
+Submarine,stealth,3.5
