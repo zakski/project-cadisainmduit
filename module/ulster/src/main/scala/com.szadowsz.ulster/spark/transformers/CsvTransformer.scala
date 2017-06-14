@@ -18,7 +18,10 @@ import scala.collection.mutable
   * Created on 28/11/2016.
   */
 class CsvTransformer(override val uid: String) extends Transformer {
+
   protected val logger = LoggerFactory.getLogger("com.szadowsz.ulster.spark")
+
+  protected val delimiter: Param[Char] = new Param[Char](this, "delimiter", "")
 
   protected val inputCol: Param[String] = new Param[String](this, "inputCol", "input Column", { s: String => s != null && s.length > 0 })
 
@@ -29,8 +32,12 @@ class CsvTransformer(override val uid: String) extends Transformer {
   protected val sizeParam: Param[Int] = new Param[Int](this, "size", "number of output columns")
 
   setDefault(tmpCol, "tmp")
+  setDefault(delimiter, ',')
 
-  private def read: (String) => Seq[String] = (row: String) => new CsvListReader(new StringReader(row), CsvPreference.STANDARD_PREFERENCE).read().asScala
+  private def read: (String) => Seq[String] = (row: String) => {
+    val pref = new CsvPreference.Builder('"',$(delimiter), "\r\n").build
+    new CsvListReader(new StringReader(row), pref).read().asScala
+  }
 
   private def createFunct(index: Int) = {
     udf { a: mutable.WrappedArray[String] => if (a.length > index) a(index) else null.asInstanceOf[String] }
@@ -45,6 +52,10 @@ class CsvTransformer(override val uid: String) extends Transformer {
   def getOutputCols: Array[String] = $(outputCols)
 
   def setSize(size: Int): CsvTransformer = set(sizeParam, size)
+
+  def setDelimiter(tabDelimited: Char) = set(delimiter, tabDelimited)
+
+  def getDelimiter: Char = $(delimiter)
 
   def getSize: Int = $(sizeParam)
 
