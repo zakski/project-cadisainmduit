@@ -4,6 +4,7 @@ import java.io.{File, StringReader}
 import java.sql.Date
 import java.text.SimpleDateFormat
 
+import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.common.io.delete.DeleteUtil
 import com.szadowsz.common.io.read.{CsvReader, FReader}
 import com.szadowsz.common.io.write.CsvWriter
@@ -28,7 +29,7 @@ import scala.util.Try
 /**
   * Created on 27/04/2016.
   */
-object UboatPreparer {
+object UboatPreparer extends LocalDataframeIO {
   private val _logger = LoggerFactory.getLogger(UboatPreparer.getClass)
 
   val dateUdf = udf[Date, String]((s: String) => {
@@ -39,33 +40,6 @@ object UboatPreparer {
   })
 
   val dateComboUdf = udf[Date, Date,Date]((d1: Date,d2 : Date) => if (d1 == null) d2 else d1)
-
-  protected def convertToRDD(sess: SparkSession, dropFirst: Boolean, lines: Array[String]): (Array[String], RDD[String]) = {
-    if (dropFirst) {
-      // assume the first line is the header
-      val schema = new CsvListReader(new StringReader(lines.head.asInstanceOf[String]), CsvPreference.STANDARD_PREFERENCE).read().asScala.toArray
-      (schema, sess.sparkContext.parallelize(lines.drop(1)))
-    } else {
-      (Array(), sess.sparkContext.parallelize(lines))
-    }
-  }
-
-  protected def extractFile(sess: SparkSession, f: File, dropFirst: Boolean, readSchema: Boolean = false): DataFrame = {
-    val r = new FReader(f.getAbsolutePath)
-    val lines = r.lines().toArray.map(_.toString)
-
-    val (fields, stringRdd) = convertToRDD(sess, dropFirst, lines)
-
-    val rowRDD = stringRdd.map(s => Row.fromSeq(List(s)))
-    var df = sess.createDataFrame(rowRDD, StructType(Array(StructField("fields", StringType))))
-
-    if (readSchema && dropFirst) {
-      val t = new CsvTransformer("X").setInputCol("fields").setOutputCols(fields).setSize(fields.length)
-      df = t.transform(df)
-    }
-    df.cache() // cache the constructed dataframe
-    df
-  }
 
   private def buildClassPipe(): Lineage = {
     val pipe = new Lineage("UboatClass")
@@ -105,14 +79,6 @@ object UboatPreparer {
     val pipe = new Lineage("UboatExt")
     pipe.addPassThroughTransformer(classOf[StringStatistics], Map("isDebug" -> true, "debugPath" -> "./data/debug/uboat/"))
     pipe
-  }
-
-  protected def writeDF(df: DataFrame, path: String, charset: String, filter: (Seq[String]) => Boolean, sortBy: Ordering[Seq[String]]): Unit = {
-    val writer = new CsvWriter(path, charset, false)
-    writer.write(df.schema.fieldNames: _*)
-    val res = df.collect().map(r => r.toSeq.map(f => Option(f).map(_.toString).getOrElse(""))).filter(filter)
-    writer.writeAll(res.sorted(sortBy))
-    writer.close()
   }
 
   def main(args: Array[String]): Unit = {

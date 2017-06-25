@@ -2,7 +2,7 @@ package com.szadowsz.cadisainmduit.people.web
 
 import java.io.File
 
-import com.szadowsz.cadisainmduit.people.NameHandler
+import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.common.io.delete.DeleteUtil
 import com.szadowsz.common.io.explore.{ExtensionFilter, FileFinder}
 import com.szadowsz.common.io.read.CsvReader
@@ -18,7 +18,7 @@ import org.apache.spark.sql.functions._
 /**
   * Created on 28/01/2017.
   */
-object WebNamesHandler extends NameHandler {
+object WebNamesHandler extends LocalDataframeIO {
 
   private def buildBCenterPipe(): Lineage = {
     val pipe = new Lineage("BCenter")

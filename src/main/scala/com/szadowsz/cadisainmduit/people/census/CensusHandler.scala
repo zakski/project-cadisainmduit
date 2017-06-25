@@ -2,7 +2,7 @@ package com.szadowsz.cadisainmduit.people.census
 
 import java.io.{File, StringReader}
 
-import com.szadowsz.cadisainmduit.people.NameHandler
+import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.common.io.read.FReader
 import com.szadowsz.common.io.write.CsvWriter
 import com.szadowsz.ulster.spark.Lineage
@@ -23,7 +23,7 @@ import scala.collection.JavaConverters._
 /**
   * Created on 25/01/2017.
   */
-trait CensusHandler extends NameHandler {
+trait CensusHandler extends LocalDataframeIO {
 
   protected def buildStdPipeline(name: String, cols: Array[String], gender: Option[Char]): Lineage = {
     require(cols.contains("name") && (cols.contains("gender") || (gender.contains('M') || gender.contains('F'))), "Missing Default Column")

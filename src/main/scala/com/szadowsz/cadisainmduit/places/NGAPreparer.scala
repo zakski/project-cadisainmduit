@@ -1,9 +1,8 @@
 package com.szadowsz.cadisainmduit.places
 
 import java.io.{File, StringReader}
-import java.sql.Date
-import java.text.SimpleDateFormat
 
+import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.common.io.delete.DeleteUtil
 import com.szadowsz.common.io.explore.{ExtensionFilter, FileFinder}
 import com.szadowsz.common.io.read.{CsvReader, FReader}
@@ -12,7 +11,6 @@ import com.szadowsz.common.io.zip.ZipperUtil
 import com.szadowsz.ulster.spark.Lineage
 import com.szadowsz.ulster.spark.transformers.string.spelling.{CapitalisationTransformer, RegexValidationTransformer}
 import com.szadowsz.ulster.spark.transformers.string.{RegexGroupExtractor, StringFiller, StringMapper, StringTrimmer}
-import com.szadowsz.ulster.spark.transformers.util.stats.StringStatistics
 import com.szadowsz.ulster.spark.transformers.{CastTransformer, ColRenamerTransformer, CsvTransformer}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.functions.{udf, _}
@@ -23,12 +21,11 @@ import org.supercsv.io.CsvListReader
 import org.supercsv.prefs.CsvPreference
 
 import scala.collection.JavaConverters._
-import scala.util.Try
 
 /**
   * Created on 27/04/2016.
   */
-object NGAPreparer {
+object NGAPreparer extends LocalDataframeIO {
   private val _logger = LoggerFactory.getLogger(getClass)
 
   val ngaSchema = Array("RC", "UFI", "UNI", "LAT", "LONG", "DMS_LAT", "DMS_LONG", "MGRS", "JOG", "FC", "DSG", "PC", "CC1", "ADM1", "POP", "ELEV", "CC2", "NT", "LC", "SHORT_FORM",
@@ -45,42 +42,6 @@ object NGAPreparer {
   val blockList = List("Botswana", "Cameroon", "Gambia", "Ghana", "Kenya", "Lesotho", "Malawi", "Mauritius", "Mozambique", "Nambia", "Nigeria", "Rwanda", "Sierra Leone",
     "South Africa", "Swaziland", "Tanzania", "Zambia", "Zimbabwe", "Bangladesh", "India", "Pakistan", "Uganda", "Sri Lanka", "Cyprus", "Malaysia")
 
-  protected def convertToRDD(sess: SparkSession, dropFirst: Boolean, delimiter: Char, lines: Array[String]): (Array[String], RDD[String]) = {
-    // assume the first line is the header
-    if (dropFirst) {
-      val pref = new CsvPreference.Builder('"', delimiter, "\r\n").build
-      val schema = new CsvListReader(new StringReader(lines.head.asInstanceOf[String]), pref).read().asScala.toArray
-      (schema, sess.sparkContext.parallelize(lines.drop(1)))
-    } else {
-      (Array(), sess.sparkContext.parallelize(lines))
-    }
-  }
-
-  protected def extractFile(sess: SparkSession, f: File, dropFirst: Boolean, delimiter: Char, readSchema: Boolean = false): DataFrame = {
-    val r = new FReader(f.getAbsolutePath)
-    val lines = r.lines().toArray.map(_.toString)
-
-    val (fields, stringRdd) = convertToRDD(sess, dropFirst, delimiter, lines)
-
-    val rowRDD = stringRdd.map(s => Row.fromSeq(List(s)))
-    var df = sess.createDataFrame(rowRDD, StructType(Array(StructField("fields", StringType))))
-
-    if (readSchema && dropFirst) {
-      val t = new CsvTransformer("X").setInputCol("fields").setOutputCols(fields).setSize(fields.length).setDelimiter(delimiter)
-      df = t.transform(df)
-    }
-    df.cache() // cache the constructed dataframe
-    df
-  }
-
-  protected def writeDF(df: DataFrame, path: String, charset: String, filter: (Seq[String]) => Boolean, sortBy: Ordering[Seq[String]]): Unit = {
-    val writer = new CsvWriter(path, charset, false, CsvPreference.STANDARD_PREFERENCE)
-    writer.write(df.schema.fieldNames: _*)
-    val res = df.collect().map(r => r.toSeq.map(f => Option(f).map(_.toString).getOrElse(""))).filter(filter)
-    writer.writeAll(res.sorted(sortBy))
-    writer.close()
-  }
-
   def main(args: Array[String]): Unit = {
     val sess = SparkSession.builder()
       .config("spark.driver.host", "localhost")
@@ -94,7 +55,7 @@ object NGAPreparer {
     val countries = FileFinder.search("./data/places/nga", Some(new ExtensionFilter(".txt", false))).filter(f => f.getName.endsWith("_populatedplaces_p.txt"))
       .map(_.getName.substring(0, 2))
 
-    val usa = extractFile(sess, new File("./data/places/nga/POP_PLACES_20170601.txt"), true, '|')
+    val usa = extractFile(sess, new File("./data/places/nga/POP_PLACES_20170601.txt"), true, false,'|')
 
     val usaResult: DataFrame = getUSA(usa)
     val otherResult = getOtherCountries(sess)
@@ -136,39 +97,9 @@ object NGAPreparer {
   }
 
   private def buildGrammerProbs(df: DataFrame): DataFrame = {
-    val places = new CsvReader("./archives/dict/places/placeTypes.csv")
-    val placesSet = places.readAll().map(s => s.head.trim).toSet
-
-    val cardinalRegex = "^((?:North|South|East|West|Northwest|Northeast|Southeast|Southwest) )".r
-    val startRegex = "^((?:New||Mount|Little|Old|<<CARDINAL>>) ){0,1}(?:.+)$".r
-    val coreRegex = "^(?:(?:New|Mount|Little|Old|<<CARDINAL>>) ){0,1}(.+)$".r
-    val coreRegex2 = ("^(.+?)(?: (?:" + placesSet.mkString("|") + ")){0,1}$").r
-    val postfixRegex = ("^(?:.+?)( (?:" + placesSet.mkString("|") + ")){0,1}$").r
-
-    val startUDF = udf[String, String]((name: String) => {
-      val cardName = cardinalRegex.replaceAllIn(name, "<<CARDINAL>> ")
-      startRegex.replaceAllIn(cardName, "$1<<REST>>")
-    })
-
-    val coreUDF = udf[String, String]((name: String) => {
-      val cardName = cardinalRegex.replaceAllIn(name, "<<CARDINAL>> ")
-      coreRegex.replaceAllIn(cardName, "$1")
-    })
-
-    val core2UDF = udf[String, String]((name: String) => {
-      coreRegex2.replaceAllIn(name, "$1")
-    })
-
-    val postUDF = udf[String, String]((name: String) => {
-      postfixRegex.replaceAllIn(name, "<<CORE>>$1")
-    })
-
-    val head = df.select((startUDF(col("name")).alias("name") +: df.columns.filterNot(_ == "name").map(s => col(s))): _*)
-    val core = df.select((coreUDF(col("name")).alias("name") +: df.columns.filterNot(_ == "name").map(s => col(s))): _*)
-    val core2 = core.select((core2UDF(col("name")).alias("name") +: df.columns.filterNot(_ == "name").map(s => col(s))): _*)
-    val post = core.select((postUDF(col("name")).alias("name") +: df.columns.filterNot(_ == "name").map(s => col(s))): _*)
-    writeDF(groupUp(head.union(post)), "./data/places/grammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
-    head.union(post).union(core2)
+    val (g,f) = PlaceGrammar.buildGrammar(df)
+    writeDF(groupUp(g), "./data/places/grammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
+    f
   }
 
   private def getUSA(usa: DataFrame) = {
@@ -186,7 +117,7 @@ object NGAPreparer {
       .filter(f => f.getName.endsWith("_populatedplaces_p.txt")
       )
     //   val placesDfs = placeFiles.map(f => extractFile(sess, f, true, true)).slice(0,placeFiles.length/4)
-    val placesDfs = placeFiles.map(f => extractFile(sess, f, true, '\t'))
+    val placesDfs = placeFiles.map(f => extractFile(sess, f, true, false,'\t'))
 
     val lcFunct = udf[Boolean, String, String]((s1: String, s2: String) => {
       (s1 == null || s1.trim.length == 0 || s1 == "eng") &&
