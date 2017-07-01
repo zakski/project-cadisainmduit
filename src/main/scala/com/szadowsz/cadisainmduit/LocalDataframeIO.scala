@@ -64,8 +64,8 @@ trait LocalDataframeIO {
     * @param filter
     * @param sortBy
     */
-  protected def writeDF(df: DataFrame, path: String, charset: String, filter: (Seq[String]) => Boolean, sortBy: Ordering[Seq[String]]): Unit = {
-    val writer = new CsvWriter(path, charset, false)
+  protected def writeDF(df: DataFrame, path: String, charset: String, filter: (Seq[String]) => Boolean, sortBy: Ordering[Seq[String]], append : Boolean = false): Unit = {
+    val writer = new CsvWriter(path, charset, append)
     writer.write(df.schema.fieldNames: _*)
     val res = df.collect().map(r => r.toSeq.map(f => Option(f).map(_.toString).getOrElse(""))).filter(filter)
     writer.writeAll(res.sorted(sortBy))
