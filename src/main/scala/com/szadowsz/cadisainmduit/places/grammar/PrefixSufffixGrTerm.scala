@@ -10,7 +10,7 @@ case class PrefixSufffixGrTerm(name : String, patternWords : Seq[String], prefix
   def code : String = s"<<${name.toUpperCase}>>"
 
   override def conformPattern : String = {
-    if (prefix) patternWords.mkString("^((?:","|",") )(.*)$") else patternWords.mkString("^(.*)( (?:","|","))$")
+    if (prefix) patternWords.mkString("^((?:","|",") )(.*?)$") else patternWords.mkString("^(.*?)( (?:","|","))$")
   }
 
   override def remainderPattern: String = conformPattern

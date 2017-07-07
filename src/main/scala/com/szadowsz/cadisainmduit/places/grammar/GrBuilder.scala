@@ -1,38 +1,25 @@
 package com.szadowsz.cadisainmduit.places.grammar
 
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.{Column, DataFrame}
 import org.apache.spark.sql.expressions.UserDefinedFunction
-import org.apache.spark.sql.functions._
+import org.apache.spark.sql.functions.{udf, _}
 
 /**
   * Created on 29/06/2017.
   */
-object GrBuilder {
+case class GrBuilder(gramList : List[GrTerm], lvlNames : List[String], filterUdf : Option[UserDefinedFunction], defaultTerminus : String, terminus : Map[String,String]) {
 
-  val gramList: List[GrTerm] = List(
-    PrefixSufffixGrTerm("Age", List("New", "Old"), true, 1),
-    PrefixSufffixGrTerm("Cardinal", List("North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest", "Northern", "Southern", "Eastern",
-      "Western"), true, 1),
-    PrefixSufffixGrTerm("Cardinal", List("North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest", "Northern", "Southern", "Eastern",
-      "Western"), false, 1),
-    PrefixSufffixGrTerm("Great", List("Great", "Greater"), true, 1),
-    PrefixSufffixGrTerm("Low", List("Low", "Lower"), true, 1),
-    PrefixSufffixGrTerm("Size", List("Big", "Little"), true, 1),
-    PrefixSufffixGrTerm("High", List("High"), true, 1),
-    PrefixSufffixGrTerm("Regal", List("Royal"), true, 1),
-    PrefixSufffixGrTerm("Regal", List("Regis"), false, 1),
-    PrefixSufffixGrTerm("Pre", List("Mount","Camp","Fort","Port","Point"), true, 2)
-  )
 
-  val lvlNames = List("<<PLACENAME>>", "<<BODY>>", "<<CORE>>")
+  protected val terminusMappingUDF: UserDefinedFunction = udf[String, String]((name: String) => terminus.getOrElse(name,s"<<${defaultTerminus.toUpperCase}>>"))
+  protected val remainderUDF: UserDefinedFunction = udf[Boolean, String]((name: String) => !terminus.contains(name))
+
+  protected def getGrammarAtLvl(pres: Int): List[GrTerm] = gramList.filter(g => g.precedence == pres)
 
   protected def extractDF(df: DataFrame, colName: String, func: UserDefinedFunction): DataFrame = {
     df.select(func(col(colName)).alias(colName) +: df.columns.filterNot(_ == colName).map(s => col(s)): _*)
   }
 
-  protected def getGrammarAtLvl(pres: Int): List[GrTerm] = gramList.filter(g => g.precedence == pres)
-
-  protected def groupUp(df: DataFrame, colName: String): DataFrame = {
+  def groupUp(df: DataFrame, colName: String): DataFrame = {
     val sums = df.columns.filterNot(_ == colName).map(c => sum(col(c)).alias(c))
     df.groupBy(colName).agg(sums.head, sums.tail: _*)
   }
@@ -61,18 +48,24 @@ object GrBuilder {
     (head, body)
   }
 
-  protected def extract(df: DataFrame, lvl: Int, max: Int): (DataFrame, DataFrame) = {
+  protected def getLevels(df: DataFrame, lvl: Int, max: Int): (DataFrame, DataFrame) = {
     val (h1, b1) = extractLvl(df, lvlNames(lvl), lvl)
     if (lvl < max) {
-      val (h2, b2) = extract(df, lvl + 1, max)
-      (h1.union(h2), b1.union(b2))
+      val (h2, b2) = getLevels(b1, lvl + 1, max)
+      (h1.union(h2), b2)
     } else {
       (h1, b1)
     }
   }
 
-  def extract(df: DataFrame): (DataFrame, DataFrame) = {
-    val max = gramList.map(_.precedence).max
-    extract(df, 1, max)
+  def getGrammar(df: DataFrame): (DataFrame, DataFrame) = {
+    val max = Math.min(gramList.map(_.precedence).max,lvlNames.length)
+    val (baseGram, remainder) = getLevels(df, 1, max)
+
+    val filteredRemainder = filterUdf.map(fc => groupUp(remainder,"name").filter(fc(col("name"),col("total")))).getOrElse(remainder)
+    val toTerminusDf = groupUp(extractDF(filteredRemainder,"name",terminusMappingUDF),"name").withColumn("parent", lit(lvlNames.last))
+    val otherDF = filteredRemainder.filter(remainderUDF(col("name")))
+
+    (baseGram.union(toTerminusDf),otherDF)
   }
 }

@@ -3,6 +3,7 @@ package com.szadowsz.cadisainmduit.places
 import java.io.File
 
 import com.szadowsz.cadisainmduit.LocalDataframeIO
+import com.szadowsz.cadisainmduit.places.pop.OGPopPreparer
 import com.szadowsz.common.io.delete.DeleteUtil
 import com.szadowsz.common.io.explore.{ExtensionFilter, FileFinder}
 import com.szadowsz.common.io.zip.ZipperUtil
@@ -53,15 +54,11 @@ object PlacePreparer extends LocalDataframeIO {
         ): _*)
 
     val sums = result.columns.filterNot(_ == "name").map(c => sum(col(c)).alias(c))
-    val gramResult = groupUp(buildGrammerProbs(result))
+    val ukPop = OGPopPreparer.getPops(sess)
+    val gramResult = buildGrammerProbs(result,ukPop)
 
     writeDF(result, "./data/places/places.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
-    writeDF(gramResult, "./data/places/fullGrammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (/*-s(1).toInt,*/ s.head)))
-  }
-
-  private def groupUp(df: DataFrame): DataFrame = {
-    val sums = df.columns.filterNot(_ == "name").map(c => sum(col(c)).alias(c))
-    df.groupBy("name").agg(sums.head, sums.tail: _*)
+    writeDF(gramResult, "./data/places/fullGrammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
   }
 
   private def getFilteredData(unitedResult: Dataset[Row]) = {
@@ -73,9 +70,9 @@ object PlacePreparer extends LocalDataframeIO {
     filResult
   }
 
-  private def buildGrammerProbs(df: DataFrame): DataFrame = {
-    val (g, f) = PlaceGrammar.buildGrammar(df)
-    writeDF(g, "./data/places/grammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
+  private def buildGrammerProbs(df: DataFrame, pop : DataFrame): DataFrame = {
+    val (g, f) = PlaceGrammar.buildGrammar(df,pop)
+    writeDF(g, "./data/places/grammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (s.head, -s(2).toInt)))
     f
   }
 }
