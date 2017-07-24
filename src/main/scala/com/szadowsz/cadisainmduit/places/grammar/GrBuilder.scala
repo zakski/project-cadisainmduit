@@ -7,10 +7,20 @@ import org.apache.spark.sql.functions.{udf, _}
 /**
   * Created on 29/06/2017.
   */
-case class GrBuilder(gramList : List[GrTerm], lvlNames : List[String], filterUdf : Option[UserDefinedFunction], defaultTerminus : String, terminus : Map[String,String]) {
+case class GrBuilder(
+                      gramList : List[GrTerm],
+                      lvlNames : List[String],
+                      filterUdf : Option[UserDefinedFunction],
+                      defaultTerminus : Option[String],
+                      terminus : Map[String,String]
+                    ) {
 
 
-  protected val terminusMappingUDF: UserDefinedFunction = udf[String, String]((name: String) => terminus.getOrElse(name,s"<<${defaultTerminus.toUpperCase}>>"))
+  protected val terminusMappingUDF: UserDefinedFunction = udf[String, String]((name: String) =>
+    s"<<${terminus.get(name).orElse(defaultTerminus).get.toUpperCase}>>")
+
+  protected val terminusUDF: UserDefinedFunction = udf[Boolean, String]((name: String) => terminus.contains(name))
+
   protected val remainderUDF: UserDefinedFunction = udf[Boolean, String]((name: String) => !terminus.contains(name))
 
   protected def getGrammarAtLvl(pres: Int): List[GrTerm] = gramList.filter(g => g.precedence == pres)
@@ -63,9 +73,12 @@ case class GrBuilder(gramList : List[GrTerm], lvlNames : List[String], filterUdf
     val (baseGram, remainder) = getLevels(df, 1, max)
 
     val filteredRemainder = filterUdf.map(fc => groupUp(remainder,"name").filter(fc(col("name"),col("total")))).getOrElse(remainder)
-    val toTerminusDf = groupUp(extractDF(filteredRemainder,"name",terminusMappingUDF),"name").withColumn("parent", lit(lvlNames.last))
+    val filteredTerminus = if (defaultTerminus.isDefined) filteredRemainder else filteredRemainder.filter(terminusUDF(col("name")))
     val otherDF = filteredRemainder.filter(remainderUDF(col("name")))
 
-    (baseGram.union(toTerminusDf),otherDF)
+    val toTerminusDf = groupUp(extractDF(filteredTerminus,"name",terminusMappingUDF),"name").withColumn("parent", lit(lvlNames.last))
+    val terminusDf = groupUp(filteredTerminus,"name").withColumn("parent", terminusMappingUDF(col("name")))
+
+    (baseGram.union(toTerminusDf).union(terminusDf),otherDF)
   }
 }

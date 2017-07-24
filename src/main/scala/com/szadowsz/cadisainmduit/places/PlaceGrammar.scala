@@ -38,15 +38,16 @@ object PlaceGrammar {
 
   val lvlNames = List("<<PLACENAME>>", "<<BODY>>", "<<CORE>>")
 
-  protected val ancientPH: String = "<<ANCIENT>>"
-  protected val paradisePH: String = "<<PARADISE>>"
-  protected val homelandPH1: String = "<<HOMELAND1>>"
-  protected val homelandPH2: String = "<<HOMELAND2>>"
-  protected val indigPH: String = "<<INDIGENOUS>>"
-  protected val animalPH: String = "<<ANIMAL>>"
-  protected val plantsPH: String = "<<PLANT>>"
-  protected val disPH: String = "<<DISCARD>>"
-  protected val otherPH: String = "<<OTHER>>"
+  protected val ancientPH: String = "ANCIENT"
+  protected val paradisePH: String = "PARADISE"
+  protected val homelandPH1: String = "HOMELAND1"
+  protected val homelandPH2: String = "HOMELAND2"
+  protected val empirePH: String = "EMPIRE"
+  protected val indigPH: String = "INDIGENOUS"
+  protected val animalPH: String = "ANIMAL"
+  protected val plantsPH: String = "PLANT"
+  protected val disPH: String = "DISCARD"
+  protected val otherPH: String = "OTHER"
 
   protected val startFilterUDF: UserDefinedFunction = udf[Boolean, String]((name: String) => {
     !name.startsWith("The ") && !name.startsWith("El ") && !name.startsWith("La ") && !name.startsWith("San ") && !name.startsWith("Santa ") &&
@@ -57,13 +58,16 @@ object PlaceGrammar {
     val disGeneric = new CsvReader("./archives/dict/places/toDiscard/generic.csv").readAll().map(s => s.head.trim -> disPH)
     val disForeign = new CsvReader("./archives/dict/places/toDiscard/foreign.csv").readAll().map(s => s.head.trim -> disPH)
     val disNumbers = new CsvReader("./archives/dict/places/toDiscard/numbers.csv").readAll().map(s => s.head.trim -> disPH)
+    val disSun = new CsvReader("./archives/dict/places/toDiscard/sun.csv").readAll().map(s => s.head.trim -> disPH)
+    val disRev = new CsvReader("./archives/dict/places/toDiscard/revolutionary.csv").readAll().map(s => s.head.trim -> disPH)
 
-    val discard = disGeneric ++ disForeign ++ disNumbers
+    val discard = disGeneric ++ disForeign ++ disNumbers ++ disSun ++ disRev
 
     val kepAncient = new CsvReader("./archives/dict/places/toKeep/ancient.csv").readAll().map(s => s.head.trim -> ancientPH)
     val kepParadise = new CsvReader("./archives/dict/places/toKeep/paradise.csv").readAll().map(s => s.head.trim -> paradisePH)
     val kepHome1 = new CsvReader("./archives/dict/places/toKeep/home1.csv").readAll().map(s => s.head.trim -> homelandPH1)
     val kepHome2 = new CsvReader("./archives/dict/places/toKeep/home2.csv").readAll().map(s => s.head.trim -> homelandPH2)
+    val kepEmp = new CsvReader("./archives/dict/places/toKeep/empire.csv").readAll().map(s => s.head.trim -> empirePH)
     val kepIndig = new CsvReader("./archives/dict/places/toKeep/indig.csv").readAll().map(s => s.head.trim -> indigPH)
     val kepAnimal = new CsvReader("./archives/dict/places/toKeep/animals.csv").readAll().map(s => s.head.trim -> animalPH)
     val kepPlants = new CsvReader("./archives/dict/places/toKeep/plants.csv").readAll().map(s => s.head.trim -> plantsPH)
@@ -75,7 +79,7 @@ object PlaceGrammar {
     //    val kepRock = new CsvReader("./archives/dict/places/toKeep/rock.csv").readAll().map(s => s.head.trim -> rockPH)
     //    val kepSaints = new CsvReader("./archives/dict/places/toKeep/saints.csv").readAll().map(s => s.head.trim -> saintPH)
 
-    val keep = kepAncient ++ kepParadise ++ kepHome1 ++ kepHome2 ++ kepIndig ++ kepAnimal ++ kepPlants
+    val keep = kepAncient ++ kepParadise ++ kepHome1 ++ kepHome2 ++ kepEmp ++ kepIndig ++ kepAnimal ++ kepPlants
     //kepGeneric ++ kepRev ++ kepRock ++ kepColon ++ kepColour ++ kepForeign ++ kepHome ++ kepParadise ++ kepSaints
 
     val list = keep ++ discard
@@ -94,7 +98,7 @@ object PlaceGrammar {
 
   def getRemainder(df: DataFrame): DataFrame = {
     val start = df.filter(startFilterUDF(col("name")))
-    val gr = GrBuilder(gramList, lvlNames, None, "other", Map())
+    val gr = GrBuilder(gramList, lvlNames, None, Some("other"), Map())
     val (h, b) = gr.getGrammar(start)
     b
   }
@@ -104,8 +108,8 @@ object PlaceGrammar {
     val ototal = start.select(sum(col("total"))).collect().head.getLong(0)
 
     val names = pop.select("name").collect().map(_.toSeq.head.toString)
-    val nameFil = udf((n: String, tot: Long) => names.contains(n) || tot > 1)
-    val gr = GrBuilder(gramList, lvlNames, Option(nameFil), "other", endTypes)
+    val nameFil = udf((n: String, tot: Long) => (names.contains(n) || tot > 1))// && endTypes.keys.exists(k => n.contains(k)))
+    val gr = GrBuilder(gramList, lvlNames, Option(nameFil), None, endTypes)
     val (h, b) = gr.getGrammar(start)
 
     //    val dif = ototal - b.select(sum(col("total"))).collect().head.getLong(0)

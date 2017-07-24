@@ -55,7 +55,8 @@ object PlacePreparer extends LocalDataframeIO {
 
     val sums = result.columns.filterNot(_ == "name").map(c => sum(col(c)).alias(c))
     val ukPop = OGPopPreparer.getPops(sess)
-    val gramResult = buildGrammerProbs(result,ukPop)
+    val f = udf[Boolean,String](n => n.contains(" "))
+    val gramResult = buildGrammerProbs(result,ukPop)//.filter(f(col("name")))
 
     writeDF(result, "./data/places/places.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
     writeDF(gramResult, "./data/places/fullGrammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
@@ -72,7 +73,10 @@ object PlacePreparer extends LocalDataframeIO {
 
   private def buildGrammerProbs(df: DataFrame, pop : DataFrame): DataFrame = {
     val (g, f) = PlaceGrammar.buildGrammar(df,pop)
-    writeDF(g, "./data/places/grammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (s.head, -s(2).toInt)))
+    writeDF(g, "./data/places/grammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => {
+      val index = PlaceGrammar.lvlNames.indexOf(s.head)
+      (if (index < 0) Int.MaxValue else index,s.head, -s(2).toInt)
+    }))
     f
   }
 }
