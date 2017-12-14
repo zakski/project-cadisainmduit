@@ -1,4 +1,4 @@
-package com.szadowsz.cadisainmduit
+package com.szadowsz.ulster.spark
 
 import java.io.{File, StringReader}
 
@@ -6,8 +6,8 @@ import com.szadowsz.common.io.read.FReader
 import com.szadowsz.common.io.write.CsvWriter
 import com.szadowsz.ulster.spark.transformers.CsvTransformer
 import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.supercsv.io.CsvListReader
 import org.supercsv.prefs.CsvPreference
 

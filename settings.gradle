@@ -1,3 +1,3 @@
 rootProject.name = 'project-cadisainmduit'
-include 'module/ulster'
+include 'module/ulster', 'module/tarbh'
 

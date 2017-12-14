@@ -15,6 +15,7 @@ import scala.util.matching.Regex
 object PlaceGrammar {
 
 
+  protected lazy val disTypes: Set[String] = getDiscardTypes
   protected lazy val endTypes: Map[String, String] = getTerminusTypes
   protected lazy val postPlTypes: Set[String] = getPostPlaceTypes
   protected lazy val dashTypes: Set[String] = getPostDashTypes
@@ -54,15 +55,17 @@ object PlaceGrammar {
       !name.startsWith("Santo ")
   })
 
+  protected def getDiscardTypes: Set[String] = {
+    val disGeneric = new CsvReader("./archives/dict/places/toDiscard/generic.csv").readAll().map(s => s.head.trim)
+    val disForeign = new CsvReader("./archives/dict/places/toDiscard/foreign.csv").readAll().map(s => s.head.trim)
+    val disNumbers = new CsvReader("./archives/dict/places/toDiscard/numbers.csv").readAll().map(s => s.head.trim)
+    val disSun = new CsvReader("./archives/dict/places/toDiscard/sun.csv").readAll().map(s => s.head.trim)
+    val disRev = new CsvReader("./archives/dict/places/toDiscard/revolutionary.csv").readAll().map(s => s.head.trim)
+
+    (disGeneric ++ disForeign ++ disNumbers ++ disSun ++ disRev).toSet
+  }
+
   protected def getTerminusTypes: Map[String, String] = {
-    val disGeneric = new CsvReader("./archives/dict/places/toDiscard/generic.csv").readAll().map(s => s.head.trim -> disPH)
-    val disForeign = new CsvReader("./archives/dict/places/toDiscard/foreign.csv").readAll().map(s => s.head.trim -> disPH)
-    val disNumbers = new CsvReader("./archives/dict/places/toDiscard/numbers.csv").readAll().map(s => s.head.trim -> disPH)
-    val disSun = new CsvReader("./archives/dict/places/toDiscard/sun.csv").readAll().map(s => s.head.trim -> disPH)
-    val disRev = new CsvReader("./archives/dict/places/toDiscard/revolutionary.csv").readAll().map(s => s.head.trim -> disPH)
-
-    val discard = disGeneric ++ disForeign ++ disNumbers ++ disSun ++ disRev
-
     val kepAncient = new CsvReader("./archives/dict/places/toKeep/ancient.csv").readAll().map(s => s.head.trim -> ancientPH)
     val kepParadise = new CsvReader("./archives/dict/places/toKeep/paradise.csv").readAll().map(s => s.head.trim -> paradisePH)
     val kepHome1 = new CsvReader("./archives/dict/places/toKeep/home1.csv").readAll().map(s => s.head.trim -> homelandPH1)
@@ -71,19 +74,8 @@ object PlaceGrammar {
     val kepIndig = new CsvReader("./archives/dict/places/toKeep/indig.csv").readAll().map(s => s.head.trim -> indigPH)
     val kepAnimal = new CsvReader("./archives/dict/places/toKeep/animals.csv").readAll().map(s => s.head.trim -> animalPH)
     val kepPlants = new CsvReader("./archives/dict/places/toKeep/plants.csv").readAll().map(s => s.head.trim -> plantsPH)
-    //    val kepColon = new CsvReader("./archives/dict/places/toKeep/colonial.csv").readAll().map(s => s.head.trim -> empirePH)
-    //    val kepColour = new CsvReader("./archives/dict/places/toKeep/colours.csv").readAll().map(s => s.head.trim -> colourPH)
-    //    val kepGeneric = new CsvReader("./archives/dict/places/toKeep/generic.csv").readAll().map(s => s.head.trim -> genericPH)
-    //    val kepHome = new CsvReader("./archives/dict/places/toKeep/home.csv").readAll().map(s => s.head.trim -> homelandPH)
-    //    val kepRev = new CsvReader("./archives/dict/places/toKeep/revolutionary.csv").readAll().map(s => s.head.trim -> revPH)
-    //    val kepRock = new CsvReader("./archives/dict/places/toKeep/rock.csv").readAll().map(s => s.head.trim -> rockPH)
-    //    val kepSaints = new CsvReader("./archives/dict/places/toKeep/saints.csv").readAll().map(s => s.head.trim -> saintPH)
-
     val keep = kepAncient ++ kepParadise ++ kepHome1 ++ kepHome2 ++ kepEmp ++ kepIndig ++ kepAnimal ++ kepPlants
-    //kepGeneric ++ kepRev ++ kepRock ++ kepColon ++ kepColour ++ kepForeign ++ kepHome ++ kepParadise ++ kepSaints
-
-    val list = keep ++ discard
-    list.toMap
+    keep.toMap
   }
 
   protected def getPostPlaceTypes: Set[String] = {
@@ -108,7 +100,7 @@ object PlaceGrammar {
     val ototal = start.select(sum(col("total"))).collect().head.getLong(0)
 
     val names = pop.select("name").collect().map(_.toSeq.head.toString)
-    val nameFil = udf((n: String, tot: Long) => (names.contains(n) || tot > 1))// && endTypes.keys.exists(k => n.contains(k)))
+    val nameFil = udf((n: String, tot: Long) => (names.contains(n) || tot > 1) && !disTypes.exists(k => n.contains(k)))
     val gr = GrBuilder(gramList, lvlNames, Option(nameFil), None, endTypes)
     val (h, b) = gr.getGrammar(start)
 

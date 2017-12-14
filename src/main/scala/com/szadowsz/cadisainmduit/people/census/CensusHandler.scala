@@ -2,10 +2,9 @@ package com.szadowsz.cadisainmduit.people.census
 
 import java.io.{File, StringReader}
 
-import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.common.io.read.FReader
 import com.szadowsz.common.io.write.CsvWriter
-import com.szadowsz.ulster.spark.Lineage
+import com.szadowsz.ulster.spark.{Lineage, LocalDataframeIO}
 import com.szadowsz.ulster.spark.transformers.math.vec.AverageTransformer
 import com.szadowsz.ulster.spark.transformers.math.{CounterTransformer, DivisionTransformer, NullTransformer}
 import com.szadowsz.ulster.spark.transformers.{CastTransformer, ColFilterTransformer, ColRenamerTransformer, CsvTransformer}

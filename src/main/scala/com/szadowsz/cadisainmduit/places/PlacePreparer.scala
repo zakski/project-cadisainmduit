@@ -2,12 +2,11 @@ package com.szadowsz.cadisainmduit.places
 
 import java.io.File
 
-import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.cadisainmduit.places.pop.OGPopPreparer
 import com.szadowsz.common.io.delete.DeleteUtil
 import com.szadowsz.common.io.explore.{ExtensionFilter, FileFinder}
 import com.szadowsz.common.io.zip.ZipperUtil
-import com.szadowsz.ulster.spark.Lineage
+import com.szadowsz.ulster.spark.{Lineage, LocalDataframeIO}
 import com.szadowsz.ulster.spark.transformers.CsvTransformer
 import com.szadowsz.ulster.spark.transformers.string.spelling.RegexValidationTransformer
 import com.szadowsz.ulster.spark.transformers.string.{RegexGroupExtractor, StringFiller}
@@ -59,7 +58,7 @@ object PlacePreparer extends LocalDataframeIO {
     val gramResult = buildGrammerProbs(result,ukPop)//.filter(f(col("name")))
 
     writeDF(result, "./data/places/places.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
-    writeDF(gramResult, "./data/places/fullGrammar.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
+    writeDF(gramResult, "./data/places/remainder.csv", "UTF-8", (row: Seq[String]) => true, Ordering.by((s: Seq[String]) => (-s(1).toInt, s.head)))
   }
 
   private def getFilteredData(unitedResult: Dataset[Row]) = {

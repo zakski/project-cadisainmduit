@@ -2,10 +2,9 @@ package com.szadowsz.cadisainmduit.ships
 
 import java.io.{File, StringReader}
 
-import com.szadowsz.cadisainmduit.LocalDataframeIO
 import com.szadowsz.common.io.read.{CsvReader, FReader}
 import com.szadowsz.common.io.write.CsvWriter
-import com.szadowsz.ulster.spark.Lineage
+import com.szadowsz.ulster.spark.{Lineage, LocalDataframeIO}
 import com.szadowsz.ulster.spark.transformers.CsvTransformer
 import com.szadowsz.ulster.spark.transformers.string.StringMapper
 import com.szadowsz.ulster.spark.transformers.util.stats.StringStatistics
