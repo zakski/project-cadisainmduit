@@ -2,6 +2,7 @@
 
 # Do not add user-specific sensitive/high-churn Intellij files
 .idea/
+*.iml
 
 # Do not add user-specific Gradle data and configuration
 .gradle/

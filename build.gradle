@@ -4,10 +4,6 @@ version '0.1-ALPHA'
 
 /* Standard plugins documentation is available here https://docs.gradle.org/current/userguide/standard_plugins.html. */
 
-/* Language plugins to aid in compilation of target languages, probably best to be explicit here.*/
-apply plugin: 'java'
-apply plugin: 'scala'
-
 // IntelliJ is the primary development medium, so it makes sense to add explicit support for all the sub-modules
 apply plugin: 'idea'
 
@@ -24,9 +20,9 @@ idea {
  */
 allprojects {
     ext {
-        scalaVersion = '2.11.8'
+        scalaVersion = '2.11.11'
         scalaTestVersion = '2.2.4'
-        sparkVersion = '2.0.2'
+        sparkVersion = '2.3.0-SNAPSHOT'
         slf4jVersion = '1.7.12'
         junitVersion = '4.11'
         seleniumVersion = '2.52.0'
@@ -39,84 +35,34 @@ allprojects {
         maven {
             url 'http://dl.bintray.com/zakski/default'
         }
+        maven {
+            url 'https://repository.apache.org/content/repositories/snapshots/'
+        }
     }
 }
 
+task unZipResources() {
+    fileTree(dir: 'archives')/*.include('*.zip')*/.each { dataFile ->
+        if (dataFile.name.endsWith(".zip")) {
+            copy {
+                def parent = dataFile.getParent()
+                def relative = parent.substring(parent.indexOf(rootDir.path) + rootDir.path.length() + 1)
+                def target = relative.substring("archives\\".length())
+                def name = dataFile.name - '.zip'
 
-/*
- * Dependencies of the current system. Important dependencies for interops between scala and java are: scala compiler,
- * slf4j logger, scalatest and junit.
- */
-dependencies {
-    compile group: 'com.szadowsz', name: 'an-phobail', version: '0.0.2'
-    compile project(':module/ulster')
+                println "Unzipping ${dataFile.name} From ${relative} To data/$target/$name"
 
-    compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
-
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-
-    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
-
-    testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
-    testCompile group: 'junit', name: 'junit', version: junitVersion
-
-    compile group: 'net.sf.extjwnl', name: 'extjwnl', version: '1.9.2'
-    compile group: 'net.sf.extjwnl', name: 'extjwnl-data-wn31', version: '1.2'
-
-}
-
-task unzip1901_1(type: Copy) {
-    def zipFile = file('archives/data/census/ireland/1901/1901-1.zip')
-    def outputDir = file("data/census/ireland/1901")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzip1901_2(type: Copy) {
-    def zipFile = file('archives/data/census/ireland/1901/1901-2.zip')
-    def outputDir = file("data/census/ireland/1901")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzip1901_3(type: Copy) {
-    def zipFile = file('archives/data/census/ireland/1901/1901-3.zip')
-    def outputDir = file("data/census/ireland/1901")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzip1901_4(type: Copy) {
-    def zipFile = file('archives/data/census/ireland/1901/1901-4.zip')
-    def outputDir = file("data/census/ireland/1901")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzipDictionary(type: Copy) {
-    def zipFile = file('archives/dict.zip')
-    def outputDir = file("data/dict")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzipFirstnames(type: Copy) {
-    def zipFile = file('archives/firstnames.zip')
-    def outputDir = file("data/firstnames")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task unzipSurnames(type: Copy) {
-    def zipFile = file('archives/surnames.zip')
-    def outputDir = file("data/surnames")
-    from zipTree(zipFile)
-    into outputDir
-}
-
-task zipDictionary(type: Zip) {
-    from "data/dict"
-    destinationDir file("archives/")
-    archiveName "dict.zip"
+                from zipTree(dataFile.path)
+                into "data/$target/$name"
+            }
+        } else if (dataFile.name.endsWith(".csv")) {
+            copy {
+                def parent = dataFile.getParent()
+                def relative = parent.substring(parent.indexOf(rootDir.path) + rootDir.path.length() + 1)
+                def target = relative.substring("archives\\".length())
+                from fileTree(dataFile.path)
+                into "data/$target/"
+            }
+        }
+    }
 }

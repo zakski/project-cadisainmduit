@@ -2,7 +2,7 @@ package com.szadowsz.ulster.spark.transformers.math.vec
 
 import java.text.DecimalFormat
 
-import com.szadowsz.ulster.spark.params.HasDecimalFormatting
+import com.szadowsz.spark.ml.params.HasDecimalFormatting
 import org.apache.spark.ml.UnaryTransformer
 import org.apache.spark.ml.linalg.Vector
 import org.apache.spark.ml.param.{Param, ParamPair}
