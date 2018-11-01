@@ -22,7 +22,7 @@ allprojects {
     ext {
         scalaVersion = '2.11.11'
         scalaTestVersion = '2.2.4'
-        sparkVersion = '2.3.0-SNAPSHOT'
+        sparkVersion = '2.3.0'
         slf4jVersion = '1.7.12'
         junitVersion = '4.11'
         seleniumVersion = '2.52.0'
@@ -35,20 +35,18 @@ allprojects {
         maven {
             url 'http://dl.bintray.com/zakski/default'
         }
-        maven {
-            url 'https://repository.apache.org/content/repositories/snapshots/'
-        }
     }
 }
 
 task unZipResources() {
     fileTree(dir: 'archives')/*.include('*.zip')*/.each { dataFile ->
         if (dataFile.name.endsWith(".zip")) {
+            def parent = dataFile.getParent()
+            def relative = parent.substring(parent.indexOf(rootDir.path) + rootDir.path.length() + 1)
+            def target = relative.substring("archives\\".length())
+            def name = dataFile.name - '.zip'
+
             copy {
-                def parent = dataFile.getParent()
-                def relative = parent.substring(parent.indexOf(rootDir.path) + rootDir.path.length() + 1)
-                def target = relative.substring("archives\\".length())
-                def name = dataFile.name - '.zip'
 
                 println "Unzipping ${dataFile.name} From ${relative} To data/$target/$name"
 

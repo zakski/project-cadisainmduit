@@ -34,15 +34,42 @@ object ShipPreparer extends LocalDataframeIO {
     results
   }
 
+  def getNames() = {
+    val typeData = new CsvReader("./archives/results/baby_names.csv")
+    val typeRows = typeData.readAll().drop(1)
+    typeRows.map(s => s.head.trim).toList
+  }
+
+  def getPlaces() = {
+    val typeData = new CsvReader("./archives/results/placenames.csv")
+    val typeRows = typeData.readAll().drop(1)
+    typeRows.map(s => s.head.trim).toList
+  }
+
+  def getOverride() = {
+    val typeData = new CsvReader("./archives/dict/ships/override.txt")
+    val typeRows = typeData.readAll().drop(1)
+    typeRows.map(s => s.head.trim).toList
+  }
+
+
+  def listFunct(list : Array[String]) = {
+    (name: String) => {
+      val nameParts = name.split(" ")
+      list.exists(v => nameParts.exists(v.toUpperCase == _.toUpperCase))
+    }
+  }
+
+
   def main(args: Array[String]): Unit = {
     val sess = SparkSession.builder()
       .config("spark.driver.host", "localhost")
       .master("local[4]")
       .getOrCreate()
 
-    val dfRN = extractFile(sess, new File("./data/data/web/rn/rnInfo.csv"), true)
-    val dfUSN = extractFile(sess, new File("./data/data/web/usn/usnInfo.csv"), true)
-    val dfUboat = extractFile(sess, new File("./data/data/web/uboat/uboatInfo.csv"), true)
+    val dfRN = extractFile(sess, new File("./data/tmp/rn/rnInfo.csv"), true)
+    val dfUSN = extractFile(sess, new File("./data/tmp/usn/usnInfo.csv"), true)
+    val dfUboat = extractFile(sess, new File("./data/tmp/uboat/uboatInfo.csv"), true)
 
     val pipe = new Lineage("ship")
     pipe.addStage(classOf[CsvColumnExtractor], "inputCol" -> "fields", "outputCols" -> schema, "size" -> schema.length)
@@ -76,10 +103,19 @@ object ShipPreparer extends LocalDataframeIO {
       }
     }
 
+    val overrides = getOverride()
+    val overrideUdf = udf[Boolean,String](s => overrides.contains(s))
+
     val dictUDF = udf[String, String](dictFunct)
 
+    val names = getNames()
+    val nameUDF = udf[Boolean,String](listFunct(names.toArray))
+    val places = getPlaces()
+    val placesUDF = udf[Boolean,String](listFunct(places.toArray))
+
     val results = idiResults.filter(col("type") =!= "Starship").groupBy("name").agg(
-      dictUDF(col("name")).alias("pos"),
+      count(when(nameUDF(col("name")), true)).alias("hasName"),
+      count(when(placesUDF(col("name")), true)).alias("hasPlace"),
       round(avg(col("rating")), 2).alias("power"),
       count(when(col("country") === "Commonwealth", true)).alias("commonwealth"),
       count(when(col("country") =!= "Commonwealth", true)).alias("usa"),
@@ -96,10 +132,11 @@ object ShipPreparer extends LocalDataframeIO {
       count(when(col("role") === "cargo", true)).alias("cargo"),
       count(when(col("role") === "resupply", true)).alias("resupply"),
       count(when(col("role") === "auxiliary", true)).alias("auxiliary"),
-      count(when(col("role") === "unknown", true)).alias("unknown")
-    )
+      count(when(col("role") === "unknown", true)).alias("unknown"),
+      dictUDF(col("name")).alias("def")
+    ).filter(!(col("commonwealth") === 0 && col("hasName") > 0) || overrideUdf(col("name")))
 
-    val finalOrd: Ordering[Seq[String]] = Ordering.by(seq => seq.head)
-    writeDF(results, "./data/data/web/ships.csv", "UTF-8", (s: Seq[String]) => true, finalOrd)
+    val finalOrd: Ordering[Seq[String]] = Ordering.by(seq => (seq(3).toDouble,seq.head))
+    writeDF(results, "./data/results/ships.csv", "UTF-8", (s: Seq[String]) => true, finalOrd)
   }
 }

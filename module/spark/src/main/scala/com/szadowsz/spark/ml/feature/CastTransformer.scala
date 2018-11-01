@@ -20,6 +20,8 @@ class CastTransformer(override val uid: String) extends Transformer with HasInpu
 
   def setOutputDataType(input: DataType): this.type = set("outputDataType", input)
 
+  def setInputCol(input: String): this.type = set("inputCol", input)
+
   def getOutputDataType: DataType = $(outputDataType)
 
 

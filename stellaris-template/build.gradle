@@ -1,0 +1,32 @@
+// Equivalent to groupid and version in maven, artifactid equivalent is set in settings.gradle.
+group 'com.szadowsz'
+version '0.0.1'
+
+// IntelliJ is the primary development medium, so it makes sense to add explicit support for it in gradle
+apply plugin: 'idea'
+
+// Add necessary language support
+apply plugin: 'java'
+apply plugin: 'scala'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
+
+
+    testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+}
