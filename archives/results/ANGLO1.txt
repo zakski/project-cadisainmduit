@@ -1,0 +1,454 @@
+﻿### British Empire
+### Created by zakski
+
+ANGLO1 = {
+	randomized = yes
+	alias = "Anglo1"
+
+	ship_names = {
+
+		corvette = {
+			Agile Archer Arrow Bruiser Cherub Chimera Claymore Broadsword Battleaxe Cutlass Deterrent Errant Faithful Fierce Gladius Grappler Hammer Vampire Velox Venator Vendetta Venerable Venomous Taciturn Supreme Success Shredder Seraph Serpent Spitfire Stalker Stratagem Scimitar Scorcher Scourge Scythe Revenant Redoubtable Raptor Reaver Prodigal Rapier Prudent Persistent Peerless Myrmidon Indignant Javelin Knight Starwolf Bonaventure Adventure Boxer Buccaneer Cavalier Celestial Chariot Comet Crucible Cyclone Decisive Dexterous Diadem Earnest Eclipse Forger Fortune Gauntlet Griffin Horizon Hotspur Hurricane Hussar Jubilant Lancer Lightning Magic Mediator Mermaid Meteor Minstrel Miranda Mustang Sharpshooter Mystic Naiad Nautilus Nebula Nimble "North Star" Nymph Obdurate Ocean Onward Oracle Paradox Paragon Pearl Peregrine Perseverance Marksman Rifleman Sniper Maelstrom Lucidity Berserker Brigand Celerity Cudgel Cuirass Growler Incubus Prowler Fury Fireball Dart Falchion Spadroon Longsword Bolo Spatha Xiphos Mirage Snapper Firebrand Ambuscade "Ad Astra" Attack Buckler Conquest Domino Gemini Glaive Halberd Harpy Kite Petard Regal Reprise Skirmisher Sprite Succubus Tisiphone Alecto Megaera Troubadour Balladeer Bard Cannonball Horatius Rampart Serenader Dirk Epee Glimmer Cockatrice
+		}
+
+		destroyer = {
+			Cyclops Centaur Adversary Assassin Dagger Daring Duty Havoc Hero Hunter Justice Impeccable Interceptor Infernal Loyal Matchless Mauler Mayhem Malice Menace Merciless Mischief Monarch Patriot Predator Powerful Punisher Ravager Reaper Savage Spiteful Templar Terminator Terror Thrasher Minotaur Manticore Interdictor Intruder Hydra Enfield Harasser Unbeaten Werewolf Zealous Petulant Phantom Phoenix Pike Pursuer Raider Rainbow Rapid Redemption Rigorous Robust Sabre Salvation Sanguine Scarab Scepter "Sea Witch" Siren Sorceress Spearhead Specter Spirit Splendid Stallion Stalwart Steadfast Strenuous Superb Supernova Surprise Swiftsure Talent Talisman Talon Taurus Tenacious "Thunder Child" Thunderous Tireless Trenchant Righteous Trident Trojan Trumpet Truncheon Typhoon Undaunted Venture Versatile Vigorous Viper Vivacious Winger Wizard Wyvern Wolfhound Trinity Outrage Argo Cygnus Awesome Trebuchet Avalanche Carronade Garm Demon Satyr Boanerges Erinyes Rakshasa Rephaim Sephiroth Alchemist Audacious Canticle Cantrip Culverin Goblin Hippogriff Impulse Inspired Intolerant Ironside Irresistible Magician Magus Mandrake Shaman Sorcerer Thaumaturge Truculent Turbulent Unconquered "War Maiden" Insuperable Ascendant Archangel Intransigent Warlock Paradigm Probity
+		}
+
+		cruiser = {
+			Acheron Achilles Agamemnon Amphion Aquilon Argonaut Argus Ariel Aurora Avernus Bacchus Bucephalus Calliope Calypso Castor Charybdis Circe Cleopatra Constantine Cordelia Cyrus Damocles Daedalus Darius Diomede Dryad Electra Endymion Erebus Fenris Freya Gilgamesh Gorgon Halcyon Hecate Hector Hesperus Janus Jason Juno Jupiter Lancelot Lazarus Leander Leonidas Lysander Maenad Mars Medea Medusa Menestheus Mercury Merlin Minerva Minos Neptune Nessus Nestor Nimrod Niobe Oberon Odin Ophelia Orestes Orpheus Osiris Pandora Penelope Persephone Perseus Phoebe Pluto Poseidon Proteus Pylades Serapis Stygian Tantalus Telemachus Theseus Thor Trajan Triton Venus Adamant Ardent Assail Austere Adroit Aegis Anchor Corsair Banshee Enchantress Aggressor Assault Excellence Senator Tornado Usurper Utmost Whirlwind Athena Loki Anubis Uziel Cephalus Deimos Ares Mjolnir Fafnir Galahad Shiva Aeolus Ganymede Zephyrus Pharos Alastor Horus Anhur Amun Sekhmet Sobek Aeshma Toutatis Seraphim Idomeneus Ravana Abaddon Tiamat Taranis Hedetet Agni Arethusa Atropos Atum Chiron Gawain "King Arthur" Percival Tristan Ishtar Ivanhoe Marduk Menelaus Midas Ozymandias Parnassus Priam Thetis Xanthus Narayana Eris Boreas Thalassa Atreus Bellona Raijin Tyr Bastet Andromache Avalon Durendal Unswerving
+		}
+
+		battleship = {
+			Vengeance Triumphant Nemesis Avenger Champion Conqueror Crusader Judicator Vanguard Renown Demolisher Dragon Furious Gladiator Magnificent Onslaught Revenge Vanquisher Vehement Basilisk Tempest Warrior Nike Paladin Sovereign Repulse Majestic Centurion Citadel Dreadnought Leviathan Katana Cerberus Valkyrie Hyperion Galatea Ambush Vindicator Indomitable Sentinel Brilliant Blazer Audacity Gallant Nova Shadow Allegiance Challenger Fearless Protector Victorious Courageous Defiance Valorous Azrael Thanatos Cronus Helios Crius Hades Epimetheus Prospero Untiring Zenith Meridian Conquistador Scylla Tormentor Warlord Devastator Artemis Vigilance Decimator Legion Reprisal Unrivalled Warhammer Retribution Infinity Eviscerator Eminence Relentless Archon Typhon Pinnacle Bastion Incomparable Invictus Requiem Dominance Armageddon Preponderous Consummate Perfection Incorruptible Impregnable Insurmountable Impenetrable Unbreakable Implacable Impervious Inexorable Unyielding Ogre Avatar
+		}
+
+		titan = {
+			Prometheus Glory Immortal Goliath Imperator Executor
+		}
+
+		colossus = {
+			Eradicator Behemoth Harbinger Juggernaut Kraken
+		}
+
+		science = {
+			Crescent Diligent Zephyr Enigma Arbiter Asperity Astute Alacrity Torch Remembrance Pilgrim Trailblazer Vagabond Wayfarer Ambassador Emissary Nomad Pathfinder Wanderer Traveler Acuity Sagacious Khonsu
+		}
+
+		colonizer = {
+			Godspeed Prophecy "Manifest Destiny" Virtue Potential Expansion "Pioneer Spirit" Prosperity Summit Seeder Harvest Demeter Isis Ceres Exodus Foundation Scion Progeny Obligation Purpose Provider "Shining City" Acquirer Cultivator "Dawn of Civilization" Purity Community Brotherhood Heket
+		}
+
+		constructor = {
+			Industry Assiduity Effort Laborer Builder Craftsman "Hard Hat" Progress Engineer Promise Service Shelter Beast Creator Developer Forger Foundry Factory Anvil Pillar Architect Accommodator Ptah Ilmarinen Creidhne Gobannus Luchtaine Goibniu Vishvakarman Tvastar Ikenga Qaynan Ucuetis Ogoun Longshoreman Stevedore
+		}
+
+		transport = {
+			Falx Katzbalger Cinquedea Estoc Foil Flamberge Poignard Sword
+		}
+
+		military_station_small = {
+			Dignity Distinction Discipline Recompense Paramount Constancy Tenacity Sedulity Diligence Pertinacity Exemplary Rectitude Integrity Prudence
+		}
+
+		ion_cannon = {
+			Longbow Crossbow Arbalest Gargoyle Hellfire
+		}
+
+	}
+
+	fleet_names = {
+		random_names = {
+			"Strike Force Manticore" "Strike Force Basilisk" "Strike Force Chimera" "Strike Force Minotaur" "Strike Force Gorgon" "Strike Force Dragon"
+			"Strike Force Wyvern" "Strike Force Enfield" "Strike Force Centaur" "Strike Force Pegasus" "Strike Force Kraken" "Strike Force Charybdis"
+			"Strike Force Cerberus" "Strike Force Cyclops" "Strike Force Griffin" "Strike Force Phoenix" "Strike Force Scylla" "Strike Force Titan"
+			"Strike Force Hydra" "Strike Force Werewolf" "Strike Force Behemoth" "Strike Force Medusa" "Strike Force Sphinx" "Strike Force Hippogriff"
+			"Strike Force Garuda"
+		}
+		sequential_name = "%O% Strike Force"
+	}
+
+	army_names = {
+		generic = {
+			sequential_name = "%O% Colonial Gendarmerie"
+		}
+
+		assault_army = {
+			sequential_name = "%O% Assault Legion"
+		}
+
+		slave_army = {
+			sequential_name = "%O% Janissary Corps"
+		}
+
+		clone_army = {
+			sequential_name = "%O% Vatgrown Soldiery"
+		}
+
+		robotic_army = {
+			sequential_name = "%O% Unmanned Battlegroup"
+		}
+
+		robotic_defense_army = {
+			sequential_name = "%O% Unmanned Gendarmerie"
+		}
+
+		android_army = {
+			sequential_name = "%O% Android Auxiliary"
+		}
+
+		android_defense_army = {
+			sequential_name = "%O% Android Gendarmerie"
+		}
+
+		psionic_army = {
+			random_names = {
+				"Shadow Legion" "Ghost Legion" "Wraith Legion" "Specter Legion" "Phantom Legion" "Widowmaker Legion" "Skull Legion" "Banshee Legion"
+				"Warlock Legion" "Reaper Legion"
+			}
+			sequential_name = "%O% Psy Warriors"
+		}
+
+		xenomorph_army = {
+			random_names = {
+				"Experimental Unit 'Rahab'" "Experimental Unit 'Jaculus'" "Experimental Unit 'Amaru'" "Experimental Unit 'Orochi'" "Experimental Unit 'Typhon'" "Experimental Unit 'Illuyanka'"
+				"Experimental Unit 'Bakunawa'" "Experimental Unit 'Fafnir'" "Experimental Unit 'Tarasque'" "Experimental Unit 'Tiamat'"
+			}
+			sequential_name = "%O% Morphling Marauders"
+		}
+
+		gene_warrior_army = {
+			sequential_name = "%O% Eugenic Vanguard"
+		}
+
+		occupation_army = {
+			sequential_name = "%O% Occupation Legion"
+		}
+
+		robotic_occupation_army = {
+			sequential_name = "%O% Unmanned Garrison"
+		}
+
+		android_occupation_army = {
+			sequential_name = "%O% Android Garrison"
+		}
+	}
+
+	### PLANETS
+
+	planet_names = {
+
+		generic = {
+			names = {
+				Acrisia Aurora Capella Euterpe Faunus Hesperos Keresia Melpomenia Nexon Osiris Pallas Pallena Proclas
+				Rhea Saon Smitheus Solaria Tethys Theia Destinikon Doron Hesperides Noricum Tyndis "Nova Constantinople"
+				Athura Tartessos Agartha "St. Knatchbull" "St. Caspar" Truett "St. Hossack" Flaxington Girdwood Fincastle
+				Rattenbury Grinstead Leffingwell Durkheim Treadway Hoxworth "Hinckley's Hope" Tronchet Knutton Corregan
+				Mullineux "Fitzroy's World" "Schimmel's World" Lockney
+			}
+		}
+
+		pc_desert = {
+			names = {
+				"Frampton Sands" Sunrise "Nova Alexandria" Inferno
+			}
+		}
+
+		pc_tropical = {
+			names = {
+				Khersonia Jangala Broadleaf Shrub
+			}
+		}
+
+		pc_arid = {
+			names = {
+				Tartarus "High Ground" "Nova Antioch"
+			}
+		}
+
+		pc_continental = {
+			names = {
+				Destiny Bastion Citadel Acropolis Delphi Harmony Dawnlight Myndos Thebes Camelot Arcadia Abbassus Ashur
+			}
+		}
+
+		pc_gaia = {
+			names = {
+				Sanctuary Serendipity Deliverance Apollonia "Nova Babylon" Garden
+			}
+		}
+
+		pc_ocean = {
+			names = {
+				Hyderia "Meredith Bay" Neritum "Port Bixby" "Port Snedden"
+			}
+		}
+
+		pc_tundra = {
+			names = {
+				Stonehead "Nova Samarkand" Evonium
+			}
+		}
+
+		pc_arctic = {
+			names = {
+				Jotunheim Winter
+			}
+		}
+
+		pc_savannah = {
+			names = {
+			}
+		}
+
+		pc_alpine = {
+			names = {
+			}
+		}
+
+	}
+
+	### CHARACTERS
+
+	character_names = {
+
+		names1 = {
+			weight = 60
+			first_names_male = {
+				Aaron Abdul Adam Adrian Aedan Ahmad Ahmed Aidan Aiden Alan Alasdair Alastair Albert Alec Alex Alexander
+				Alfie Alfred Ali Alistair Alister Allan Amir Andrew Angus Anthony Anton Antoni Antonio Antony Aodhan
+				Archibald Archie Aron Arran Arron Arthur Ashley Ashton Aston Austin Bailey Barry Beau Ben Benedict
+				Benjamin Bernard Billy Blaine Blair Blake Bobby Brad Bradley Brandon Brendan Brett Brian Brodie Brody
+				Brogan Brooklyn Bruce Bryan Bryce Bryn Byron Caden Caelan Cai Caiden Cain Cal Caleb Callan Callum Calum
+				Calvin Cameron Campbell Caolan Carl Carlo Carson Carter Casey Cathal Chad Charles Charley Charlie Che
+				Chris Christian Christopher Christy Cian Ciaran Cillian Clark Clarke Cody Cohen Cole Colin Colm Conal
+				Conall Conan Connor Conor Conrad Cooper Corey Corin Cormac Cory Craig Curtis Dale Damian Damien Damon
+				Dan Daniel Danny Dara Daragh Darragh Darrell Darren Darryl Daryl David Dawson Dean Declan Denis Dennis
+				Denver Derek Dermot Desmond Devon Dexter Diarmuid Dillon Dion Dominic Dominik Donal Donald Douglas Drew
+				Duncan Dylan Eamon Eamonn Eddie Edward Edwin Eli Elijah Elliot Elliott Ellis Emmett Eoghan Eoin Eric
+				Erik Ethan Euan Eugene Evan Ewan Fabian Felix Fergal Fergus Finlay Finley Finn Fintan Fionn Flynn
+				Francis Frank Frankie Fraser Frazer Freddie Frederick Gabriel Gareth Garry Gary Gavin Geoffrey George
+				Gerald Gerard Giovanni Glen Glenn Gordon Graham Grant Greg Gregor Gregory Guy Hamish Harley Harris
+				Harrison Harry Harvey Hassan Hayden Henry Hugh Hugo Hunter Iain Ian Isaac Ivan Jack Jackson Jacob
+				Jaden Jai Jaime Jake Jakob Jakub James Jamie Jan Jared Jason Jay Jayden Jed Jenson Jeremy Jerome Jesse
+				Jim Jody Joe Joel Joey John Johnathan Johnny Jon Jonah Jonathan Jonathon Jordan Jordon Joseph Josh
+				Joshua Josiah Jude Julian Junior Justin Kai Kain Kaleb Kane Karl Kealan Keegan Keelan Keenan Keith
+				Kelvin Kenneth Kevin Kian Kieran Kieron Killian Kirk Kris Kristian Kristopher Kurtis Kyle Kyran Lachlan
+				Laurence Lawrence Lee Leighton Lennon Lennox Leo Leon Leonard Levi Lewis Liam Lloyd Lochlann Logan
+				Lorcan Louie Louis Luca Lucas Luis Lukas Luke Lyle Mackenzie Magnus Malachy Malcolm Marc Marcel Marco
+				Marcus Mark Marshall Martin Martyn Mason Mathew Matt Matthew Maurice Max Maximilian Maxwell Micah Michael
+				Michal Micheal Mikey Miles Milo Mitchell Mohamed Mohammad Mohammed Morgan Muhammad Murray Myles Nathan
+				Nathaniel Neil Niall Nicholas Nicolas Noah Noel Norman Odhran Oisin Oliver Omar Oran Oscar Oskar Owen
+				Padraig Patrick Paul Pearce Peter Philip Phillip Pierce Preston Quinn Ralph Ray Raymond Reece Regan
+				Reuben Rhys Rian Richard Richie Ricky Riley Rio Roan Robbie Robert Robin Rocco Rogan Rohan Roman Ronald
+				Ronan Ronnie Rory Ross Rowan Roy Ruairi Ruari Ruben Rudi Rudy Russell Ryan Sam Samuel Saul Scott Seamus
+				Sean Sebastian Seth Shane Shaun Shay Shayne Shea Simon Sol Sonny Spencer Stanley Stefan Stephen Steve
+				Steven Stevie Stewart Stuart Taylor Terence Terry Theo Theodore Thomas Tiernan Timothy Tobias Toby Todd
+				Tom Tomas Tommy Tony Torin Travis Trevor Tristan Troy Ty Tyler Tyrone Victor Vincent Walter Warren Wayne
+				Wesley Will William Zac Zach Zachariah Zachary Zack Zak Zane
+			}
+			first_names_female = {
+				Aaliyah Abbey Abbi Abbie Abby Abi Abigail Adele Adrianna Aileen Ailsa Aimee Aimie Aine Aisha Aisling
+				Aislinn Alana Alanna Alannah Alesha Alex Alexa Alexandra Alexandria Alexis Alice Alicia Alisha Alison
+				Alix Aliyah Alysha Alyssa Amanda Amber Amelia Amelie Amie Amira Amy Ana Andrea Angel Angela Angelina
+				Anita Ann Anna Annabel Annabella Annabelle Annalise Anne Annie Antonia Anya Aoife April Arabella Ariana
+				Arianna Asha Ashleigh Ashley Audrey Autumn Ava Ayesha Ayla Bailey Barbara Beatrice Bella Bernadette
+				Beth Bethan Bethany Bianca Billie Bobbi Bobbie Bonnie Brenna Brianna Bridget Brogan Bronagh Brooke
+				Brooklyn Bryony Cailin Caitlin Caitlyn Caitriona Callie Candice Caoimhe Cara Caragh Carla Carly Carmen
+				Caroline Carolyn Carrie Carys Casey Cassandra Cassie Catherine Catrina Catriona Cerys Chanelle Chantelle
+				Charis Charlene Charley Charlie Charlotte Charmaine Chelsea Chelsey Cheryl Chloe Christina Christine
+				Ciara Cindy Claire Clara Clare Claudia Cliona Clodagh Codie Cody Colleen Collette Connie Constance
+				Cora Corinne Courtney Crystal Daisy Dakota Dana Daniela Daniella Danielle Danni Dara Darcey Darci Darcie
+				Darcy Davina Dawn Debbie Deborah Demi Denise Diana Diane Dionne Donna Dorothy Ebony Eden Edith Eileen
+				Eilidh Eilis Eilish Eimear Eireann Eirinn Elaine Eleanor Elena Elise Elisha Eliza Elizabeth Ella Elle
+				Ellen Ellie Eloise Elsa Elsie Emer Emilia Emilie Emily Emma Emmie Enya Erica Erika Erin Erinn Eryn Esme
+				Esther Eva Eve Evelyn Evie Faith Farah Farrah Fatima Fay Faye Felicity Fiona Fionnuala Florence Frances
+				Francesca Freya Gabriela Gabriella Gabrielle Gemma Georgia Georgie Georgina Geraldine Gillian Gina Grace
+				Gracie Grainne Hailey Haley Halle Hanna Hannah Harley Harriet Hayley Hazel Heather Heidi Helen Helena
+				Hollie Holly Honor Hope Imogen India Iona Iris Isabel Isabella Isabelle Isla Isobel Ivy Jacqueline Jade
+				Jaime Jamie Jane Janet Jasmin Jasmine Jayne Jazmin Jean Jemima Jemma Jenna Jenni Jennie Jennifer Jenny
+				Jessica Jessie Jill Joanna Joanne Jodi Jodie Jody Johanna Jolene Joni Jordan Jorja Josephine Josie Joy
+				Jude Judith Judy Julia Julie Juliet Juliette Justine Kacey Kaci Kacie Kaitlin Kaitlyn Kara Karen Karina
+				Karis Karla Karolina Kasey Kate Katelyn Katharine Katherine Kathleen Kathryn Katie Katrina Katy Kayla
+				Kaylee Kayleigh Keeley Keely Keeva Keira Kellie Kelly Kelsey Kelsie Kendra Kenzie Keri Kerri Kerrie
+				Kerry Kezia Kiera Kim Kimberley Kimberly Kira Kirsten Kirstie Kirsty Kitty Kristen Kristin Kristina
+				Kyla Kylie Kyra Lacey Laila Lana Lara Larissa Laura Lauren Laurie Lauryn Layla Lea Leah Leanna Leanne
+				Leia Leigh Leigha Leila Lena Leona Leonie Lesley Lexie Lia Libby Lila Lilian Lillie Lilly Lily Linda
+				Lindsay Lindsey Lisa Lois Lola Lori Lorna Lorraine Louisa Louise Lucia Lucie Lucinda Lucy Luisa Lydia
+				Lyndsey Lynn Mackenzie Macy Maddie Maddison Madeleine Madeline Madison Maeve Maggie Maia Mairead Maisie
+				Maisy Maja Margaret Maria Marianne Marie Marina Marion Marissa Marnie Martha Martina Mary Matilda May
+				Maya Meg Megan Meghan Melanie Melissa Melody Mia Michaela Michelle Millie Miriam Miya Mollie Molly
+				Monica Morgan Moya Mya Nadia Nadine Nancy Naomi Natalia Natalie Natasha Neve Nia Niamh Nicola Nicole
+				Nikita Nikki Nikola Nina Nora Nuala Olivia Oonagh Orla Orlagh Orlaith Paige Pamela Paris Patricia Paula
+				Penelope Penny Philippa Phoebe Pippa Polly Poppy Rachael Rachel Rebecca Rebekah Regan Rhea Rhia Rhian
+				Rhianna Rhiannon Rhona Ria Riley Riona Robyn Rochelle Roisin Roma Rosa Rosanna Rose Rosemary Rosie Rowan
+				Roxanne Ruby Ruth Sabrina Sacha Sadie Saffron Sally Samantha Samara Sandra Saoirse Sara Sarah Sasha
+				Saskia Savannah Scarlet Scarlett Selina Serena Shania Shanice Shannon Sharon Shauna Sheila Shelby
+				Shona Sian Sienna Simone Sinead Siobhan Skye Sofia Sofie Sonia Sophia Sophie Sorcha Stacey Stella
+				Stephanie Summer Susan Susanna Susannah Suzanna Suzanne Sylvia Tabitha Talia Tamara Tammy Tamsin Tamzin
+				Tanisha Tanya Tara Taylor Teagan Tegan Teresa Teri Terri Tess Tessa Thea Theresa Therese Tia Tiana
+				Tianna Tiffany Tilly Tina Toni Tori Una Ursula Valerie Vanessa Veronica Vicky Victoria Violet Vivien
+				Vivienne Wendy Willow Yasmin Yvonne Zara Zoe Zoey
+			}
+			second_names = {
+				Smith Jones Williams Taylor Brown Davies Evans Wilson Johnson Robinson Wright Thompson Evans Walker White Roberts Green Hall
+				Wood Jackson Clark Lewis Mason Mitchell Cox Campbell Stewart Quinn Murphy Hamilton Moore Murray McLaughlin Martin O'Neill
+				Anderson Scott MacDonald Reid Ross Watson Patterson Morrison Sanders Harris Hughes Driscoll Price Jenkins Morgan Moss
+				Sinclair Simpson Zimmerman Young York Youngfellow Winters Worley Woodard Whitley Wheeler Wentworth West Weaver Webb Welsh
+				Sparks Spencer Stafford Stanley Steel Sterling Stevens Stone Stewart Sullivan Swanson Sweeney Swift Sykes Terrell Thornton
+				Tipton Turner Tyler Underwood Vincent Voight Wade Washington Watts O'Connor O'Donnell O'Hara Owens Page Palmer Parker
+				Perry Parson Paxton Payne Perkins Peters Pershing Phillips Pitt Potter Reynolds Reaves Reese Richardson Rivers Robbins
+				Robertson Roswell Ryan Salinger Samuels Sandler Savage Saxton Schneider Scowley Sedgwick Shannon Flint Sibbett Silverman
+				Silverstone Smart Snow Kruger Landau Lawrence Lawson Lee Leonard Little Lowell Michaels McGillis McKinnon McSwain McCoy
+				McCarthy McCormick McCreary Marshall Lynch Miller Montgomery Morris Nash Newman Nichols North Masterson Mayfield McCall
+				Hansen Harrington Hart Hendricks Holmes Higgins Hoffman Hood Hutchinson Hyland Knight Kirk King Kenway Kennedy Kelly
+				Kane Nathanson Jennings Jacobs Jefferies Irwin Gilbert Glass Glover Goldberg Goldstein Goodman Goodwin Graham Grant Graves
+				Gray Greenberg Gorney Griffin Halley Hunter Holloway Hoover Hutchins Hill Hines Holden Harvey Handler Cohen Collins Conrad
+				Conroy Cook Conley Compton Cody Crouch Crosby Curtis Fields Farrell Felton Fisher Fleming Forrest Foster Fox Freeman
+				Futterman Gardner Garrett Gates Garfield Gabriel Daniels Darling Easterbrook Edwards Edelstein Elliott Emerson Ericson
+				Duncan Dickinson Alexander Allen Austin Bauer Bancroft Baker Bailey Banks Barks Bassett Brewster Brooks Breckenridge Booth
+				Bloom Sherman Sheridan Billingsley Billings Bergman Bates Becker Bell Bellflower Bains Bean Cartwright Carpenter Buckland
+				Burness Burnett Bush Butler French England Carroll Carter Cavanaugh Chaffin Chase Channing Chapman Arnold Fry Milton
+				Sharp Durston Howell Mead Poole Ashton Brockbank Cooper Cursham Dixon Baxter Drake Garland Wells Hargreaves Houghton
+				Haygarth Hurst Kingsford Lindsay Rawson Walden Walters Whitfield Bennett Cross Buxton Dyson McMillan Russell Scott Beauclerk
+				Ward Howard Lloyd Tanner Nicholas Matthews Ellis Whyting Whittaker Barton Hawkins Garrovick Spector Reeves Vernon McNiven
+				Rowley Sandford Fawcett Lockhart Lang Oliphant Wilkins Balfour Appleby Buchanan Yardley Shaw Stokes Allenby Cockburn Mundy
+				Franklin Armstrong Chamberlain Powell Abbott Blair "Van Hoof" "Van Rijn" Burnside Schofield Farnsworth Ford Warner Porter
+				Barksdale Polk Gibbons Archer Pickett Houston Whitfield Pearson Lucas Horner Bainbridge Rollins Casey Cochrane Merchant
+				Bowden Douglas Muldoon Wickham Milligan Bradley Findley Spooner Harper Shepard Kingston Knox Colbeck Shields Burns Gibson
+				Burton Crutchley Gilligan Bridges Richter Fowler Novak Longfield Seabrook Hazelton Kingsley Doggart Wilcox Hudson Hooks Hicks
+				Cameron Hammond Knotts Jefferson Coffey Adams Babcock Baldwin Bannister Purcell Baumgartner Birch Blackwood Blake Bolander
+				Bolton Brock Brannigan Burke Weyland Burrows Cairns Carlyle Carson Charlesworth Church Clancy Cullen Dufresne Bixby Featherstone
+				Ferguson Foley Funk Gorman Haddock Grisdale Grimes Hoffmeyer Holt Ingram Kaiser Kearns Keeler Kellerman Kinnear Kurtz Kyle
+				Laidlaw Lankshear Lessard Lowe MacKenzie MacNevin MacInnis Madigan Maloney Marsh McAllister McBain Myers Nicholson Olsen
+				O'Malley Peacock Peckham Murdoch Prefontaine Pratt Popovic Pritchard Quackenbush Penebscott Pfaffenbach Ramsey Quincey
+				Reilly Reinhart Renaud Rolston Shoebottom Skinner Sloan Snell Snider Sorensen Spiller Spurgeon Stanfield Stackhouse Stiles
+				Sutherland Sutton Taggart Townsend Traynor Stark Strudwick MacArthur Barnes Atkins Ballard Biggs Baird Fredericks Humphry
+				Colt Dillard Cunningham DeStefano Finks Fletcher Galloway Kirby Sutter Preston Tucker "Smith Jr." "Williams Jr." "Evans Jr."
+				"Walker Jr." "Taylor Jr." "Scott Jr." "Meriweather II" "Barksdale III" "Leadbetter IV" "Pemberton II" "Trapier III" Kowalski
+				Rabinowitz Feldman Katz Roykirk Decker
+			}
+			regnal_first_names_male = {
+				Albert Alexander Alfred Andrew Arthur Athelstan Augustus Charles Christian Eadred Eadwig Edgar Edmund
+				Edward Ferdinand Frederick George Harold Harry Henry Louis Louise Michael Philip James John Richard William
+			}
+			regnal_first_names_female = {
+				Alexandra Alice Amelia Anne Augusta Beatrice Catherine Charlotte Diana Elizabeth Eugenie Helena Leopold
+				Margaret Maria Marie Mary Matilda Maud Meghan Sarah Sophia Sophie Victoria
+			}
+			regnal_second_names = {
+				Godwin Hanover Lancaster Mountbatten Normandy Plantagenet "Saxe-Coburg and Gotha" Stuart Tudor Wessex
+			}
+		}
+
+		names2 = {
+			weight = 10
+			first_names_male = {
+				Aadam Aadil Aamir Aaran Aarron Abbas Abd Abdallah Abdel Abdulaziz Abdulla Abdullah Abdulrahman Abdur
+				Abel Abid Abraham Abrar Abu Ace Addison Adeel Adem Aden Adil Aditya Adnan Adriano Adrien Ahad Ahmet Ahsan
+				Aiman Ainsley Aj Aj Ajay Akash Alain Alban Alberto Albie Aldo Aleem Alejandro Aleksander Alessandro
+				Alessio Alexandre Alexandros Alexis Alexzander Alisdair Alix Allen Allister Ally Alun Alvin Amaan Amaar
+				Aman Amandeep Amar Ameer Amer Amin Amit Amjad Ammar Amos Amrit Anas Anders Anderson Andi Andre Andrea
+				Andreas Andrei Andres Andy Anees Angelo Anil Anish Anson Antoine Anwar Aqeel Aqib Aran Areeb Arfan Ari
+				Arian Arif Arin Arjan Arjun Arlo Armaan Arman Armando Armin Arnold Arsalan Artur Arun Arya Aryan Asa
+				Asad Ash Asher Ashraf Asif Asim Atif Austen Awais Axel Ayan Ayaz Aydan Ayden Aydin Ayman Aymen Ayoub
+				Ayrton Azaan Azeem Azhar Azim Aziz Bailie Barclay Barnabas Barnaby Barney Barrie Bartosz Basil
+				Baxter Bayley Beck Benn Bentley Bertie Bilal Bill Bjorn Blain Blane Blayne Blue Bobbie Boris Boyd
+				Braden Bradlee Brady Braeden Braiden Brandan Branden Brayden Brenden Brendon Brennan Brent Bret Brook
+				Bruno Bryson Buddy Burhan Cadan Cade Cael Cahal Cahir Caidan Cailan Cailean Cailum Caine Cairo Calan
+				Cale Callam Callen Camran Caoimhin Carlos Carrick Caspar Casper Cassius Cavan Cayden Charly Chase Chay
+				Chester Chi Christie Christos Chun Cianan Ciaron Cieran Claudio Clay Clayton Clement Clifford Clinton
+				Clive Clyde Coby Codey Codi Codie Coen Cohan Colby Colton Colum Conlan Conn Connall Connar Connel
+				Connell Conner Coran Corben Corbin Corbyn Cori Cornelius Corran Corrie Cosmo Crawford Cristian Cruz Cullen Cyril Cyrus Daanish Daanyaal Daire Daithi Daley Dallas Dalton Damion Dane Dani Danial Daniele Danish Daniyal Dante Danyaal Danyal Darcy Daren Darian Darin Dario Darius Darran Darrel Darwin Daud Dave Davide Davie Davis Davy Dawid Dawood Deacon Deaglan Declyn Deen Deniz Denny Denzel Deon Derick Derren Derrick Derry Devan Devin Devlin Dhruv Diego Diesel Dilan Dillan Dimitri Dino Diogo Domenico Dominick Dominykas Don Donnie Donny Donovan Dorian Dougal Duane Dwayne Dyllan Dylon Eathan Eben Edan Eden Edgar Edmond Edmund Eduard Eesa Ehsan Elias Eliot Eliott Emil Emile Emilio Emir Emmanuel Emmet Emre Enda Enrico Enrique Enzo Erin Ernest Eryk Eshan Etienne Eunan Ewen Ezekiel Ezra Fabio Fahad Faheem Faisal Faiz Faizaan Faizan Faraz Farhaan Farhan Faris Fearghal Fernando Fiachra Filip Finbar Finbarr Findlay Findley Finian Finnian Finnlay Finnley Fionntan Fletcher Floyd Forbes Fox Francesco Francisco Franciszek Franco Franklin Fred Freddy Frederic Fynn Gage Garrett Garth Gene Geordie Georgios Gerrard Gerry Gethin Ghulam Giacomo Gian Giancarlo Gianluca Gianni Gideon Gil Gilbert Giles Gino Giorgio Giuseppe Glyn Glynn Grady Graeme Gregg Greig Griffin Guillaume Gurpreet Gus Haaris Habib Hadi Hadyn Haiden Haider Hal Hamad Hamid Hammad Hamza Hamzah Hans Hari Haris Harold Haroon Harper Harri Harun Harvie Hasan Haseeb Hashim Hasnain Haydn Heath Hector Henri Hisham Howard Hubert Hudson Hughie Humza Hussain Hussein Huw Ibraheem Ibrahim Idrees Idris Ieuan Igor Ilyas Imran Innes Iqbal Irfan Irvine Isa Isaiah Islam Ismaeel Ismael Ismail Issac Ivo Ivor Izaac Izaak Jac Jace Jackie Jacky Jacques Jadon Jae Jago Jaiden Jaimie Jak Jamal Jameel Jamil Jarlath Jarred Jarrod Jarvis Jaskaran Jasper Jaspreet Jaxon Jaxson Jayce Jaydan Jaydn Jaydon Jayme Jaymie Jayson Jean Jedd Jeevan Jeff Jefferson Jeffrey Jensen Jeremiah Jerry Jethro Jett Jia Jimi Jimmy Jo Joachim Joao Johan Johann Johannes Johnathon Johnnie Johnson Jonas Jonjo Jonny Jorden Jordi Jordy Jorge Jose Josef Joss Jozef Juan Judah Jules Julien Jun Junaid Ka Kabir Kacper Kade Kaden Kael Kaelan Kaiden Kailum Kaine Kajus Kal Kalan Kale Kaleem Kalem Kalen Kallan Kallum Kalum Kalvin Kamal Kameron Kamil Kamran Karam Karan Kareem Karim Karol Karson Kasey Kashif Kasim Kasper Kayden Kaylum Kayne Keagan Keane Keanu Keaton Kegan Keigan Keir Keiran Keiren Keiron Kelan Kellan Ken Kenan Kennedy Kenny Kent Kenzie Kerr Kester Kevan Khai Khaled Khaleel Khalid Khalil Kiefer Kiel Kier Kieren Kiernan Kim Kingsley Kiran Kishan Kit Kobe Kobi Koby Kodi Kodie Kody Kole Konnor Konrad Korben Korey Kori Kory Krish Krishan Kristofer Kristoffer Krystian Krzysztof Kurt Kyan Kye Kylan Kyron Laith Lance Larry Lars Laurie Lawrie Lawson Layton Leif Leigh Leith Leland Lenny Leonardo Leopold Leroy Leslie Lex Leyton Lincoln Linden Lleyton Lochlan Lorenzo Lorne Loui Luan Luc Lucca Lucian Luciano Ludovic Luigi Luka Luqman Lyall Lyndon Maaz Mac Macaulay Macauley Mack Maddox Mahdi Mahmood Mahmoud Maison Majid Makenzie Maksymilian Malachi Malek Malik Man Mani Manus Marcello Marcos Marek Mario Marius Marko Markus Marley Marty Marvin Marwan Massimo Matas Mateo Mateusz Mathias Mathieu Matteo Matthias Maxim Maximillian Maximus Mazin Mckenzie Mehdi Mehmet Melvin Merlin Michele Miguel Mika Mikael Mikail Mike Mikolaj Milan Millar Miller Mirza Mitch Mitchel Mohamad Mohd Mohsin Montgomery Morris Moses Muhammed Muneeb Mungo Murdo Murphy Musa Mustafa Mylo Nabeel Nabil Nadeem Naeem Nasir Nasser Natan Nataniel Nathanael Nathanial Nathen Naveed Navid Neal Ned Neill Nelson Neo Neville Nial Nick Nickolas Nicky Nico Nigel Nikhil Nikita Nikki Niko Nikodem Nikolai Nikolaos Nikolas Nile Nils Niven Nojus Nolan Nyall Oakley Odin Olaf Olivier Oliwier Ollie Olly Omer Oren Orin Orlando Orrin Osama Osman Ossian Otis Otto Owain Pablo Paddy Padraic Paolo Parker Pascal Patrik Patryk Pawel Peadar Pearse Pedro Perry Phil Phoenix Pierre Piers Pietro Piotr Pranav Presley Qasim Quentin Quintin Quinton Raees Rafael Rafe Raheel Raheem Rahim Rahman Rahul Raja Rajan Rami Ramon Ramsay Ramsey Ramzi Rana Raphael Rashid Ravi Rayaan Rayan Rayhan Rayyan Raza Reagan Reegan Rees Reese Reeve Reggie Reginald Rehan Rehman Reid Reilly Reis Reiss Remi Remy Rene Rex Reza Rhian Rhodri Rhyan Riaz Ricardo Riccardo Ricki Rico Ridwan Rikki Rion Rishi Ritchie River Riyad Rizwan Rob Robby Roberto Robson Rocky Roddy Roderick Rodney Rodrigo Roger Rohit Roland Romeo Ronin Rorie Roshan Rowen Ruadhan Ruaidhri Ruairidh Ruan Ruaraidh Ruaridh Rueben Rufus Rui Rupert Rylan Rylee Ryley Rylie Saad Sacha Saeed Sahil Sai Saif Saim Sajid Sajjad Saleem Saleh Salman Sameer Sami Samir Sammy Samson Samual Sandeep Sandy Sanjay Santiago Santino Saqib Sasha Scot Se Sebastien Senan Sergio Shaan Shae Shah Shahbaz Shahid Shahzaib Shakeel Shan Shaw Shawn Shayan Sheikh Sheldon Shoaib Siddharth Sidney Silas Simeon Sion Sohaib Sohail Solomon Sonnie Soren Stan Stefano Steffan Stephan Stirling Struan Subhaan Subhan Suhail Sulaiman Suleman Sultan Sunny Suraj Sven Sven Sydney Syed Szymon Tadhg Taha Tahir Tai Tait Talha Tanvir Taran Tarek Tarik Tarik Tariq Tate Taylan Tayler Ted Teddie Teddy Teejay Teo Terrence Theodor Thom Thor Tiarnan Tim Timur Titus Tj Tomasz Tommi Tor Trent Trey Tye Tylar Tylor Tymon Tyrese Ultan Umair Umar Umer Usmaan Usman Uwais Uzair Valentino Vaughan Vaughn Vernon Vijay Vince Vincenzo Vinnie Vishal Vito Wade Wai Waleed Wallace Waqas Waseem Wasim Wilfred Willem Wilson Winston Wojciech Woody Wyatt Xander Xavier Yacine Yahya Yan Yann Yaseen Yasin Yasir Yasser Yousaf Yousef Yousif Youssef Yousuf Yusef Yusuf Zacharias Zachery Zackary Zahid Zahir Zaid Zain Zakaria Zakariya Zakary Zaki Zakir Zakk Zander Zayd Zayn Zayyan Zeeshan Zen Zeshan Zia Ziad Zion Zohaib Zubair
+			}
+			first_names_female = {
+				Anna Yelena Olga Oksana Tatyana Svetlana Nadya Yekaterina Irina Galina Miroslava Anastasia Vera Polina Lyudmila Elena
+				Marina Darya Irma Ksenia Alexandra Nadesja Valentina Arina Alya Galenka Katya Ljuba Radmila Natacha Vlada Nadezhda
+				Tatiana Sonia Mira
+
+			}
+			second_names_male = {
+				Grishin Fedorov Komarov Pushkov Petrenko Shatalov Ivanov Kamensky Vasiliev Ulanov Volkov Gryaznov Dudnik Yerzov Zhirov
+				Zhivenkov Kazakov Krutov Ivannikov Kolosov Kuzin Larionov Maksimushkin Markov Ostrovsky Polachev Rychenkov Romanov
+				Sayanovich Statnik Sorokin Turgenev Titov Tvardovsky Antonov Skobelev Lazarev Makarov Dragomirov Alekseyev
+			}
+			second_names_female = {
+				Grishina Fedorova Komarova Pushkova Petrenko Shatalova Ivanova Kamenskaya Vasilyeva Ulanova Volkova Gryaznova Dudnik Yerzova
+				Zhirova Zhivenkova Kazakova Krutova Ivannikova Kolosova Kuzina Larionova Maksimushkina Markova Ostrovskaya Polacheva Rychenkova
+				Romanova Statnik Sorokina Turgeneva Titova Tvardovskaya Antonova Skobeleva Lazareva Makarova Dragomirova Alekseyeva
+			}
+			regnal_first_names_male = {
+				Albert Alexander Alfred Andrew Arthur Athelstan Augustus Charles Christian Eadred Eadwig Edgar Edmund
+				Edward Ferdinand Frederick George Harold Harry Henry Louis Louise Michael Philip James John Richard William
+			}
+			regnal_first_names_female = {
+				Alexandra Alice Amelia Anne Augusta Beatrice Catherine Charlotte Diana Elizabeth Eugenie Helena Leopold
+				Margaret Maria Marie Mary Matilda Maud Meghan Sarah Sophia Sophie Victoria
+			}
+			regnal_second_names = {
+				Godwin Hanover Lancaster Mountbatten Normandy Plantagenet "Saxe-Coburg and Gotha" Stuart Tudor Wessex
+			}
+		}
+
+		names3 = {
+			weight = 15
+			first_names_male = {
+				Karl Wilhelm Otto Heinrich Friedrich Paul Hans Gustav Max Ernst Hermann Walter Werner Günther Wolfgang Helmuth Kurt Rolf
+				Peter Klaus Gerhard Heinz Horst Manfred Uwe Jürgen Dieter Andreas Thomas Stefan Lukas Felix Martin Fritz Johann Erich Arnold
+				Bruno Franz Rudolf Erhard Jörg Axel Emil Gerhardt Gottfried Holger Joachim Konrad Lothar Ludwig Matthias Moritz Reinhard
+				Sigismund Ulrich Udo
+			}
+			first_names_female = {
+				Anna Elsa Emma Helga Ursula Gisela Ingrid Ilse Jessika Sandra Stefanie Andrea Anja Katrin Birgit Martina Heike Sabine Erika
+				Edith Lena Lisa Katharina Claudia Silvia Tina Annike Renate Bettina Wibke Sara Lina Julia Marith Heidi Angelika Christel
+				Gretchen Hilde Hildegard Gertrude Wilhelmina Lisbeth Kerstin Johanna Anita
+			}
+			second_names = {
+				Müller Schmidt Schneider Fischer Weber Meyer Wagner Schulz Becker Hoffmann Bauer Brinkmann Brill Dietrich Erhard Grasser
+				"von Gebser" "von Fritsch" "von Wrangel" "von Halkett" "von Boyen" "von Falkenstein" Dreyer Wolf Klein Richter Schäfer
+				Neumann Braun Schwarz Krüger Stein Keller Schubert Baumann Ziegler Brandt Sauer Kreutz Bergmeister Andbert
+			}
+			regnal_first_names_male = {
+				Albert Alexander Alfred Andrew Arthur Athelstan Augustus Charles Christian Eadred Eadwig Edgar Edmund
+				Edward Ferdinand Frederick George Harold Harry Henry Louis Louise Michael Philip James John Richard William
+			}
+			regnal_first_names_female = {
+				Alexandra Alice Amelia Anne Augusta Beatrice Catherine Charlotte Diana Elizabeth Eugenie Helena Leopold
+				Margaret Maria Marie Mary Matilda Maud Meghan Sarah Sophia Sophie Victoria
+			}
+			regnal_second_names = {
+				Godwin Hanover Lancaster Mountbatten Normandy Plantagenet "Saxe-Coburg and Gotha" Stuart Tudor Wessex
+			}
+		}
+
+		names4 = {
+			weight = 15
+			first_names_male = {
+				Philippe Pierre Jean-Marie Marcel Francois Hubert Paul Antoine Michel Henri Marc Jean Maurice René Claude Yves Jacques
+				Simon Olivier Joseph Robert Georges André Raymond Gaston Charles Thierry Guy Patrice Mathieu Jean-Francois Lucien Jean-Paul
+				Daniel Thibault Luc Dominic Sébastien Hugo
+			}
+			first_names_female = {
+				Chloe Inés Manon Camille Clara Juliette Clémence Jeanne Charlotte Marie Nina Julia Elise Justine Yasmine Elina Andrea
+				Eleonore Clarisse Fanny Selma Leila Veronique Sophie Helena Daphne Suzanne Melanie Bernadette Maud Angeline Celine Jessica
+				Pauline Viviane Jeanette
+			}
+			second_names = {
+				Martin Bernard Dubois Durand Leroy Moreau Lambert Dupont Leclerc Laurent Renard Tremblay Gagnon Roy Bouchard Gauthier
+				Morin Lavoie Fortin Gagne Duval Hébert "Le Gall" "Le Roux" Deville Gerard Duchaine Jauvin Gilbert Bergeron Paquette
+				Pelletier Rémy Giroud Bosquet "de Castelnau" "de Montaignac" Lebouef Péllissier Deveraux
+			}
+			regnal_first_names_male = {
+				Albert Alexander Alfred Andrew Arthur Athelstan Augustus Charles Christian Eadred Eadwig Edgar Edmund
+				Edward Ferdinand Frederick George Harold Harry Henry Louis Louise Michael Philip James John Richard William
+			}
+			regnal_first_names_female = {
+				Alexandra Alice Amelia Anne Augusta Beatrice Catherine Charlotte Diana Elizabeth Eugenie Helena Leopold
+				Margaret Maria Marie Mary Matilda Maud Meghan Sarah Sophia Sophie Victoria
+			}
+			regnal_second_names = {
+				Godwin Hanover Lancaster Mountbatten Normandy Plantagenet "Saxe-Coburg and Gotha" Stuart Tudor Wessex
+			}
+		}
+	}
+}
