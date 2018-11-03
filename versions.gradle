@@ -1,0 +1,12 @@
+ext.versions = [:]
+
+versions.scala = '2.11.11'
+
+versions.sparkVersion = '2.3.0'
+
+versions.slf4jVersion = '1.7.12'
+versions.seleniumVersion = '2.52.0'
+versions.superCsv = '2.3.1'
+
+versions.junitVersion = '4.11'
+versions.scalaTestVersion = '2.2.4'

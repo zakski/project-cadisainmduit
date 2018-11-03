@@ -21,12 +21,12 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
+    compile group: 'org.scala-lang', name: 'scala-compiler', version: versions.scala
 
-    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-api', version: versions.slf4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: versions.slf4jVersion
 
 
-    testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: scalaTestVersion
-    testCompile group: 'junit', name: 'junit', version: junitVersion
+    testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: versions.scalaTestVersion
+    testCompile group: 'junit', name: 'junit', version: versions.junitVersion
 }

@@ -2,7 +2,7 @@ package com.szadowz.naming.stellaris.characters
 
 import com.szadowz.naming.stellaris.StringUtils
 
-case class CharList(sections : List[CharListSection]){
+case class CharList(sections : Seq[CharListSection]){
 
   private def convertSections = {
     sections.map(_.toString).zipWithIndex.map{case (s, i) => 

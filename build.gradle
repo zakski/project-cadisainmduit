@@ -6,6 +6,7 @@ version '0.1-ALPHA'
 
 // IntelliJ is the primary development medium, so it makes sense to add explicit support for all the sub-modules
 apply plugin: 'idea'
+apply from: file("versions.gradle")
 
 idea {
     module {
