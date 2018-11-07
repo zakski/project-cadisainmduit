@@ -1,8 +1,9 @@
-package com.szadowsz.naming.people.prep
+package com.szadowsz.naming.people.prep.us
 
 import java.io.File
 
 import com.szadowsz.common.io.write.CsvWriter
+import com.szadowsz.naming.people.prep.CensusHandler
 import com.szadowsz.spark.ml.Lineage
 import com.szadowsz.spark.ml.feature._
 import org.apache.spark.ml.feature.{Bucketizer, IndexToString}

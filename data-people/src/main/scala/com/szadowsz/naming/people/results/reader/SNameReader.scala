@@ -2,14 +2,14 @@ package com.szadowsz.naming.people.results.reader
 
 import java.io.FileReader
 
-import com.szadowsz.naming.people.results.{FName, FNameList, NamePop}
+import com.szadowsz.naming.people.results.{SName, SNameList, NamePop}
 import org.supercsv.io.CsvListReader
 import org.supercsv.prefs.CsvPreference
 
 import scala.collection.JavaConverters._
 import scala.util.Try
 
-case class FNameReader(filePath : String) {
+case class SNameReader(filePath : String) {
   private val pref = new CsvPreference.Builder('"',',', "\r\n").build
   
   private def readFile: (List[String], List[List[String]]) = {
@@ -21,11 +21,10 @@ case class FNameReader(filePath : String) {
     result.getOrElse((List(),List()))
   }
   
-  def read: FNameList = {
+  def read: SNameList = {
     val (headers,data) = readFile
     val nameIndex = headers.indexOf("name")
-    val genderIndex = headers.indexOf("gender")
-    val rankIndexs = headers.zipWithIndex.filter{case (h,i) => h.endsWith("_AppRank")}.map{case (h,i) => (h.substring(0,h.lastIndexOf("_")),i)}
-    FNameList(data.map(row => FName(row(nameIndex),row(genderIndex).head,rankIndexs.map{case (h,i) => h -> NamePop.typeOf(row(i).toLowerCase)}.toMap)))
+    val rankIndexs = headers.zipWithIndex.filter{case (h,i) => h.endsWith("_Rank")}.map{case (h,i) => (h.substring(0,h.lastIndexOf("_")),i)}
+    SNameList(data.map(row => SName(row(nameIndex),rankIndexs.map{case (h,i) => h -> NamePop.typeOf(row(i).toLowerCase)}.toMap)))
   }
 }

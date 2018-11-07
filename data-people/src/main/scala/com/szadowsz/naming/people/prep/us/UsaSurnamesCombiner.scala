@@ -1,9 +1,11 @@
-package com.szadowsz.naming.people.prep
+package com.szadowsz.naming.people.prep.us
+
+import com.szadowsz.naming.people.prep.CensusFileCombiner
 import com.szadowsz.spark.ml.Lineage
-import com.szadowsz.spark.ml.feature.{ColFilterTransformer, DivisionTransformer, ValueCounter}
-import org.apache.spark.ml.feature.{Bucketizer, IndexToString, QuantileDiscretizer}
-import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
+import com.szadowsz.spark.ml.feature.ColFilterTransformer
+import org.apache.spark.ml.feature.{Bucketizer, IndexToString}
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 
 object UsaSurnamesCombiner {
   def main(args: Array[String]): Unit = {
@@ -34,7 +36,7 @@ class UsaSurnamesCombiner extends CensusFileCombiner {
     val merged = combined.select("name", sortedHeaders: _*)
 
     val pipeline = buildCountPipeline("pctUSA", sortedHeaders.filter(_.contains("count")).head)
-    pipeline.fitAndTransform(merged)._2.filter(col("count_USA_ranked") =!= "unused").select("name", "count_USA_ranked")
+    pipeline.fitAndTransform(merged)._2.filter(col("USA_Rank") =!= "unused").select("name", "USA_Rank")
   }
 
     override protected def selectCols(region: String, year: String, schema: Array[String], tmp: DataFrame): Dataset[Row] = {
@@ -47,7 +49,7 @@ class UsaSurnamesCombiner extends CensusFileCombiner {
     pipe.addStage(classOf[Bucketizer], "inputCol" -> countCol, "outputCol" -> s"${countCol}_buckets",
               "splits" -> Array(Double.NegativeInfinity, 100,1000, 10000, 100000, 500000, Double.PositiveInfinity))
 
-    pipe.addStage(classOf[IndexToString], "inputCol" -> s"${countCol}_buckets", "outputCol" -> s"${countCol}_ranked",
+    pipe.addStage(classOf[IndexToString], "inputCol" -> s"${countCol}_buckets", "outputCol" -> "USA_Rank",
       "labels" -> Array("unused","ultra-rare","rare","uncommon","common","basic"))
 
     val excluded = Array(s"${countCol}_buckets")

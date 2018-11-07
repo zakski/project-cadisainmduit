@@ -1,6 +1,6 @@
 package com.szadowsz.naming.people.results
 
-case class BabyName(name : String, gender : Char, pop : Map[String,NamePop]) {
+case class SName(name : String, pop : Map[String,NamePop]) {
   
   def properCaseName : String = name.head + name.tail.toLowerCase
   
