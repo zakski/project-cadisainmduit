@@ -7,11 +7,13 @@
 # Do not add user-specific Gradle data and configuration
 .gradle/
 
+sklearn-env/
 
 # Do not add local builds to git
 build/
 /data/
 /results-*/
+/results_*/
 /results/
 
 # Do not add complied jvm code to git
